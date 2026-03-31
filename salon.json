@@ -1,0 +1,63 @@
+{
+  "name": "KATEstageLASH蒲田西口店",
+  "type": "アイブロウ・まつ毛専門サロン",
+  "services": [
+    "まつ毛パーマ",
+    "パリジェンヌラッシュリフト",
+    "アイブロウワックス",
+    "アイブロウスタイリング",
+    "まつ毛トリートメント"
+  ],
+  "notProvided": ["マツエク", "まつ毛エクステンション"],
+  "address": {
+    "postalCode": "144-0051",
+    "prefecture": "東京都",
+    "city": "大田区",
+    "area": "西蒲田7丁目48-10",
+    "building": "三晃電機ビル501号",
+    "full": "〒144-0051 東京都大田区西蒲田7丁目48-10 三晃電機ビル501号"
+  },
+  "phone": "03-6751-0586",
+  "siteUrl": "https://eyelash12.com/",
+  "bookingUrl": "https://beauty.hotpepper.jp/kr/slnH000797013/coupon/",
+  "blogUrlPattern": "https://eyelash12.com/blog/{slug}/",
+  "categories": {
+    "beautyInfo": { "name": "美容情報", "id": 27 },
+    "eyelash": { "name": "まつ毛", "id": 26 },
+    "eyebrow": { "name": "眉毛", "id": 25 }
+  },
+  "localKeywords": ["蒲田", "蒲田駅", "大田区", "西蒲田"],
+  "target": "20代後半〜40代女性",
+  "imageThemes": {
+    "eyelashPerm": {
+      "label": "まつ毛パーマ",
+      "triggers": ["まつ毛パーマ", "パリジェンヌ", "ラッシュリフト"],
+      "gradient": { "from": "#1a1a4e", "to": "#6b3fa0" },
+      "textColor": "#ffffff"
+    },
+    "eyebrow": {
+      "label": "アイブロウ・眉毛",
+      "triggers": ["アイブロウ", "眉毛"],
+      "gradient": { "from": "#5c3d1e", "to": "#c9a84c" },
+      "textColor": "#ffffff"
+    },
+    "eyelashCare": {
+      "label": "まつ毛ケア",
+      "triggers": ["まつ毛ケア", "美容液", "トリートメント"],
+      "gradient": { "from": "#d4456b", "to": "#e8a0b4" },
+      "textColor": "#ffffff"
+    },
+    "beautyGeneral": {
+      "label": "美容情報全般",
+      "triggers": [],
+      "gradient": { "from": "#e07850", "to": "#f5c4a1" },
+      "textColor": "#ffffff"
+    },
+    "localArea": {
+      "label": "蒲田・大田区エリア",
+      "triggers": ["蒲田", "大田区"],
+      "gradient": { "from": "#1a7a6d", "to": "#4ecdc4" },
+      "textColor": "#ffffff"
+    }
+  }
+}

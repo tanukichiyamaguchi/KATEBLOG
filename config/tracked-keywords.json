@@ -1,0 +1,39 @@
+{
+  "primaryKeywords": [
+    { "keyword": "まつ毛パーマ 蒲田", "category": "eyelash", "priority": 1 },
+    { "keyword": "アイブロウ 蒲田", "category": "eyebrow", "priority": 2 },
+    { "keyword": "眉毛サロン 蒲田", "category": "eyebrow", "priority": 3 },
+    { "keyword": "まつ毛パーマ 大田区", "category": "eyelash", "priority": 4 },
+    { "keyword": "パリジェンヌラッシュリフト 蒲田", "category": "eyelash", "priority": 5 },
+    { "keyword": "眉毛ワックス 蒲田", "category": "eyebrow", "priority": 6 },
+    { "keyword": "まつ毛パーマ 持ち 期間", "category": "eyelash", "priority": 7 },
+    { "keyword": "アイブロウワックス 痛い", "category": "eyebrow", "priority": 8 },
+    { "keyword": "眉毛 整え方 女性", "category": "eyebrow", "priority": 9 },
+    { "keyword": "まつ毛パーマ 種類 選び方", "category": "eyelash", "priority": 10 }
+  ],
+  "expandedCategories": {
+    "eyelashCare": [
+      "まつ毛美容液 おすすめ",
+      "まつ毛が抜ける原因",
+      "ビューラー まつ毛 痛む",
+      "まつ毛パーマ後のケア"
+    ],
+    "eyebrowDesign": [
+      "似合う眉毛の形 診断",
+      "面長 眉毛 おすすめ",
+      "丸顔 眉毛 似合う",
+      "眉毛 黄金比 書き方"
+    ],
+    "localArea": [
+      "蒲田 美容サロン おすすめ",
+      "蒲田駅 まつ毛サロン",
+      "大田区 アイブロウサロン"
+    ],
+    "seasonal": [
+      "夏 まつ毛パーマ 持ち",
+      "花粉症 まつ毛パーマ",
+      "成人式 アイメイク まつ毛",
+      "梅雨 まつ毛パーマ メリット"
+    ]
+  }
+}
