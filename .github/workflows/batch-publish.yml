@@ -1,0 +1,49 @@
+name: Batch Publish Blog Articles
+
+on:
+  workflow_dispatch:
+    inputs:
+      start_date:
+        description: 'Start date (YYYY-MM-DD)'
+        required: true
+      interval:
+        description: 'Interval days between posts'
+        required: false
+        default: '3'
+      time:
+        description: 'Publish time (HH:MM)'
+        required: false
+        default: '11:00'
+
+jobs:
+  batch-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Create .env
+        run: |
+          echo "WP_URL=${{ secrets.WP_URL }}" > .env
+          echo "WP_USERNAME=${{ secrets.WP_USERNAME }}" >> .env
+          echo "WP_APP_PASSWORD=${{ secrets.WP_APP_PASSWORD }}" >> .env
+
+      - name: Review all articles
+        run: |
+          for f in output/*.html; do
+            echo "=== Reviewing: $f ==="
+            node cli.js review "$f" --skip-links
+          done
+
+      - name: Batch publish
+        run: |
+          node cli.js batch output/*.html \
+            --start "${{ github.event.inputs.start_date }}" \
+            --interval "${{ github.event.inputs.interval }}" \
+            --time "${{ github.event.inputs.time }}"

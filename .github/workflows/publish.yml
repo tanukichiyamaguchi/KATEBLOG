@@ -1,0 +1,64 @@
+name: Publish Blog to WordPress
+
+on:
+  workflow_dispatch:
+    inputs:
+      article:
+        description: 'Article HTML file path (e.g. output/matsuge-perm-kamata.html)'
+        required: true
+      date:
+        description: 'Publish date (YYYY-MM-DD, empty for draft)'
+        required: false
+      time:
+        description: 'Publish time (HH:MM, default 11:00)'
+        required: false
+        default: '11:00'
+  push:
+    paths:
+      - 'output/**.html'
+    branches:
+      - main
+      - 'claude/**'
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Create .env
+        run: |
+          echo "WP_URL=${{ secrets.WP_URL }}" > .env
+          echo "WP_USERNAME=${{ secrets.WP_USERNAME }}" >> .env
+          echo "WP_APP_PASSWORD=${{ secrets.WP_APP_PASSWORD }}" >> .env
+
+      - name: Review article
+        run: |
+          if [ -n "${{ github.event.inputs.article }}" ]; then
+            node cli.js review "${{ github.event.inputs.article }}" --skip-links
+          else
+            for f in output/*.html; do
+              echo "=== Reviewing: $f ==="
+              node cli.js review "$f" --skip-links
+            done
+          fi
+
+      - name: Publish to WordPress
+        run: |
+          if [ -n "${{ github.event.inputs.article }}" ]; then
+            ARGS="${{ github.event.inputs.article }}"
+            if [ -n "${{ github.event.inputs.date }}" ]; then
+              ARGS="$ARGS --date ${{ github.event.inputs.date }} --time ${{ github.event.inputs.time }}"
+            fi
+            node cli.js publish $ARGS
+          else
+            echo "Manual trigger required for publishing. Use workflow_dispatch."
+            echo "Push trigger only runs review."
+          fi
