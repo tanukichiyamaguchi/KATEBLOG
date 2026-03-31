@@ -20,23 +20,30 @@ async function uploadImage(config, imagePath, altText) {
   const imageData = fs.readFileSync(imagePath);
   const filename = path.basename(imagePath);
 
-  const response = await axios.post(
-    `${config.wpUrl}/wp-json/wp/v2/media`,
-    imageData,
-    {
-      headers: {
-        ...getAuthHeader(config),
-        'Content-Type': 'image/png',
-        'Content-Disposition': `attachment; filename="${filename}"`,
-      },
-    }
-  );
+  try {
+    const response = await axios.post(
+      `${config.wpUrl}/wp-json/wp/v2/media`,
+      imageData,
+      {
+        headers: {
+          ...getAuthHeader(config),
+          'Content-Type': 'image/png',
+          'Content-Disposition': `attachment; filename="${filename}"`,
+        },
+      }
+    );
 
-  return {
-    id: response.data.id,
-    url: response.data.source_url,
-    altText,
-  };
+    return {
+      id: response.data.id,
+      url: response.data.source_url,
+      altText,
+    };
+  } catch (err) {
+    const status = err.response?.status;
+    const data = err.response?.data;
+    console.error(`  画像アップロードエラー [${status}]:`, JSON.stringify(data || err.message));
+    throw err;
+  }
 }
 
 async function createPost(config, postData) {
@@ -132,4 +139,47 @@ async function checkImageUrls(config, postId) {
   return results;
 }
 
-module.exports = { getConfig, uploadImage, createPost, getRecentPosts, checkImageUrls };
+async function testConnection(config) {
+  // 1. Test basic API access
+  console.log('  [1/3] REST API接続テスト...');
+  try {
+    const res = await axios.get(`${config.wpUrl}/wp-json/wp/v2/`, {
+      timeout: 10000,
+    });
+    console.log(`  ✅ REST API接続OK (${res.data.name || 'WordPress'})`);
+  } catch (err) {
+    console.log(`  ❌ REST API接続失敗: ${err.response?.status || err.message}`);
+    return false;
+  }
+
+  // 2. Test authentication
+  console.log('  [2/3] 認証テスト...');
+  try {
+    const res = await axios.get(`${config.wpUrl}/wp-json/wp/v2/users/me`, {
+      headers: getAuthHeader(config),
+      timeout: 10000,
+    });
+    console.log(`  ✅ 認証OK: ${res.data.name} (ID:${res.data.id}, roles: ${JSON.stringify(res.data.roles || [])})`);
+  } catch (err) {
+    console.log(`  ❌ 認証失敗 [${err.response?.status}]: ${JSON.stringify(err.response?.data || err.message)}`);
+    return false;
+  }
+
+  // 3. Test post creation capability
+  console.log('  [3/3] 投稿権限テスト...');
+  try {
+    const res = await axios.get(`${config.wpUrl}/wp-json/wp/v2/posts`, {
+      params: { per_page: 1 },
+      headers: getAuthHeader(config),
+      timeout: 10000,
+    });
+    console.log(`  ✅ 投稿一覧取得OK (${res.headers['x-wp-total'] || '?'}件)`);
+  } catch (err) {
+    console.log(`  ❌ 投稿取得失敗 [${err.response?.status}]: ${JSON.stringify(err.response?.data || err.message)}`);
+    return false;
+  }
+
+  return true;
+}
+
+module.exports = { getConfig, uploadImage, createPost, getRecentPosts, checkImageUrls, testConnection };

@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const { reviewArticle } = require('./src/reviewer');
 const { publishArticle } = require('./src/publisher');
-const { getConfig, getRecentPosts, checkImageUrls } = require('./src/wordpress');
+const { getConfig, getRecentPosts, checkImageUrls, testConnection } = require('./src/wordpress');
 
 const args = process.argv.slice(2);
 const command = args[0];
@@ -108,11 +108,25 @@ async function main() {
       break;
     }
 
+    case 'test': {
+      console.log('\n🔧 WordPress接続テスト...');
+      const config = getConfig();
+      const ok = await testConnection(config);
+      if (ok) {
+        console.log('\n✅ 全テスト通過。WordPress投稿が可能です。');
+      } else {
+        console.log('\n❌ テスト失敗。上記のエラーを確認してください。');
+        process.exit(1);
+      }
+      break;
+    }
+
     default:
       console.log(`
 KATEstageLASH ブログ自動化ツール
 
 使用法:
+  node cli.js test                                 WordPress接続テスト
   node cli.js review <file.html> [--skip-links]   品質チェック
   node cli.js publish <file.html> [options]        画像生成 + WordPress投稿
   node cli.js batch <files...> [options]           バッチ投稿

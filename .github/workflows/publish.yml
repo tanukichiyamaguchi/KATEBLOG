@@ -39,6 +39,9 @@ jobs:
           echo "WP_USERNAME=${{ secrets.WP_USERNAME }}" >> .env
           echo "WP_APP_PASSWORD=${{ secrets.WP_APP_PASSWORD }}" >> .env
 
+      - name: Test WordPress connection
+        run: node cli.js test
+
       - name: Review article
         run: |
           if [ -n "${{ github.event.inputs.article }}" ]; then
