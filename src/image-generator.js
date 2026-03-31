@@ -6,7 +6,6 @@ const salon = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'salon.json'
 
 function selectTheme(title) {
   const themes = salon.imageThemes;
-  // Check in priority order: specific topics first, then general
   const themeOrder = ['eyelashPerm', 'eyebrow', 'eyelashCare', 'localArea', 'beautyGeneral'];
   for (const key of themeOrder) {
     const theme = themes[key];
@@ -19,8 +18,7 @@ function selectTheme(title) {
 }
 
 function generateGradientVariation(baseFrom, baseTo, index) {
-  // Create subtle variations for each image
-  const shift = (index * 15) % 40;
+  const shift = (index * 12) % 30;
   const adjustColor = (hex, amount) => {
     const r = Math.min(255, Math.max(0, parseInt(hex.slice(1, 3), 16) + amount));
     const g = Math.min(255, Math.max(0, parseInt(hex.slice(3, 5), 16) + amount));
@@ -28,8 +26,8 @@ function generateGradientVariation(baseFrom, baseTo, index) {
     return `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
   };
   return {
-    from: adjustColor(baseFrom, shift - 20),
-    to: adjustColor(baseTo, 20 - shift)
+    from: adjustColor(baseFrom, shift - 15),
+    to: adjustColor(baseTo, 15 - shift)
   };
 }
 
@@ -47,39 +45,107 @@ function wrapText(text, maxCharsPerLine) {
   return lines;
 }
 
+// まつ毛の装飾SVGパーツ
+function getLashDecoration(themeKey) {
+  if (themeKey === 'eyelashPerm' || themeKey === 'eyelashCare') {
+    // まつ毛をイメージした曲線装飾（上部）
+    return `
+    <g opacity="0.15">
+      <path d="M200,80 Q400,20 600,60 Q800,100 1000,50" fill="none" stroke="white" stroke-width="3" stroke-linecap="round"/>
+      <path d="M180,110 Q400,50 600,90 Q800,130 1020,70" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"/>
+      <path d="M220,140 Q420,80 620,120 Q820,160 980,100" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+    </g>
+    <g opacity="0.08">
+      <circle cx="150" cy="500" r="80" fill="white"/>
+      <circle cx="1050" cy="130" r="60" fill="white"/>
+    </g>`;
+  }
+  if (themeKey === 'eyebrow') {
+    // アーチ型の装飾（眉毛をイメージ）
+    return `
+    <g opacity="0.12">
+      <path d="M250,100 Q600,30 950,100" fill="none" stroke="white" stroke-width="4" stroke-linecap="round"/>
+      <path d="M280,130 Q600,65 920,130" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+    </g>
+    <g opacity="0.08">
+      <circle cx="100" cy="530" r="70" fill="white"/>
+      <circle cx="1100" cy="100" r="50" fill="white"/>
+    </g>`;
+  }
+  // デフォルト: エレガントな円形装飾
+  return `
+    <g opacity="0.08">
+      <circle cx="100" cy="100" r="120" fill="white"/>
+      <circle cx="1100" cy="530" r="100" fill="white"/>
+      <circle cx="1050" cy="80" r="40" fill="white"/>
+    </g>`;
+}
+
+function escapeXml(text) {
+  return text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&apos;');
+}
+
 async function generateImage(headingText, articleTitle, index, outputDir) {
   const width = 1200;
   const height = 630;
   const theme = selectTheme(articleTitle);
   const colors = generateGradientVariation(theme.gradient.from, theme.gradient.to, index);
 
-  // Wrap heading text for display
-  const lines = wrapText(headingText, 18);
-  const lineHeight = 56;
+  const lines = wrapText(headingText, 16);
+  const lineHeight = 58;
   const totalTextHeight = lines.length * lineHeight;
-  const startY = (height - totalTextHeight) / 2 - 20;
+  const startY = (height - totalTextHeight) / 2 - 30;
 
-  // Build SVG text elements
   const textElements = lines.map((line, i) => {
     const y = startY + 60 + i * lineHeight;
-    return `<text x="600" y="${y}" font-family="'Hiragino Sans', 'Yu Gothic', 'Noto Sans JP', sans-serif" font-size="44" font-weight="bold" fill="${theme.textColor}" text-anchor="middle" dominant-baseline="middle">${escapeXml(line)}</text>`;
+    return `<text x="600" y="${y}" font-family="'Hiragino Sans', 'Yu Gothic', 'Noto Sans JP', sans-serif" font-size="42" font-weight="bold" fill="white" text-anchor="middle" dominant-baseline="middle" letter-spacing="2">${escapeXml(line)}</text>`;
   }).join('\n    ');
 
-  // Salon name at bottom
+  // テーマに合わせた装飾
+  const decoration = getLashDecoration(theme.key);
+
   const salonNameText = salon.name;
 
   const svg = `<svg width="${width}" height="${height}" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+    <linearGradient id="bg${index}" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" style="stop-color:${colors.from};stop-opacity:1" />
-      <stop offset="100%" style="stop-color:${colors.to};stop-opacity:1" />
+      <stop offset="50%" style="stop-color:${colors.to};stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:${colors.from};stop-opacity:0.85" />
     </linearGradient>
+    <filter id="shadow${index}">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-opacity="0.3"/>
+    </filter>
   </defs>
-  <rect width="${width}" height="${height}" fill="url(#bg)" />
-  <rect x="40" y="40" width="${width - 80}" height="${height - 80}" rx="16" ry="16" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2" />
-  <line x1="100" y1="${startY + totalTextHeight + 70}" x2="${width - 100}" y2="${startY + totalTextHeight + 70}" stroke="rgba(255,255,255,0.4)" stroke-width="1" />
-  ${textElements}
-  <text x="600" y="${startY + totalTextHeight + 110}" font-family="'Hiragino Sans', 'Yu Gothic', 'Noto Sans JP', sans-serif" font-size="22" fill="rgba(255,255,255,0.8)" text-anchor="middle">${escapeXml(salonNameText)}</text>
+
+  <!-- 背景グラデーション -->
+  <rect width="${width}" height="${height}" fill="url(#bg${index})" />
+
+  <!-- テーマ別装飾 -->
+  ${decoration}
+
+  <!-- 上品なフレーム -->
+  <rect x="50" y="50" width="${width - 100}" height="${height - 100}" rx="12" ry="12" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="1.5" />
+  <rect x="60" y="60" width="${width - 120}" height="${height - 120}" rx="8" ry="8" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1" />
+
+  <!-- 見出しテキスト -->
+  <g filter="url(#shadow${index})">
+    ${textElements}
+  </g>
+
+  <!-- 区切り線 -->
+  <line x1="450" y1="${startY + totalTextHeight + 70}" x2="750" y2="${startY + totalTextHeight + 70}" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" stroke-linecap="round" />
+
+  <!-- 小さなダイヤモンド装飾 -->
+  <rect x="596" y="${startY + totalTextHeight + 64}" width="8" height="8" rx="1" fill="rgba(255,255,255,0.6)" transform="rotate(45, 600, ${startY + totalTextHeight + 68})" />
+
+  <!-- サロン名 -->
+  <text x="600" y="${startY + totalTextHeight + 108}" font-family="'Hiragino Sans', 'Yu Gothic', 'Noto Sans JP', sans-serif" font-size="20" fill="rgba(255,255,255,0.7)" text-anchor="middle" letter-spacing="4">${escapeXml(salonNameText)}</text>
 </svg>`;
 
   const filename = `image-${index}.png`;
@@ -93,17 +159,7 @@ async function generateImage(headingText, articleTitle, index, outputDir) {
   return { filename, outputPath };
 }
 
-function escapeXml(text) {
-  return text
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&apos;');
-}
-
 async function generateArticleImages(htmlContent, articleTitle, outputDir) {
-  // Extract H2 headings from HTML
   const h2Regex = /<h2[^>]*>(.*?)<\/h2>/gi;
   const headings = [];
   let match;

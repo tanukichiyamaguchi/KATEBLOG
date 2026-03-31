@@ -292,11 +292,29 @@ function kateblog_import_article($download_url, $publish_date = '', $publish_tim
         }
     }
 
+    // 投稿者を「ケイトステージラッシュ」に設定
+    $author_id = 0;
+    $author_user = get_user_by('login', 'katestage');
+    if (!$author_user) {
+        // display_nameで検索
+        $users = get_users(array('search' => '*ケイトステージラッシュ*', 'search_columns' => array('display_name')));
+        if (!empty($users)) {
+            $author_id = $users[0]->ID;
+        }
+    } else {
+        $author_id = $author_user->ID;
+    }
+    // 見つからなければ現在のユーザー
+    if (!$author_id) {
+        $author_id = get_current_user_id();
+    }
+
     // 投稿作成
     $post_data = array(
         'post_title'   => $meta['title'],
         'post_content' => $content,
         'post_status'  => 'draft',
+        'post_author'  => $author_id,
         'post_name'    => isset($meta['slug']) ? $meta['slug'] : '',
         'post_category' => isset($meta['category']) ? array($meta['category']) : array(27),
     );
