@@ -115,6 +115,18 @@ function kateblog_fetch_brief($slug) {
 }
 
 // ========================================
+// FAQ JSON-LD をフロントエンドの<head>で出力
+// ========================================
+add_action('wp_head', function() {
+    if (is_singular('post')) {
+        $jsonld = get_post_meta(get_the_ID(), '_kateblog_faq_jsonld', true);
+        if ($jsonld) {
+            echo '<script type="application/ld+json">' . $jsonld . '</script>' . "\n";
+        }
+    }
+});
+
+// ========================================
 // 管理画面
 // ========================================
 
@@ -454,6 +466,14 @@ function kateblog_import_article($download_url, $publish_date = '', $publish_tim
             'focus' => array('keyphrase' => $meta['keyword'], 'score' => 0),
             'additional' => array(),
         )));
+    }
+
+    // FAQ JSON-LDを本文から抽出してメタに保存（scriptタグはWPが除去するため）
+    if (preg_match('/<script\s+type=["\']application\/ld\+json["\']>([\s\S]*?)<\/script>/i', $content, $jsonld_match)) {
+        update_post_meta($post_id, '_kateblog_faq_jsonld', $jsonld_match[1]);
+        // 本文からscriptタグ部分を除去（WPが除去してテキスト表示される問題を防止）
+        $content_clean = preg_replace('/<script\s+type=["\']application\/ld\+json["\']>[\s\S]*?<\/script>/i', '', $content);
+        wp_update_post(array('ID' => $post_id, 'post_content' => trim($content_clean)));
     }
 
     return array(
