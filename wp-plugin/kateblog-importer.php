@@ -2,11 +2,121 @@
 /**
  * Plugin Name: KATEBLOG Importer
  * Description: GitHubリポジトリから記事HTMLを取得してWordPressに投稿するプラグイン
- * Version: 1.0.0
+ * Version: 2.0.0
  * Author: KATEstageLASH
  */
 
 if (!defined('ABSPATH')) exit;
+
+// ========================================
+// 自動インポート（WP-Cron）
+// ========================================
+
+// Cron スケジュール登録（1時間ごと）
+add_filter('cron_schedules', function($schedules) {
+    $schedules['kateblog_hourly'] = array(
+        'interval' => 3600,
+        'display'  => 'KATEBLOG: 1時間ごと',
+    );
+    return $schedules;
+});
+
+// プラグイン有効化時にCronを登録
+register_activation_hook(__FILE__, function() {
+    if (!wp_next_scheduled('kateblog_auto_import_hook')) {
+        wp_schedule_event(time(), 'kateblog_hourly', 'kateblog_auto_import_hook');
+    }
+});
+
+// プラグイン無効化時にCronを解除
+register_deactivation_hook(__FILE__, function() {
+    wp_clear_scheduled_hook('kateblog_auto_import_hook');
+});
+
+// 自動インポート実行
+add_action('kateblog_auto_import_hook', 'kateblog_auto_import');
+
+function kateblog_auto_import() {
+    $files = kateblog_fetch_github_files();
+    if (isset($files['error']) || empty($files)) return;
+
+    // インポート済みファイルリストを取得
+    $imported = get_option('kateblog_imported_files', array());
+    $log = array();
+
+    foreach ($files as $file) {
+        $filename = $file['name'];
+
+        // 既にインポート済みならスキップ
+        if (in_array($filename, $imported)) continue;
+
+        // ブリーフJSONから投稿日を取得
+        $slug = str_replace('.html', '', $filename);
+        $brief = kateblog_fetch_brief($slug);
+        $publish_date = '';
+        $publish_time = '11:00';
+        if ($brief && !empty($brief['publishDate'])) {
+            $publish_date = $brief['publishDate'];
+        }
+        if ($brief && !empty($brief['publishTime'])) {
+            $publish_time = $brief['publishTime'];
+        }
+
+        // インポート実行
+        $result = kateblog_import_article($file['download_url'], $publish_date, $publish_time);
+
+        if (isset($result['success']) && $result['success']) {
+            $imported[] = $filename;
+            $log[] = "✅ {$filename} → {$result['title']} (ID:{$result['post_id']}, {$result['status']})";
+        } else {
+            $log[] = "❌ {$filename} → " . ($result['error'] ?? 'unknown error');
+        }
+    }
+
+    // インポート済みリストを更新
+    update_option('kateblog_imported_files', $imported);
+
+    // ログを保存（管理画面で確認用）
+    if (!empty($log)) {
+        $existing_log = get_option('kateblog_import_log', array());
+        $existing_log[] = array(
+            'date' => current_time('Y-m-d H:i:s'),
+            'entries' => $log,
+        );
+        // 最新20回分のみ保持
+        if (count($existing_log) > 20) {
+            $existing_log = array_slice($existing_log, -20);
+        }
+        update_option('kateblog_import_log', $existing_log);
+    }
+}
+
+// GitHubからブリーフJSONを取得
+function kateblog_fetch_brief($slug) {
+    $repo = get_option('kateblog_github_repo', 'tanukichiyamaguchi/KATEBLOG');
+    $branch = get_option('kateblog_github_branch', 'claude/blog-automation-system-YsyOB');
+    $token = get_option('kateblog_github_token', '');
+
+    $url = "https://raw.githubusercontent.com/{$repo}/{$branch}/briefs/{$slug}.json";
+    $args = array(
+        'headers' => array('User-Agent' => 'KATEBLOG-Importer/2.0'),
+        'timeout' => 15,
+    );
+    if ($token) {
+        $args['headers']['Authorization'] = "Bearer {$token}";
+    }
+
+    $response = wp_remote_get($url, $args);
+    if (is_wp_error($response) || wp_remote_retrieve_response_code($response) !== 200) {
+        return null;
+    }
+
+    return json_decode(wp_remote_retrieve_body($response), true);
+}
+
+// ========================================
+// 管理画面
+// ========================================
 
 // 管理画面メニュー追加
 add_action('admin_menu', function() {
@@ -371,6 +481,14 @@ function kateblog_render_page() {
                 $message = '<div class="notice notice-success"><p>✅ 投稿完了: <a href="' . esc_url($result['edit_url']) . '">' . esc_html($result['title']) . '</a> (ステータス: ' . esc_html($result['status']) . ')</p></div>';
             }
         }
+        if ($_POST['kateblog_action'] === 'run_auto_import') {
+            kateblog_auto_import();
+            $message = '<div class="notice notice-success"><p>✅ 自動インポートを実行しました。下のログを確認してください。</p></div>';
+        }
+        if ($_POST['kateblog_action'] === 'reset_imported') {
+            update_option('kateblog_imported_files', array());
+            $message = '<div class="notice notice-success"><p>インポート済みリストをリセットしました。</p></div>';
+        }
         if ($_POST['kateblog_action'] === 'save_settings') {
             update_option('kateblog_github_repo', sanitize_text_field($_POST['kateblog_github_repo']));
             update_option('kateblog_github_branch', sanitize_text_field($_POST['kateblog_github_branch']));
@@ -398,7 +516,44 @@ function kateblog_render_page() {
         </form>
 
         <hr>
-        <h2>記事一覧（GitHub output/）</h2>
+        <h2>自動インポート</h2>
+        <p>GitHubに新しい記事がプッシュされると、<strong>1時間以内に自動的に下書き保存</strong>されます。<br>
+        ブリーフJSONに投稿日が設定されている場合は、予約投稿として保存されます。</p>
+        <?php
+        $next_run = wp_next_scheduled('kateblog_auto_import_hook');
+        $imported = get_option('kateblog_imported_files', array());
+        ?>
+        <table class="form-table">
+            <tr><th>ステータス</th><td><?php echo $next_run ? '✅ 有効（1時間ごと）' : '❌ 無効'; ?></td></tr>
+            <tr><th>次回実行</th><td><?php echo $next_run ? date('Y-m-d H:i:s', $next_run + get_option('gmt_offset') * 3600) : '-'; ?></td></tr>
+            <tr><th>インポート済み</th><td><?php echo count($imported); ?>本 <?php if (!empty($imported)): ?><details><summary>詳細</summary><ul><?php foreach ($imported as $f) echo '<li>' . esc_html($f) . '</li>'; ?></ul></details><?php endif; ?></td></tr>
+        </table>
+
+        <form method="post" style="margin-bottom:20px;">
+            <?php wp_nonce_field('kateblog_action'); ?>
+            <input type="hidden" name="kateblog_action" value="run_auto_import">
+            <button type="submit" class="button button-secondary">今すぐ自動インポートを実行</button>
+            <button type="submit" name="kateblog_action" value="reset_imported" class="button" onclick="return confirm('インポート済みリストをリセットしますか？');">インポート済みリストをリセット</button>
+        </form>
+
+        <?php
+        $log = get_option('kateblog_import_log', array());
+        if (!empty($log)): ?>
+            <h3>インポートログ</h3>
+            <div style="max-height:300px;overflow-y:auto;background:#f9f9f9;padding:10px;border:1px solid #ddd;">
+            <?php foreach (array_reverse($log) as $entry): ?>
+                <p><strong><?php echo esc_html($entry['date']); ?></strong></p>
+                <ul>
+                <?php foreach ($entry['entries'] as $line): ?>
+                    <li><?php echo esc_html($line); ?></li>
+                <?php endforeach; ?>
+                </ul>
+            <?php endforeach; ?>
+            </div>
+        <?php endif; ?>
+
+        <hr>
+        <h2>手動インポート（GitHub output/）</h2>
         <?php if (isset($files['error'])): ?>
             <div class="notice notice-error"><p><?php echo esc_html($files['error']); ?></p></div>
         <?php elseif (empty($files)): ?>
