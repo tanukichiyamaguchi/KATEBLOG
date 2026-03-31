@@ -5,6 +5,7 @@ const path = require('path');
 const { reviewArticle } = require('./src/reviewer');
 const { publishArticle } = require('./src/publisher');
 const { getConfig, getRecentPosts, checkImageUrls, testConnection } = require('./src/wordpress');
+const { generateArticleImages } = require('./src/image-generator');
 
 const args = process.argv.slice(2);
 const command = args[0];
@@ -105,6 +106,24 @@ async function main() {
         const icon = r.ok ? '✅' : '❌';
         console.log(`  ${icon} [${r.status}] ${r.url}`);
       });
+      break;
+    }
+
+    case 'generate-images': {
+      const filePath = args[1];
+      if (!filePath) {
+        console.error('使用法: node cli.js generate-images <file.html>');
+        process.exit(1);
+      }
+      const html = fs.readFileSync(filePath, 'utf-8');
+      const titleMatch = html.match(/<!--\s*TITLE:\s*(.+?)\s*-->/);
+      const slugMatch = html.match(/<!--\s*SLUG:\s*(.+?)\s*-->/);
+      const title = titleMatch ? titleMatch[1] : path.basename(filePath, '.html');
+      const slug = slugMatch ? slugMatch[1] : path.basename(filePath, '.html');
+      const imageDir = path.join(path.dirname(filePath), `images-${slug}`);
+      console.log(`\n🎨 画像生成: ${filePath}`);
+      const images = await generateArticleImages(html, title, imageDir);
+      console.log(`\n✅ ${images.length}枚の画像を生成しました → ${imageDir}/`);
       break;
     }
 

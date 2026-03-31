@@ -225,6 +225,31 @@ function kateblog_upload_image($image_path, $alt_text) {
     return $attachment_id;
 }
 
+// GitHubから事前生成済み画像をダウンロード
+function kateblog_download_github_image($slug, $image_index) {
+    $repo = get_option('kateblog_github_repo', 'tanukichiyamaguchi/KATEBLOG');
+    $branch = get_option('kateblog_github_branch', 'claude/blog-automation-system-YsyOB');
+    $token = get_option('kateblog_github_token', '');
+
+    $url = "https://raw.githubusercontent.com/{$repo}/{$branch}/output/images-{$slug}/image-{$image_index}.png";
+    $args = array(
+        'headers' => array('User-Agent' => 'KATEBLOG-Importer/1.0'),
+        'timeout' => 30,
+    );
+    if ($token) {
+        $args['headers']['Authorization'] = "Bearer {$token}";
+    }
+
+    $response = wp_remote_get($url, $args);
+    if (is_wp_error($response) || wp_remote_retrieve_response_code($response) !== 200) {
+        return null;
+    }
+
+    $tmp = wp_tempnam('kateblog_img_') . '.png';
+    file_put_contents($tmp, wp_remote_retrieve_body($response));
+    return $tmp;
+}
+
 // 記事をインポート
 function kateblog_import_article($download_url, $publish_date = '', $publish_time = '11:00') {
     $html = kateblog_fetch_file_content($download_url);
@@ -234,8 +259,9 @@ function kateblog_import_article($download_url, $publish_date = '', $publish_tim
     if (empty($meta['title'])) return array('error' => 'タイトルが見つかりません');
 
     $content = kateblog_strip_meta($html);
+    $slug = isset($meta['slug']) ? $meta['slug'] : '';
 
-    // H2見出しを抽出して画像生成
+    // GitHubから事前生成済みの画像をダウンロードして置換
     preg_match_all('/<h2[^>]*>(.*?)<\/h2>/i', $content, $h2_matches);
     $image_index = 1;
 
@@ -244,20 +270,23 @@ function kateblog_import_article($download_url, $publish_date = '', $publish_tim
             $clean_heading = strip_tags($heading);
             $placeholder = "%%IMAGE_{$image_index}%%";
 
-            if (strpos($content, $placeholder) !== false) {
-                $tmp_image = kateblog_generate_image($clean_heading, $meta['title']);
-                $att_id = kateblog_upload_image($tmp_image, $clean_heading);
+            if (strpos($content, $placeholder) !== false && $slug) {
+                // sharp で生成済みの画像を GitHub からダウンロード（0始まり）
+                $tmp_image = kateblog_download_github_image($slug, $image_index - 1);
 
-                if ($att_id) {
-                    $img_url = wp_get_attachment_url($att_id);
-                    $content = str_replace($placeholder, $img_url, $content);
+                if ($tmp_image) {
+                    $att_id = kateblog_upload_image($tmp_image, $clean_heading);
 
-                    // 最初の画像をアイキャッチに
-                    if ($image_index === 1) {
-                        $featured_image_id = $att_id;
+                    if ($att_id) {
+                        $img_url = wp_get_attachment_url($att_id);
+                        $content = str_replace($placeholder, $img_url, $content);
+
+                        if ($image_index === 1) {
+                            $featured_image_id = $att_id;
+                        }
                     }
+                    @unlink($tmp_image);
                 }
-                @unlink($tmp_image);
             }
             $image_index++;
         }
