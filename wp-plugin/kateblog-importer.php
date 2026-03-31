@@ -40,18 +40,24 @@ function kateblog_auto_import() {
     $files = kateblog_fetch_github_files();
     if (isset($files['error']) || empty($files)) return;
 
-    // インポート済みファイルリストを取得
-    $imported = get_option('kateblog_imported_files', array());
     $log = array();
 
     foreach ($files as $file) {
         $filename = $file['name'];
+        $slug = str_replace('.html', '', $filename);
 
-        // 既にインポート済みならスキップ
-        if (in_array($filename, $imported)) continue;
+        // スラッグで既存投稿を検索（重複防止）
+        $existing = get_posts(array(
+            'name'        => $slug,
+            'post_type'   => 'post',
+            'post_status' => array('publish', 'draft', 'future', 'pending', 'private'),
+            'numberposts' => 1,
+        ));
+        if (!empty($existing)) {
+            continue; // 既に同じスラッグの投稿が存在する場合はスキップ
+        }
 
         // ブリーフJSONから投稿日を取得
-        $slug = str_replace('.html', '', $filename);
         $brief = kateblog_fetch_brief($slug);
         $publish_date = '';
         $publish_time = '11:00';
@@ -66,24 +72,19 @@ function kateblog_auto_import() {
         $result = kateblog_import_article($file['download_url'], $publish_date, $publish_time);
 
         if (isset($result['success']) && $result['success']) {
-            $imported[] = $filename;
             $log[] = "✅ {$filename} → {$result['title']} (ID:{$result['post_id']}, {$result['status']})";
         } else {
             $log[] = "❌ {$filename} → " . ($result['error'] ?? 'unknown error');
         }
     }
 
-    // インポート済みリストを更新
-    update_option('kateblog_imported_files', $imported);
-
-    // ログを保存（管理画面で確認用）
+    // ログを保存
     if (!empty($log)) {
         $existing_log = get_option('kateblog_import_log', array());
         $existing_log[] = array(
             'date' => current_time('Y-m-d H:i:s'),
             'entries' => $log,
         );
-        // 最新20回分のみ保持
         if (count($existing_log) > 20) {
             $existing_log = array_slice($existing_log, -20);
         }
@@ -505,10 +506,6 @@ function kateblog_render_page() {
             kateblog_auto_import();
             $message = '<div class="notice notice-success"><p>✅ 自動インポートを実行しました。下のログを確認してください。</p></div>';
         }
-        if ($_POST['kateblog_action'] === 'reset_imported') {
-            update_option('kateblog_imported_files', array());
-            $message = '<div class="notice notice-success"><p>インポート済みリストをリセットしました。</p></div>';
-        }
         if ($_POST['kateblog_action'] === 'save_settings') {
             update_option('kateblog_github_repo', sanitize_text_field($_POST['kateblog_github_repo']));
             update_option('kateblog_github_branch', sanitize_text_field($_POST['kateblog_github_branch']));
@@ -543,17 +540,35 @@ function kateblog_render_page() {
         $next_run = wp_next_scheduled('kateblog_auto_import_hook');
         $imported = get_option('kateblog_imported_files', array());
         ?>
+        <?php
+        // 既存のKATEBLOG投稿数を取得
+        $kateblog_posts = get_posts(array(
+            'post_type' => 'post',
+            'post_status' => array('publish', 'draft', 'future', 'pending', 'private'),
+            'meta_key' => '_kateblog_faq_jsonld',
+            'numberposts' => -1,
+        ));
+        // _kateblog_faq_jsonldがない場合もあるので、スラッグベースでカウント
+        $all_slugs = array();
+        if (!empty($files) && !isset($files['error'])) {
+            foreach ($files as $f) {
+                $s = str_replace('.html', '', $f['name']);
+                $exists = get_posts(array('name' => $s, 'post_type' => 'post', 'post_status' => array('publish','draft','future','pending','private'), 'numberposts' => 1));
+                if (!empty($exists)) $all_slugs[] = $s;
+            }
+        }
+        ?>
         <table class="form-table">
             <tr><th>ステータス</th><td><?php echo $next_run ? '✅ 有効（1時間ごと）' : '❌ 無効'; ?></td></tr>
             <tr><th>次回実行</th><td><?php echo $next_run ? date('Y-m-d H:i:s', $next_run + get_option('gmt_offset') * 3600) : '-'; ?></td></tr>
-            <tr><th>インポート済み</th><td><?php echo count($imported); ?>本 <?php if (!empty($imported)): ?><details><summary>詳細</summary><ul><?php foreach ($imported as $f) echo '<li>' . esc_html($f) . '</li>'; ?></ul></details><?php endif; ?></td></tr>
+            <tr><th>GitHub上の記事</th><td><?php echo (!empty($files) && !isset($files['error'])) ? count($files) : 0; ?>本</td></tr>
+            <tr><th>インポート済み</th><td><?php echo count($all_slugs); ?>本（スラッグで重複チェック済み）</td></tr>
         </table>
 
         <form method="post" style="margin-bottom:20px;">
             <?php wp_nonce_field('kateblog_action'); ?>
             <input type="hidden" name="kateblog_action" value="run_auto_import">
-            <button type="submit" class="button button-secondary">今すぐ自動インポートを実行</button>
-            <button type="submit" name="kateblog_action" value="reset_imported" class="button" onclick="return confirm('インポート済みリストをリセットしますか？');">インポート済みリストをリセット</button>
+            <button type="submit" class="button button-primary">今すぐ自動インポートを実行</button>
         </form>
 
         <?php
