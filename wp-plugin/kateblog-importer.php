@@ -1,12 +1,73 @@
 <?php
 /**
  * Plugin Name: KATEBLOG Importer
- * Description: GitHubリポジトリから記事HTMLを取得してWordPressに投稿するプラグイン
- * Version: 2.0.0
+ * Description: GitHubリポジトリから記事HTMLを取得してWordPressに自動投稿するプラグイン
+ * Version: 3.0.0
  * Author: KATEstageLASH
  */
 
 if (!defined('ABSPATH')) exit;
+
+// ========================================
+// プラグイン自動アップデート（GitHub から最新版を自動取得）
+// ========================================
+add_filter('pre_set_site_transient_update_plugins', function($transient) {
+    if (empty($transient->checked)) return $transient;
+
+    $plugin_slug = plugin_basename(__FILE__);
+    $current_version = '3.0.0';
+
+    // GitHubから最新バージョンを確認
+    $repo = get_option('kateblog_github_repo', 'tanukichiyamaguchi/KATEBLOG');
+    $branch = get_option('kateblog_github_branch', 'claude/blog-automation-system-YsyOB');
+    $remote_url = "https://raw.githubusercontent.com/{$repo}/{$branch}/wp-plugin/kateblog-importer.php";
+
+    $response = wp_remote_get($remote_url, array(
+        'timeout' => 10,
+        'headers' => array('User-Agent' => 'KATEBLOG-Updater/1.0'),
+    ));
+
+    if (!is_wp_error($response) && wp_remote_retrieve_response_code($response) === 200) {
+        $remote_content = wp_remote_retrieve_body($response);
+        if (preg_match('/Version:\s*([\d.]+)/', $remote_content, $m)) {
+            $remote_version = $m[1];
+            if (version_compare($remote_version, $current_version, '>')) {
+                $zip_url = "https://raw.githubusercontent.com/{$repo}/{$branch}/wp-plugin/kateblog-importer.zip";
+                $transient->response[$plugin_slug] = (object) array(
+                    'slug'        => 'kateblog-importer',
+                    'new_version' => $remote_version,
+                    'package'     => $zip_url,
+                    'url'         => "https://github.com/{$repo}",
+                );
+            }
+        }
+    }
+
+    return $transient;
+});
+
+// アップデート情報画面
+add_filter('plugins_api', function($result, $action, $args) {
+    if ($action !== 'plugin_information' || !isset($args->slug) || $args->slug !== 'kateblog-importer') {
+        return $result;
+    }
+    return (object) array(
+        'name'          => 'KATEBLOG Importer',
+        'slug'          => 'kateblog-importer',
+        'version'       => '3.0.0',
+        'author'        => 'KATEstageLASH',
+        'homepage'      => 'https://github.com/tanukichiyamaguchi/KATEBLOG',
+        'sections'      => array('description' => 'GitHubリポジトリから記事を自動インポートするプラグイン'),
+    );
+}, 10, 3);
+
+// 自動アップデートを有効化
+add_filter('auto_update_plugin', function($update, $item) {
+    if (isset($item->slug) && $item->slug === 'kateblog-importer') {
+        return true; // 常に自動アップデート
+    }
+    return $update;
+}, 10, 2);
 
 // ========================================
 // 自動インポート（WP-Cron）
@@ -514,6 +575,26 @@ function kateblog_render_page() {
             kateblog_auto_import();
             $message = '<div class="notice notice-success"><p>✅ 自動インポートを実行しました。下のログを確認してください。</p></div>';
         }
+        if ($_POST['kateblog_action'] === 'clean_and_import') {
+            // 既存のKATEBLOG記事を全て削除してからインポート
+            $github_files = kateblog_fetch_github_files();
+            if (!isset($github_files['error'])) {
+                foreach ($github_files as $gf) {
+                    $s = str_replace('.html', '', $gf['name']);
+                    $old_posts = get_posts(array(
+                        'name' => $s,
+                        'post_type' => 'post',
+                        'post_status' => array('publish','draft','future','pending','private','trash'),
+                        'numberposts' => -1,
+                    ));
+                    foreach ($old_posts as $op) {
+                        wp_delete_post($op->ID, true); // 完全削除
+                    }
+                }
+            }
+            kateblog_auto_import();
+            $message = '<div class="notice notice-success"><p>✅ 既存記事をクリーンアップし、全記事を再インポートしました。</p></div>';
+        }
         if ($_POST['kateblog_action'] === 'save_settings') {
             update_option('kateblog_github_repo', sanitize_text_field($_POST['kateblog_github_repo']));
             update_option('kateblog_github_branch', sanitize_text_field($_POST['kateblog_github_branch']));
@@ -577,6 +658,12 @@ function kateblog_render_page() {
             <?php wp_nonce_field('kateblog_action'); ?>
             <input type="hidden" name="kateblog_action" value="run_auto_import">
             <button type="submit" class="button button-primary">今すぐ自動インポートを実行</button>
+        </form>
+        <form method="post" style="margin-bottom:20px;">
+            <?php wp_nonce_field('kateblog_action'); ?>
+            <input type="hidden" name="kateblog_action" value="clean_and_import">
+            <button type="submit" class="button" style="color:#d63638;" onclick="return confirm('既存のKATEBLOG記事を全て削除して再インポートします。よろしいですか？');">全記事を削除して再インポート</button>
+            <p class="description">重複が発生した場合にお使いください。既存のKATEBLOG記事を全て削除してからインポートし直します。</p>
         </form>
 
         <?php
