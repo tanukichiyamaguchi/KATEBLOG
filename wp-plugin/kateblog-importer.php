@@ -37,6 +37,11 @@ register_deactivation_hook(__FILE__, function() {
 add_action('kateblog_auto_import_hook', 'kateblog_auto_import');
 
 function kateblog_auto_import() {
+    // タイムアウト防止（20記事×6画像のダウンロードに時間がかかるため）
+    if (function_exists('set_time_limit')) {
+        set_time_limit(600); // 10分
+    }
+
     $files = kateblog_fetch_github_files();
     if (isset($files['error']) || empty($files)) return;
 
@@ -46,15 +51,15 @@ function kateblog_auto_import() {
         $filename = $file['name'];
         $slug = str_replace('.html', '', $filename);
 
-        // スラッグで既存投稿を検索（重複防止）
+        // スラッグで既存投稿を検索（ゴミ箱も含めて重複防止）
         $existing = get_posts(array(
             'name'        => $slug,
             'post_type'   => 'post',
-            'post_status' => array('publish', 'draft', 'future', 'pending', 'private'),
+            'post_status' => array('publish', 'draft', 'future', 'pending', 'private', 'trash'),
             'numberposts' => 1,
         ));
         if (!empty($existing)) {
-            continue; // 既に同じスラッグの投稿が存在する場合はスキップ
+            continue;
         }
 
         // ブリーフJSONから投稿日を取得
@@ -375,6 +380,9 @@ function kateblog_download_github_image($slug, $image_index) {
 
 // 記事をインポート
 function kateblog_import_article($download_url, $publish_date = '', $publish_time = '11:00') {
+    if (function_exists('set_time_limit')) {
+        set_time_limit(120); // 1記事あたり2分
+    }
     $html = kateblog_fetch_file_content($download_url);
     if (!$html) return array('error' => 'ファイルの取得に失敗しました');
 
