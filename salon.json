@@ -20,6 +20,7 @@
   "phone": "03-6751-0586",
   "siteUrl": "https://eyelash12.com/",
   "bookingUrl": "https://beauty.hotpepper.jp/kr/slnH000797013/coupon/",
+  "lineUrl": "https://s.lmes.jp/landing-qr/2008792677-wpt9W9sz?uLand=q3RPYg",
   "blogUrlPattern": "https://eyelash12.com/blog/{slug}/",
   "categories": {
     "beautyInfo": { "name": "美容情報", "id": 27 },
