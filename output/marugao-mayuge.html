@@ -74,6 +74,7 @@
 </div>
 
 <style>
+/* KATEBLOG UI/UX最適化スタイル */
 @keyframes kateblog-shimmer {
   0% { left: -100%; }
   100% { left: 200%; }
@@ -86,7 +87,7 @@
   left: -100%;
   width: 50%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
   animation: kateblog-shimmer 2.5s ease-in-out infinite;
 }
 .kateblog-cta-booking::after {
@@ -95,7 +96,13 @@
 .kateblog-cta-line:hover,
 .kateblog-cta-booking:hover {
   transform: translateY(-4px) !important;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.25) !important;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3) !important;
+  filter: brightness(1.05);
+}
+.kateblog-cta-line:active,
+.kateblog-cta-booking:active {
+  transform: translateY(0) !important;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2) !important;
 }
 </style>
 <script type="application/ld+json">
