@@ -2,7 +2,7 @@
 /**
  * Plugin Name: KATEBLOG Importer
  * Description: GitHubリポジトリから記事HTMLを取得してWordPressに自動投稿するプラグイン
- * Version: 3.0.0
+ * Version: 3.1.0
  * Author: KATEstageLASH
  */
 
@@ -15,7 +15,7 @@ add_filter('pre_set_site_transient_update_plugins', function($transient) {
     if (empty($transient->checked)) return $transient;
 
     $plugin_slug = plugin_basename(__FILE__);
-    $current_version = '3.0.0';
+    $current_version = '3.1.0';
 
     // GitHubから最新バージョンを確認
     $repo = get_option('kateblog_github_repo', 'tanukichiyamaguchi/KATEBLOG');
@@ -115,7 +115,7 @@ function kateblog_auto_import() {
         // スラッグで既存投稿を検索（ゴミ箱も含めて重複防止）
         $existing = get_posts(array(
             'name'        => $slug,
-            'post_type'   => 'post',
+            'post_type'   => 'blog',
             'post_status' => array('publish', 'draft', 'future', 'pending', 'private', 'trash'),
             'numberposts' => 1,
         ));
@@ -583,7 +583,7 @@ function kateblog_render_page() {
                     $s = str_replace('.html', '', $gf['name']);
                     $old_posts = get_posts(array(
                         'name' => $s,
-                        'post_type' => 'post',
+                        'post_type' => 'blog',
                         'post_status' => array('publish','draft','future','pending','private','trash'),
                         'numberposts' => -1,
                     ));
@@ -632,7 +632,7 @@ function kateblog_render_page() {
         <?php
         // 既存のKATEBLOG投稿数を取得
         $kateblog_posts = get_posts(array(
-            'post_type' => 'post',
+            'post_type' => 'blog',
             'post_status' => array('publish', 'draft', 'future', 'pending', 'private'),
             'meta_key' => '_kateblog_faq_jsonld',
             'numberposts' => -1,
@@ -642,7 +642,7 @@ function kateblog_render_page() {
         if (!empty($files) && !isset($files['error'])) {
             foreach ($files as $f) {
                 $s = str_replace('.html', '', $f['name']);
-                $exists = get_posts(array('name' => $s, 'post_type' => 'post', 'post_status' => array('publish','draft','future','pending','private'), 'numberposts' => 1));
+                $exists = get_posts(array('name' => $s, 'post_type' => 'blog', 'post_status' => array('publish','draft','future','pending','private'), 'numberposts' => 1));
                 if (!empty($exists)) $all_slugs[] = $s;
             }
         }
