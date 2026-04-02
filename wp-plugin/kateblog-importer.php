@@ -2,7 +2,7 @@
 /**
  * Plugin Name: KATEBLOG Importer
  * Description: GitHubリポジトリから記事HTMLを取得してWordPressに自動投稿するプラグイン
- * Version: 3.1.0
+ * Version: 3.2.0
  * Author: KATEstageLASH
  */
 
@@ -15,7 +15,7 @@ add_filter('pre_set_site_transient_update_plugins', function($transient) {
     if (empty($transient->checked)) return $transient;
 
     $plugin_slug = plugin_basename(__FILE__);
-    $current_version = '3.1.0';
+    $current_version = '3.2.0';
 
     // GitHubから最新バージョンを確認
     $repo = get_option('kateblog_github_repo', 'tanukichiyamaguchi/KATEBLOG');
@@ -112,10 +112,10 @@ function kateblog_auto_import() {
         $filename = $file['name'];
         $slug = str_replace('.html', '', $filename);
 
-        // スラッグで既存投稿を検索（ゴミ箱も含めて重複防止）
+        // スラッグで既存投稿を検索（「投稿」「ブログ」両方、ゴミ箱も含めて重複防止）
         $existing = get_posts(array(
             'name'        => $slug,
-            'post_type'   => 'blog',
+            'post_type'   => array('post', 'blog'),
             'post_status' => array('publish', 'draft', 'future', 'pending', 'private', 'trash'),
             'numberposts' => 1,
         ));
@@ -576,24 +576,38 @@ function kateblog_render_page() {
             $message = '<div class="notice notice-success"><p>✅ 自動インポートを実行しました。下のログを確認してください。</p></div>';
         }
         if ($_POST['kateblog_action'] === 'clean_and_import') {
-            // 既存のKATEBLOG記事を全て削除してからインポート
+            // 「投稿」と「ブログ」の両方から既存記事を全て削除してからインポート
             $github_files = kateblog_fetch_github_files();
+            $deleted_count = 0;
             if (!isset($github_files['error'])) {
                 foreach ($github_files as $gf) {
                     $s = str_replace('.html', '', $gf['name']);
+                    // 「投稿」(post) から削除
                     $old_posts = get_posts(array(
+                        'name' => $s,
+                        'post_type' => 'post',
+                        'post_status' => array('publish','draft','future','pending','private','trash'),
+                        'numberposts' => -1,
+                    ));
+                    foreach ($old_posts as $op) {
+                        wp_delete_post($op->ID, true);
+                        $deleted_count++;
+                    }
+                    // 「ブログ」(blog) から削除
+                    $old_blogs = get_posts(array(
                         'name' => $s,
                         'post_type' => 'blog',
                         'post_status' => array('publish','draft','future','pending','private','trash'),
                         'numberposts' => -1,
                     ));
-                    foreach ($old_posts as $op) {
-                        wp_delete_post($op->ID, true); // 完全削除
+                    foreach ($old_blogs as $ob) {
+                        wp_delete_post($ob->ID, true);
+                        $deleted_count++;
                     }
                 }
             }
             kateblog_auto_import();
-            $message = '<div class="notice notice-success"><p>✅ 既存記事をクリーンアップし、全記事を再インポートしました。</p></div>';
+            $message = '<div class="notice notice-success"><p>✅ 既存記事' . $deleted_count . '件を削除し、「ブログ」に全記事を再インポートしました。</p></div>';
         }
         if ($_POST['kateblog_action'] === 'save_settings') {
             update_option('kateblog_github_repo', sanitize_text_field($_POST['kateblog_github_repo']));
