@@ -2,7 +2,7 @@
 /**
  * Plugin Name: KATEBLOG Importer
  * Description: GitHubリポジトリから記事HTMLを取得してWordPressに自動投稿するプラグイン
- * Version: 3.2.0
+ * Version: 3.3.0
  * Author: KATEstageLASH
  */
 
@@ -15,7 +15,7 @@ add_filter('pre_set_site_transient_update_plugins', function($transient) {
     if (empty($transient->checked)) return $transient;
 
     $plugin_slug = plugin_basename(__FILE__);
-    $current_version = '3.2.0';
+    $current_version = '3.3.0';
 
     // GitHubから最新バージョンを確認
     $repo = get_option('kateblog_github_repo', 'tanukichiyamaguchi/KATEBLOG');
@@ -138,7 +138,8 @@ function kateblog_auto_import() {
         $result = kateblog_import_article($file['download_url'], $publish_date, $publish_time);
 
         if (isset($result['success']) && $result['success']) {
-            $log[] = "✅ {$filename} → {$result['title']} (ID:{$result['post_id']}, {$result['status']})";
+            $pt = isset($result['post_type']) ? $result['post_type'] : '?';
+            $log[] = "✅ {$filename} → {$result['title']} (ID:{$result['post_id']}, type:{$pt}, {$result['status']})";
         } else {
             $log[] = "❌ {$filename} → " . ($result['error'] ?? 'unknown error');
         }
@@ -501,15 +502,32 @@ function kateblog_import_article($download_url, $publish_date = '', $publish_tim
         $author_id = get_current_user_id();
     }
 
-    // 投稿作成
+    // 投稿作成（カスタム投稿タイプ「ブログ」に投稿）
     $post_data = array(
+        'post_type'    => 'blog',
         'post_title'   => $meta['title'],
         'post_content' => $content,
         'post_status'  => 'draft',
         'post_author'  => $author_id,
         'post_name'    => isset($meta['slug']) ? $meta['slug'] : '',
-        'post_category' => isset($meta['category']) ? array($meta['category']) : array(27),
     );
+
+    // カスタム投稿タイプのカテゴリタクソノミーを自動検出して設定
+    if (isset($meta['category'])) {
+        $taxonomies = get_object_taxonomies('blog', 'names');
+        $cat_taxonomy = '';
+        foreach ($taxonomies as $tax) {
+            if (strpos($tax, 'categor') !== false || strpos($tax, 'cat') !== false) {
+                $cat_taxonomy = $tax;
+                break;
+            }
+        }
+        if ($cat_taxonomy) {
+            $post_data['tax_input'] = array(
+                $cat_taxonomy => array(intval($meta['category'])),
+            );
+        }
+    }
 
     if ($publish_date) {
         $datetime = $publish_date . ' ' . $publish_time . ':00';
@@ -546,11 +564,16 @@ function kateblog_import_article($download_url, $publish_date = '', $publish_tim
         wp_update_post(array('ID' => $post_id, 'post_content' => trim($content_clean)));
     }
 
+    // 投稿タイプが正しく設定されたか確認
+    $created_post = get_post($post_id);
+    $actual_type = $created_post ? $created_post->post_type : 'unknown';
+
     return array(
         'success' => true,
         'post_id' => $post_id,
         'title' => $meta['title'],
         'status' => $post_data['post_status'],
+        'post_type' => $actual_type,
         'edit_url' => admin_url("post.php?post={$post_id}&action=edit"),
     );
 }
