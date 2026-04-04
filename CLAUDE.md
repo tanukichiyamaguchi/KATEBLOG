@@ -139,6 +139,60 @@ KATEBLOG/
 
 ---
 
+### Agent 6: Salon Researcher（サロン情報リサーチエージェント）
+**役割**: サロンの正確な情報をリサーチし、記事に反映
+
+**実行タイミング**: 記事執筆前（情報提供）・記事完成後（情報検証）
+
+**手順**:
+1. `salon.json` と公式サイト・ホットペッパー情報の整合性を確認
+2. メニュー名称・住所・電話番号・URLの正確性を検証
+3. 美容知識（持続期間、施術方法等）が業界の常識に沿っているか確認
+4. マツエクを当店メニューとして記載していないかチェック
+
+**参照ファイル**: `agents/salon-researcher.md`
+
+---
+
+### Agent 7: Fact Checker（ファクトチェックエージェント）
+**役割**: 記事の情報正確性を徹底検証
+
+**実行タイミング**: 記事完成後（Quality Reviewerと並行）
+
+**手順**:
+1. サロン固有情報（名称・住所・URL・メニュー）の正確性を検証
+2. 美容・医学知識の正確性を確認
+3. 薬機法・景品表示法のコンプライアンスチェック
+4. 数値データ・統計の根拠確認
+5. 記事内の矛盾チェック
+
+**参照ファイル**: `agents/fact-checker.md`
+
+---
+
+### Agent 8: Human Writing Auditor（人間らしさ監査エージェント）
+**役割**: AIだと気づかれない自然な文章かを監査
+
+**実行タイミング**: 記事完成後（最終チェック）
+
+**手順**:
+1. 6項目の自然さスコアリング（各0〜10点、合計60点以上で合格）
+2. AI文章の典型パターン（定型フレーズ多用・構造の単調さ等）を検出
+3. 具体的エピソード・感情表現・トーンの緩急をチェック
+4. 不合格の場合は修正箇所を指摘し、修正後に再スコアリング
+
+**スコアリング基準**:
+- 文型バリエーション（0-10）
+- 定型フレーズの非反復（0-10）
+- トーンの自然さ（0-10）
+- 具体性（0-10）
+- 感情・主観（0-10）
+- 接続・展開（0-10）
+
+**参照ファイル**: `agents/human-writing-auditor.md`
+
+---
+
 ### Agent 4: Publisher（公開エージェント）
 **役割**: 画像生成とWordPress予約投稿
 
@@ -162,21 +216,26 @@ node cli.js batch output/*.html --start 2026-04-01 --interval 3 --time 11:00
 
 ### 1記事の完全自動フロー
 ```
-[Keyword Planner] → briefs/{slug}.json
+[Salon Researcher] → サロン情報の最新確認
         ↓
-[Article Writer]  → output/{slug}.html
+[Keyword Planner]  → briefs/{slug}.json
         ↓
-[Quality Reviewer] → output/{slug}.html（修正済み）
+[Article Writer]   → output/{slug}.html
         ↓
-[Publisher]        → WordPress予約投稿
+[Quality Reviewer] + [Fact Checker] + [Human Writing Auditor] + [UI/UX Designer]
+        ↓                ↓                    ↓                      ↓
+     品質校閲          情報正確性         人間らしさ監査        デザイン最適化
+        ↓（全チェック通過後）
+[Publisher]         → 画像生成 → GitHubプッシュ → WP自動インポート
 ```
 
 ### 月次バッチフロー
 ```
-1. Keyword Planner が10本分のブリーフを生成
-2. Article Writer が各ブリーフから記事を執筆
-3. Quality Reviewer が全記事をチェック
-4. Publisher がバッチ投稿（3日おき、11:00公開）
+1. Salon Researcher がサロン情報を確認
+2. Keyword Planner が30本分のブリーフを生成（毎日投稿）
+3. Article Writer が各ブリーフから記事を執筆
+4. Quality Reviewer + Fact Checker + Human Writing Auditor + UI/UX Designer が並行チェック
+5. Publisher が画像生成・GitHubプッシュ（WPプラグインが自動インポート）
 ```
 
 ## CLI コマンド一覧
