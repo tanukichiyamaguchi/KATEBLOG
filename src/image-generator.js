@@ -103,7 +103,7 @@ async function generateImage(headingText, articleTitle, index, outputDir) {
 
   const textElements = lines.map((line, i) => {
     const y = startY + 60 + i * lineHeight;
-    return `<text x="600" y="${y}" font-family="'Hiragino Sans', 'Yu Gothic', 'Noto Sans JP', sans-serif" font-size="42" font-weight="bold" fill="white" text-anchor="middle" dominant-baseline="middle" letter-spacing="2">${escapeXml(line)}</text>`;
+    return `<text x="600" y="${y}" font-family="'Meiryo', 'Hiragino Sans', 'Yu Gothic', 'Noto Sans JP', sans-serif" font-size="42" font-weight="bold" fill="white" text-anchor="middle" dominant-baseline="middle" letter-spacing="2">${escapeXml(line)}</text>`;
   }).join('\n    ');
 
   // テーマに合わせた装飾
@@ -145,7 +145,7 @@ async function generateImage(headingText, articleTitle, index, outputDir) {
   <rect x="596" y="${startY + totalTextHeight + 64}" width="8" height="8" rx="1" fill="rgba(255,255,255,0.6)" transform="rotate(45, 600, ${startY + totalTextHeight + 68})" />
 
   <!-- サロン名 -->
-  <text x="600" y="${startY + totalTextHeight + 108}" font-family="'Hiragino Sans', 'Yu Gothic', 'Noto Sans JP', sans-serif" font-size="20" fill="rgba(255,255,255,0.7)" text-anchor="middle" letter-spacing="4">${escapeXml(salonNameText)}</text>
+  <text x="600" y="${startY + totalTextHeight + 108}" font-family="'Meiryo', 'Hiragino Sans', 'Yu Gothic', 'Noto Sans JP', sans-serif" font-size="20" fill="rgba(255,255,255,0.7)" text-anchor="middle" letter-spacing="4">${escapeXml(salonNameText)}</text>
 </svg>`;
 
   const filename = `image-${index}.png`;
