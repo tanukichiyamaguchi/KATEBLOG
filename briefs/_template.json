@@ -6,13 +6,27 @@
   "slug": "",
   "title": "",
   "metaDescription": "",
+  "pasona": {
+    "problem": "読者が抱える悩み・検索意図（P）",
+    "affinity": "共感ポイント・現場エピソードの方向性（A）",
+    "solution": "提示する原因と解決策（S）",
+    "offer": "自然に提案する当サロンの施術・メニュー（O）",
+    "narrowingDown": "特におすすめしたい対象・後押し（N）",
+    "action": "促す行動：予約・公式LINE（A）"
+  },
   "h2Sections": [
     {
       "heading": "",
+      "pasonaStep": "P",
       "h3Headings": [],
       "keyPoints": []
     }
   ],
+  "imagePrompts": {
+    "style": "soft pastel tones, bright and clean Japanese beauty salon",
+    "1": "1枚目H2の被写体（英語推奨）",
+    "2": "2枚目H2の被写体"
+  },
   "faqTopics": [],
   "differentiationPoints": [],
   "tags": [],
@@ -20,8 +34,8 @@
   "publishDate": "",
   "publishTime": "11:00",
   "eeatInsertionPoints": [
-    "導入部で田中の経験に触れる",
-    "専門的な解説箇所で講師経験を活かしたアドバイス",
-    "まとめで信頼性を補強"
+    "導入部で当サロンの施術経験に基づく知見に触れる",
+    "解決策の解説箇所でスタッフボイス（現場の一言）を挿入",
+    "まとめで当サロンの技術力・信頼性を補強"
   ]
 }
