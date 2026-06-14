@@ -55,58 +55,33 @@ H2見出しは下表のいずれかのステップに対応させ、記事全体
 スマホで読む女性読者を想定し、**ぱっと見て分かる**レイアウトにします。
 
 - 段落は2〜3文ごとに改行（`<p>`を細かく分ける）。
-- 1つのH2につき、**装飾コンポーネントを最低1つ**使う（下記から選択）。
+- 視認性は **図解画像（cover/diagram）＋短い段落＋箇条書き／番号リスト＋太字＋マーカー** で出す。
 - 重要語は**太字**または**マーカー**で強調。ただし1段落に1〜2か所まで。
-- 手順・比較・チェック項目は箇条書き／番号リスト／ボックスにする。
-- 各H2直下に画像を1枚（`%%IMAGE_N%%`）。
+- 手順・比較・チェック項目は箇条書き／番号リストにする。
+- 各H2直下に画像を1枚（`%%IMAGE_N%%`）。図解がそのH2の要点を視覚的に補う。
 
-### 装飾コンポーネント・スニペット集（WordPressでそのままインラインCSSが効きます）
-
-**① ポイントボックス（気づき・コツの強調）**
-```html
-<div style="background:#fff5f7;border:1px solid #f3c6d3;border-left:5px solid #e86a8e;border-radius:10px;padding:18px 20px;margin:24px 0;">
-<p style="margin:0 0 8px;font-weight:bold;color:#d6427a;">💡 ここがポイント</p>
-<p style="margin:0;line-height:1.9;">本文をここに。</p>
-</div>
-```
-
-**② スタッフボイス（吹き出し風・現場の一言／E-E-A-T）**
-```html
-<div style="display:flex;gap:12px;align-items:flex-start;background:#f7f4ff;border-radius:14px;padding:16px 18px;margin:24px 0;">
-<div style="flex:0 0 auto;width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,#b18cff,#e8a0b4);display:flex;align-items:center;justify-content:center;color:#fff;font-size:22px;">💁‍♀️</div>
-<p style="margin:0;line-height:1.9;">当サロンの現場でよくお伝えしている一言や、お客様とのエピソードを。</p>
-</div>
-```
-
-**③ チェックリスト**
+### 使ってよい装飾（最小限・自然に）
+**① チェックリスト**
 ```html
 <ul style="list-style:none;padding:0;margin:20px 0;">
 <li style="padding:10px 0 10px 34px;position:relative;border-bottom:1px dashed #eee;line-height:1.8;"><span style="position:absolute;left:4px;top:10px;color:#06C755;font-weight:bold;">✓</span>チェック項目をここに。</li>
 </ul>
 ```
-
-**④ まとめボックス（記事末尾の要点整理）**
-```html
-<div style="background:linear-gradient(180deg,#fffaf3,#ffffff);border:1px solid #ecd9b8;border-radius:12px;padding:20px 22px;margin:28px 0;box-shadow:0 4px 14px rgba(0,0,0,0.05);">
-<p style="margin:0 0 10px;font-weight:bold;font-size:18px;color:#a87a2a;">この記事のまとめ</p>
-<ul style="margin:0;padding-left:1.2em;line-height:2;">
-<li>要点1</li><li>要点2</li><li>要点3</li>
-</ul>
-</div>
-```
-
-**⑤ マーカー強調（インライン）**
+**② マーカー強調（インライン）**
 ```html
 <span style="background:linear-gradient(transparent 60%,#ffe1ec 60%);font-weight:bold;">強調したい語</span>
 ```
-
-**⑥ Q&Aブロック（本文中の疑問解消）**
+**③ まとめ（囲みなし）** — 記事末尾の要点整理は囲みボックスにせず、見出し＋箇条書きで。
 ```html
-<div style="border:1px solid #eee;border-radius:12px;padding:16px 18px;margin:20px 0;">
-<p style="margin:0 0 8px;font-weight:bold;color:#5a4a8a;">Q. 質問文？</p>
-<p style="margin:0;line-height:1.9;">A. 回答文。</p>
-</div>
+<p><strong>この記事のまとめ</strong></p>
+<ul style="line-height:2;"><li>要点1</li><li>要点2</li><li>要点3</li></ul>
 ```
+
+### 使わない（AIっぽく見えるため禁止）
+- **色付きの囲みボックス**（ポイントボックス、まとめボックス、Q&Aボックス等の `background`＋`border` で囲んだ枠）
+- **吹き出し（アバターアイコン付きの発言ボックス）**
+- 現場のエピソード・スタッフの一言（E-E-A-T）は、**吹き出しにせず普通の段落**で自然に書く（「当サロンでは〜」「〜というお声をよくいただきます」等）。
+- Q&Aは本文では**囲まず**「**Q. 〇〇？** 改行 A. 〇〇」のように普通の段落で。FAQはJSON-LDで別途。
 
 ---
 
@@ -123,7 +98,7 @@ H2見出しは下表のいずれかのステップに対応させ、記事全体
 - サロンとしての豊富な施術実績に基づいた情報を発信
 - 「当サロンでは〜」「KATEstageLASHでは〜」等、サロン名義で記載
 - 施術者の個人名は記載しない
-- 1記事に2〜3箇所、サロンの経験に基づくアドバイス・エピソードを挿入（②スタッフボイス推奨）
+- 1記事に2〜3箇所、サロンの経験に基づくアドバイス・エピソードを**普通の段落で自然に**挿入（吹き出しにしない）
 
 ## CTA（コールトゥアクション）ルール
 - 記事末尾に予約リンクと公式LINE登録リンクを設置（下記の装飾CTAボタンを使用）
@@ -214,15 +189,15 @@ H2見出しは下表のいずれかのステップに対応させ、記事全体
 
 <h2>実は多くの方が同じ悩みを抱えています</h2>      <!-- A -->
 <img src="%%IMAGE_2%%" alt="見出し内容の説明" style="max-width: 100%; height: auto;">
-<p>共感＋現場エピソード（②スタッフボイス）…</p>
+<p>共感＋現場エピソード（普通の段落で自然に）…</p>
 
 <h2>〜の原因と対処法</h2>                          <!-- S -->
 <img src="%%IMAGE_3%%" alt="見出し内容の説明" style="max-width: 100%; height: auto;">
-<p>原因を解説（①ポイントボックス／箇条書き）…</p>
+<p>原因を解説（箇条書き＋図解）…</p>
 
 <h2>〜を解決する具体的な方法</h2>                  <!-- S -->
 <img src="%%IMAGE_4%%" alt="見出し内容の説明" style="max-width: 100%; height: auto;">
-<p>実践ステップ（番号リスト／③チェックリスト）…</p>
+<p>実践ステップ（番号リスト／チェックリスト＋図解steps）…</p>
 
 <h2>こんな方は専門サロンへ｜KATEstageLASHのご提案</h2>  <!-- O / N -->
 <img src="%%IMAGE_5%%" alt="見出し内容の説明" style="max-width: 100%; height: auto;">
@@ -231,7 +206,7 @@ H2見出しは下表のいずれかのステップに対応させ、記事全体
 <h2>KATEstageLASH蒲田西口店の〇〇の特徴</h2>        <!-- A -->
 <img src="%%IMAGE_6%%" alt="KATEstageLASH蒲田西口店の説明" style="max-width: 100%; height: auto;">
 <p>サロン紹介＋スタッフからの一言…</p>
-<!-- ④まとめボックス -->
+<!-- まとめ（囲みなし：見出し＋箇条書き） -->
 <!-- 末尾CTA（緑LINE＋赤ホットペッパーの装飾ボタン） -->
 
 <!-- FAQ構造化データ -->
