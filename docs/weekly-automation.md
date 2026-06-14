@@ -18,16 +18,31 @@
 
 ---
 
-## 2. OpenAI画像生成
+## 2. 画像生成（表紙＋手書き図解＋素人風写真）
 
-### 仕組み
-- `src/openai-image-generator.js` が OpenAI Images API を呼び出し、記事内容に合った**リアル写真風**画像を生成。
-- `src/image-provider.js` がプロバイダを切り替え：
-  - `openai` … OpenAI で生成
-  - `sharp` … 従来のグラデーション画像
-  - `auto`（既定）… `OPENAI_API_KEY` があれば openai、無ければ sharp
-- OpenAIで個別画像が失敗した場合は、その画像だけ sharp に自動フォールバック。
+### 方針
+「AI感」を避けるため、画像は次の3種類を使い分けます（既定は**表紙＋図解中心**、写真は最小限）。
+
+| 種別 | 生成方法 | 用途 |
+|---|---|---|
+| **表紙 cover** | 手書きフォント＋SVG（`src/diagram-generator.js`） | 1枚目＝アイキャッチ。タイトルを大きく高視認性で。 |
+| **図解 diagram** | 手書きフォント＋SVG | cards/steps/checklist/point/compare。説明をわかりやすく。 |
+| **写真 photo** | OpenAI Images API（`src/openai-image-generator.js`） | 素人が撮った20代女性のスマホ写真風。雰囲気づけに最小限。 |
+
+- **なぜ図解はAIで作らないか**: 画像AIは日本語の文字を描かせると崩れる（かえってAI感が出る）。そこで図解・表紙の文字は**手書きフォント（Zen Kurenaido）で確実に描画**します。
+- `src/image-provider.js` が種別を判定（`IMG_DIAGRAM_N`→図解／1枚目→表紙／`IMG_TYPE_N=photo`→写真）。
+- 写真プロバイダは `openai|sharp|auto`（既定 auto＝キーがあればOpenAI、無ければsharp。個別失敗時もsharpへフォールバック）。
 - 生成物は `output/images-{slug}/image-{0..N}.png`（1200×630）。WordPressプラグインはこのPNGをそのまま取り込みます（プラグイン側の改修は不要）。
+- 図解・表紙の手書きフォントは `assets/fonts/`（OFLライセンス）。CIでは `scripts/install-fonts.sh` でfontconfigに登録してから生成します。書体は `.env` の `DIAGRAM_FONT` で変更可（既定 Zen Kurenaido、`Yomogi` も同梱）。
+
+### 画像種別の指定（記事HTMLのメタコメント）
+```html
+<!-- IMG_DIAGRAM_1: layout=cover; title=記事タイトル; category=まつ毛パーマ -->
+<!-- IMG_DIAGRAM_3: layout=cards; title=◯◯の3つの理由; items=理由1|理由2|理由3 -->
+<!-- IMG_DIAGRAM_4: layout=steps; title=◯◯の4ステップ; items=手順1|手順2|手順3|手順4 -->
+<!-- IMG_TYPE_6: photo -->
+<!-- IMG_PROMPT_6: a casual smartphone snapshot of a Japanese woman in her 20s, natural, no text -->
+```
 
 ### 画像の内容を記事に合わせる（ヒント）
 記事HTMLの先頭メタコメント、またはブリーフJSONの `imagePrompts` で被写体を指定できます。

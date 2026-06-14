@@ -147,8 +147,9 @@ function layoutPoint(spec) {
   return `
   <g filter="url(#rough)">
     <rect x="${px}" y="${py}" width="${pw}" height="${ph}" rx="24" fill="#fff7fa" stroke="${ACCENT}" stroke-width="3"/>
+    <circle cx="${px + 48}" cy="${py + 46}" r="22" fill="#fff" stroke="${ACCENT}" stroke-width="3"/>
+    <text x="${px + 48}" y="${py + 58}" font-family="${font()}" font-size="30" fill="${ACCENT}" text-anchor="middle" font-weight="700">!</text>
   </g>
-  <text x="${px + 46}" y="${py + 56}" font-family="${font()}" font-size="40">💡</text>
   <text x="${cx}" y="${startY}" font-family="${font()}" font-size="40" fill="${INK}" text-anchor="middle" font-weight="700">${tspans(lines, cx, 56)}</text>`;
 }
 
