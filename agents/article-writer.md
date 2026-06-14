@@ -36,7 +36,7 @@
 
 ## 画像プレースホルダー（表紙＋図解中心）
 各H2の直後に `%%IMAGE_N%%`（N=1から連番）を配置し、種別をメタコメントで指定する。
-- 1枚目（image-0＝アイキャッチ）は **表紙（cover）**：`<!-- IMG_DIAGRAM_1: layout=cover; title=記事タイトル; category=◯◯ -->`
+- 1枚目（image-0＝アイキャッチ）は **表紙（cover）**：`<!-- IMG_DIAGRAM_1: layout=cover; title=短い見出し(1行14文字程度); category=◯◯ -->`（SEOの`<!-- TITLE -->`は別途長めでOK）
 - 説明系H2は **図解（diagram）**：`<!-- IMG_DIAGRAM_3: layout=cards|steps|checklist|point|compare; title=...; items=A|B|C -->`
 - 雰囲気を出したいH2だけ **写真（photo）**：`<!-- IMG_TYPE_6: photo -->` ＋ `<!-- IMG_PROMPT_6: 素人が撮った20代女性のスマホ写真風（英語推奨） -->`
 図解は手書きフォントで描画されるため日本語が崩れない。詳しくは `config/shiji.md` の画像ルールを参照。
