@@ -2,3 +2,6 @@ node_modules/
 .env
 temp/
 *.log
+
+# queue のプレビュー画像は公開時(publish-next)にCIで再生成するため追跡しない
+queue/images-*/
