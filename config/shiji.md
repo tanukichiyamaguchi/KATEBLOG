@@ -137,18 +137,36 @@ H2見出しは下表のいずれかのステップに対応させ、記事全体
 2. 予約の空き枠確認への訴求
 3. 緑（LINE）＋赤（ホットペッパー）の装飾CTAボタンを使用（既存記事の末尾CTAブロックを踏襲）
 
-## 画像ルール（OpenAI写真風 / sharpフォールバック）
-- 各H2セクションの直後にアイキャッチ画像を1枚配置：`<img src="%%IMAGE_N%%" alt="..." style="max-width: 100%; height: auto;">`
-  - N は1始まりの連番。1つ目のH2が `%%IMAGE_1%%`。
-- 画像は `node cli.js generate-images` / `publish` 時に自動生成・置換される（OpenAI Images APIでリアル写真風。キーが無ければsharp）。
-- **画像の内容を記事に合わせるため、メタコメントでヒントを指定できる**（任意だが推奨）:
-  ```html
-  <!-- IMG_STYLE: soft pastel tones, bright and clean salon -->
-  <!-- IMG_PROMPT_1: a close-up of a Japanese woman's natural curled eyelashes after an eyelash perm -->
-  <!-- IMG_PROMPT_2: a relaxing eyebrow styling treatment scene in a bright beauty salon -->
-  ```
-  - `IMG_PROMPT_{N}` は N 番目のH2画像の被写体（英語推奨）。指定が無いH2は見出しから自動でプロンプト生成。
-  - `IMG_STYLE` は全画像共通の追加スタイル（任意）。
+## 画像ルール（表紙＋図解中心 / 写真は最小限）
+各H2セクションの直後にアイキャッチ画像を1枚配置：`<img src="%%IMAGE_N%%" alt="..." style="max-width: 100%; height: auto;">`（N は1始まり。1つ目のH2が `%%IMAGE_1%%`）。
+画像は `node cli.js generate-images` / `publish-next` 時に自動生成・置換される。**画像の種別はメタコメントで指定する。**
+
+### 画像の種別（基本方針：表紙＋図解中心、写真は最小限）
+- **表紙（cover）** … 記事タイトルを大きく見せる高視認性のタイトルカード（手書きフォント）。**1枚目（image-0＝アイキャッチ）に必ず置く**。指定が無くても最初のH2は自動で表紙になる。
+- **図解（diagram）** … 手書き風の図解。**画像AIに日本語を描かせると崩れるため、図解はこちらで手書きフォント＋手描き風SVGで描画する**（日本語が崩れない）。
+  - レイアウト: `cards`（3〜4項目）/ `steps`（手順・矢印付き）/ `checklist`（チェック項目）/ `point`（要点ひとつ）/ `compare`（2項目比較）。
+- **写真（photo）** … OpenAIで「**素人が撮った20代女性のスマホ写真風**」（広告っぽさ・AIっぽさを避ける）。キーが無ければsharp。雰囲気を出したい所だけ最小限に。
+
+### 指定方法（メタコメント）
+```html
+<!-- 表紙（1枚目） -->
+<!-- IMG_DIAGRAM_1: layout=cover; title=記事タイトル; category=まつ毛パーマ -->
+<!-- 図解いろいろ -->
+<!-- IMG_DIAGRAM_3: layout=cards; title=◯◯の3つの理由; items=理由1|理由2|理由3 -->
+<!-- IMG_DIAGRAM_4: layout=steps; title=◯◯の4ステップ; items=手順1|手順2|手順3|手順4 -->
+<!-- IMG_DIAGRAM_5: layout=checklist; title=こんな方へ; items=項目1|項目2|項目3 -->
+<!-- IMG_DIAGRAM_2: layout=point; title=ここがポイント; text=一番伝えたい一言 -->
+<!-- IMG_DIAGRAM_X: layout=compare; title=AとB; left=Aの見出し:特徴1,特徴2; right=Bの見出し:特徴1,特徴2 -->
+<!-- 写真にしたいH2だけ -->
+<!-- IMG_TYPE_6: photo -->
+<!-- IMG_PROMPT_6: a casual smartphone snapshot of a Japanese woman in her 20s ... -->
+```
+- 種別の決まり方: `IMG_DIAGRAM_N` があれば図解／1枚目でヒント無しなら表紙／`IMG_TYPE_N=photo` なら写真／それ以外は写真。
+- `items` は `|` 区切り、`compare` の各カラムは `見出し:項目1,項目2`。
+- 図解の手書きフォントは Zen Kurenaido（`.env` の `DIAGRAM_FONT` で変更可）。
+- 写真の被写体は `IMG_PROMPT_{N}`（英語推奨）、共通スタイルは `IMG_STYLE`。
+
+### 共通
 - `<figcaption>` タグは使用禁止
 - alt属性は見出しの内容を説明する日本語文章にする（生成プロンプトは入れない）
 - `style="max-width: 100%; height: auto;"` を全画像に設定

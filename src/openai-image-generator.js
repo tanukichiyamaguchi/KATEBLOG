@@ -58,20 +58,22 @@ function selectThemeMood(title) {
 }
 
 // 見出し・ヒントから画像生成プロンプトを組み立てる
+// 「いかにもAI／広告写真」を避け、素人がスマホで撮った自然なスナップ風にする。
 function buildPrompt({ heading, articleTitle, hint, globalStyle, themeMood, cfgStyle }) {
   // 被写体: ヒントが指定されていればそれを最優先で採用
   const subject = hint && hint.trim()
     ? hint.trim()
-    : `a scene that visually represents the blog section titled "${heading}" about eyelash perm / eyebrow beauty care at a Japanese salon`;
+    : `an everyday candid moment related to the blog section titled "${heading}" about eyelash perm / eyebrow beauty care`;
 
   const base = [
-    'Photorealistic, high-quality beauty editorial photograph for a Japanese eyelash perm and eyebrow styling salon blog.',
+    'A casual, candid smartphone snapshot, NOT a professional or studio photo, NOT an advertisement.',
     `Subject: ${subject}.`,
-    'Feature a Japanese woman in her late 20s to 40s with natural healthy-looking eyelashes and beautifully shaped eyebrows, soft natural makeup, clean and elegant.',
-    `Mood and palette: ${themeMood}.`,
-    'Bright, clean and airy salon atmosphere, soft natural lighting, shallow depth of field, tasteful and trustworthy.',
+    'Feature a real-looking Japanese woman in her 20s, natural everyday makeup, relatable girl-next-door vibe, natural and slightly imperfect.',
+    'Amateur snapshot aesthetic: shot on a smartphone, soft natural indoor lighting, natural skin texture and pores, no heavy retouching, no beauty filter, subtle grain, slightly casual framing, authentic everyday atmosphere.',
+    `Soft mood and palette: ${themeMood}.`,
+    'Avoid the glossy, over-perfect, AI-generated or stock-photo look.',
     'Absolutely no text, no letters, no numbers, no logo, no watermark, no signage.',
-    'Horizontal (landscape) composition, magazine-quality, suitable as a blog header image.',
+    'Horizontal (landscape) composition.',
   ];
 
   if (globalStyle && globalStyle.trim()) base.push(globalStyle.trim());

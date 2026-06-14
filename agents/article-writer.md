@@ -34,10 +34,12 @@
 - **N** Narrowing … 対象を絞って後押し（中間CTA）
 - **A** Action … 最後のH2＋末尾CTA（緑LINE＋赤ホットペッパー）
 
-## 画像プレースホルダー
-各H2の直後に `%%IMAGE_N%%`（N=1から連番）を配置。
-Node.jsツールが OpenAI（写真風）または sharp で生成して実画像URLに置換する。
-内容に合った画像にするため、可能な限り `IMG_PROMPT_N` ヒントを書く。
+## 画像プレースホルダー（表紙＋図解中心）
+各H2の直後に `%%IMAGE_N%%`（N=1から連番）を配置し、種別をメタコメントで指定する。
+- 1枚目（image-0＝アイキャッチ）は **表紙（cover）**：`<!-- IMG_DIAGRAM_1: layout=cover; title=記事タイトル; category=◯◯ -->`
+- 説明系H2は **図解（diagram）**：`<!-- IMG_DIAGRAM_3: layout=cards|steps|checklist|point|compare; title=...; items=A|B|C -->`
+- 雰囲気を出したいH2だけ **写真（photo）**：`<!-- IMG_TYPE_6: photo -->` ＋ `<!-- IMG_PROMPT_6: 素人が撮った20代女性のスマホ写真風（英語推奨） -->`
+図解は手書きフォントで描画されるため日本語が崩れない。詳しくは `config/shiji.md` の画像ルールを参照。
 
 ## 文体・視認性（config/shiji.md 準拠）
 - サロン名義（当サロン/私たち）＋柔らかい語りかけ口調。個人名は出さない。

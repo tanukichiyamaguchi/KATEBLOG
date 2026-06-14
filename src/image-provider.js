@@ -1,17 +1,21 @@
 // 画像生成プロバイダの統合レイヤー
-// 記事HTMLから H2 見出しと画像ヒントを抽出し、
-// OpenAI（リアル写真風）または sharp（グラデーション）で画像を生成する。
+// 記事HTMLから H2 見出しと画像ヒントを抽出し、画像種別ごとに生成する。
 //
-//   provider = 'openai' | 'sharp' | 'auto'（既定: auto）
-//   auto … OPENAI_API_KEY があれば OpenAI、無ければ sharp
+//   ・表紙（cover）   … タイトルを大きく見せる高視認性のタイトルカード（手書き風）
+//   ・図解（diagram） … 手書き風の図解（cards/steps/checklist/point/compare）
+//   ・写真（photo）   … OpenAIで「素人が撮った20代女性のスマホ写真」風（キー無→sharp）
 //
-// OpenAI で個別画像の生成に失敗した場合は、その画像だけ sharp にフォールバックする。
+// 画像種別の決定（N = 1始まり。IMG_*_N は N番目のH2に対応）:
+//   1. IMG_DIAGRAM_N がある           → その図解（layout=cover も指定可）
+//   2. index 0（最初のH2）でヒント無し → 表紙（cover）を自動生成
+//   3. IMG_TYPE_N = cover|diagram|photo → 指定種別
+//   4. それ以外                          → 写真（IMG_PROMPT_N があれば被写体に反映）
 
 const fs = require('fs');
-const { generateImage } = require('./image-generator'); // sharp 版（1枚）
+const { generateImage } = require('./image-generator');               // sharp（写真フォールバック）
 const { getOpenAIConfig, generateOpenAIImage } = require('./openai-image-generator');
+const { generateDiagram, parseDiagramSpec } = require('./diagram-generator');
 
-// 本文から H2 見出しを抽出
 function extractHeadings(html) {
   const h2Regex = /<h2[^>]*>(.*?)<\/h2>/gis;
   const headings = [];
@@ -23,35 +27,49 @@ function extractHeadings(html) {
 }
 
 // 画像ヒントを抽出
-//   <!-- IMG_STYLE: 全画像共通のスタイル指定 -->
-//   <!-- IMG_PROMPT_1: 1つ目のH2画像の被写体（英語推奨） -->
+//   <!-- IMG_STYLE: 写真共通スタイル -->
+//   <!-- IMG_PROMPT_1: 写真の被写体（英語推奨） -->
+//   <!-- IMG_TYPE_1: cover|diagram|photo -->
+//   <!-- IMG_DIAGRAM_3: layout=cards; title=...; items=A|B|C -->
 function extractImageHints(html) {
-  const hints = {};
+  const hints = {};   // 写真の被写体
+  const types = {};   // 種別
+  const diagrams = {}; // 図解スペック文字列
   let globalStyle = '';
 
   const styleMatch = html.match(/<!--\s*IMG_STYLE:\s*([\s\S]*?)\s*-->/i);
   if (styleMatch) globalStyle = styleMatch[1].trim();
 
-  const promptRegex = /<!--\s*IMG_PROMPT_(\d+):\s*([\s\S]*?)\s*-->/gi;
-  let m;
-  while ((m = promptRegex.exec(html)) !== null) {
-    hints[parseInt(m[1], 10)] = m[2].trim();
-  }
-  return { globalStyle, hints };
+  const grab = (re, into, transform) => {
+    let m;
+    while ((m = re.exec(html)) !== null) into[parseInt(m[1], 10)] = transform ? transform(m[2]) : m[2].trim();
+  };
+  grab(/<!--\s*IMG_PROMPT_(\d+):\s*([\s\S]*?)\s*-->/gi, hints);
+  grab(/<!--\s*IMG_TYPE_(\d+):\s*([\s\S]*?)\s*-->/gi, types, v => v.trim().toLowerCase());
+  grab(/<!--\s*IMG_DIAGRAM_(\d+):\s*([\s\S]*?)\s*-->/gi, diagrams);
+
+  return { globalStyle, hints, types, diagrams };
 }
 
-// プロバイダ決定
 function resolveProvider(opts = {}) {
   let provider = opts.provider || process.env.IMAGE_PROVIDER || 'auto';
   provider = String(provider).toLowerCase();
   if (provider === 'auto') {
-    const cfg = getOpenAIConfig();
-    provider = cfg.apiKey ? 'openai' : 'sharp';
+    provider = getOpenAIConfig().apiKey ? 'openai' : 'sharp';
   }
   return provider;
 }
 
-// 記事の全 H2 画像を生成
+// タイトルから表紙のカテゴリラベルを推定
+function detectCoverCategory(title) {
+  const t = title || '';
+  if (/まつ毛パーマ|パリジェンヌ|ラッシュリフト/.test(t)) return 'まつ毛パーマ';
+  if (/アイブロウ|眉/.test(t)) return 'アイブロウ';
+  if (/美容液|トリートメント|ケア/.test(t)) return 'まつ毛ケア';
+  if (/蒲田|大田区/.test(t)) return '蒲田・大田区';
+  return 'KATEstageLASH';
+}
+
 async function generateImages(htmlContent, articleTitle, outputDir, opts = {}) {
   const headings = extractHeadings(htmlContent);
   if (headings.length === 0) {
@@ -60,42 +78,56 @@ async function generateImages(htmlContent, articleTitle, outputDir, opts = {}) {
   }
 
   const provider = resolveProvider(opts);
-  const { globalStyle, hints } = extractImageHints(htmlContent);
+  const { globalStyle, hints, types, diagrams } = extractImageHints(htmlContent);
   const cfg = getOpenAIConfig();
 
   fs.mkdirSync(outputDir, { recursive: true });
-  console.log(`  画像プロバイダ: ${provider}${provider === 'openai' ? ` (model: ${cfg.model})` : ''}`);
 
   const results = [];
   for (let i = 0; i < headings.length; i++) {
     const heading = headings[i];
-    const hint = hints[i + 1]; // IMG_PROMPT_1 が最初の H2 に対応
+    const N = i + 1;
+    let type = types[N];
+
+    if (diagrams[N]) type = 'diagram';
+    else if (!type) type = i === 0 ? 'cover' : 'photo';
+
     let result = null;
 
-    if (provider === 'openai') {
-      try {
-        const r = await generateOpenAIImage({
-          heading,
-          articleTitle,
-          hint,
-          globalStyle,
-          index: i,
-          outputDir,
-          cfg,
-        });
-        result = { heading, filename: r.filename, outputPath: r.outputPath, provider: 'openai' };
-        console.log(`  ✅ OpenAI画像生成: ${r.filename} ← 「${heading}」`);
-      } catch (err) {
-        const status = err.response?.status;
-        const detail = err.response?.data?.error?.message || err.message;
-        console.log(`  ⚠️ OpenAI生成失敗 (${status || 'ERR'}): ${detail} → sharpにフォールバック`);
+    // --- 図解 ---
+    if (type === 'diagram' || type === 'cover') {
+      let spec;
+      if (type === 'cover') {
+        spec = diagrams[N] ? parseDiagramSpec(diagrams[N]) : {};
+        spec.layout = 'cover';
+        if (!spec.title) spec.title = articleTitle;
+        if (!spec.category) spec.category = detectCoverCategory(articleTitle);
+      } else {
+        spec = parseDiagramSpec(diagrams[N] || `title=${heading}`);
       }
+      const r = await generateDiagram(spec, i, outputDir);
+      result = { heading, filename: r.filename, outputPath: r.outputPath, provider: spec.layout === 'cover' ? 'cover' : 'diagram' };
+      console.log(`  🖍️ ${result.provider}生成: ${r.filename} ← 「${heading}」`);
     }
 
-    if (!result) {
-      const r = await generateImage(heading, articleTitle, i, outputDir);
-      result = { heading, filename: r.filename, outputPath: r.outputPath, provider: 'sharp' };
-      console.log(`  画像生成(sharp): ${r.filename} ← 「${heading}」`);
+    // --- 写真（OpenAI → 失敗時 sharp） ---
+    if (!result && type === 'photo') {
+      if (provider === 'openai') {
+        try {
+          const r = await generateOpenAIImage({ heading, articleTitle, hint: hints[N], globalStyle, index: i, outputDir, cfg });
+          result = { heading, filename: r.filename, outputPath: r.outputPath, provider: 'openai' };
+          console.log(`  📷 OpenAI写真生成: ${r.filename} ← 「${heading}」`);
+        } catch (err) {
+          const status = err.response?.status;
+          const detail = err.response?.data?.error?.message || err.message;
+          console.log(`  ⚠️ OpenAI生成失敗 (${status || 'ERR'}): ${detail} → sharpにフォールバック`);
+        }
+      }
+      if (!result) {
+        const r = await generateImage(heading, articleTitle, i, outputDir);
+        result = { heading, filename: r.filename, outputPath: r.outputPath, provider: 'sharp' };
+        console.log(`  画像生成(sharp): ${r.filename} ← 「${heading}」`);
+      }
     }
 
     results.push(result);
@@ -104,4 +136,4 @@ async function generateImages(htmlContent, articleTitle, outputDir, opts = {}) {
   return results;
 }
 
-module.exports = { generateImages, extractHeadings, extractImageHints, resolveProvider };
+module.exports = { generateImages, extractHeadings, extractImageHints, resolveProvider, detectCoverCategory };
