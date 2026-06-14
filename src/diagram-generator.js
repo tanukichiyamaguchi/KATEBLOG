@@ -210,7 +210,9 @@ function coverSVG(spec) {
   if (chars <= 13) { size = 64; maxChars = 13; }
   else if (chars <= 26) { size = 54; maxChars = 13; }
   else { size = 44; maxChars = 16; }
-  const lines = wrap(title, maxChars);
+  // 行を均等割りして最終行の孤立（1文字だけ等）を防ぐ
+  const numLines = Math.max(1, Math.ceil(chars / maxChars));
+  const lines = wrap(title, Math.ceil(chars / numLines));
 
   // タイトルカード（中央）
   const cardX = 90, cardW = W - 180;
