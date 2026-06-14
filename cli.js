@@ -5,7 +5,8 @@ const path = require('path');
 const { reviewArticle } = require('./src/reviewer');
 const { publishArticle } = require('./src/publisher');
 const { getConfig, getRecentPosts, checkImageUrls, testConnection } = require('./src/wordpress');
-const { generateArticleImages } = require('./src/image-generator');
+const { generateImages } = require('./src/image-provider');
+const { publishNext, queueStatus } = require('./src/queue');
 
 const args = process.argv.slice(2);
 const command = args[0];
@@ -17,7 +18,9 @@ function parseOptions(args) {
     else if (args[i] === '--time' && args[i + 1]) opts.time = args[++i];
     else if (args[i] === '--start' && args[i + 1]) opts.start = args[++i];
     else if (args[i] === '--interval' && args[i + 1]) opts.interval = parseInt(args[++i]);
+    else if (args[i] === '--provider' && args[i + 1]) opts.provider = args[++i];
     else if (args[i] === '--skip-links') opts.skipLinks = true;
+    else if (args[i] === '--dry-run') opts.dryRun = true;
   }
   return opts;
 }
@@ -112,9 +115,10 @@ async function main() {
     case 'generate-images': {
       const filePath = args[1];
       if (!filePath) {
-        console.error('使用法: node cli.js generate-images <file.html>');
+        console.error('使用法: node cli.js generate-images <file.html> [--provider openai|sharp|auto]');
         process.exit(1);
       }
+      const opts = parseOptions(args.slice(2));
       const html = fs.readFileSync(filePath, 'utf-8');
       const titleMatch = html.match(/<!--\s*TITLE:\s*(.+?)\s*-->/);
       const slugMatch = html.match(/<!--\s*SLUG:\s*(.+?)\s*-->/);
@@ -122,8 +126,33 @@ async function main() {
       const slug = slugMatch ? slugMatch[1] : path.basename(filePath, '.html');
       const imageDir = path.join(path.dirname(filePath), `images-${slug}`);
       console.log(`\n🎨 画像生成: ${filePath}`);
-      const images = await generateArticleImages(html, title, imageDir);
+      const images = await generateImages(html, title, imageDir, { provider: opts.provider });
       console.log(`\n✅ ${images.length}枚の画像を生成しました → ${imageDir}/`);
+      break;
+    }
+
+    case 'publish-next': {
+      const opts = parseOptions(args.slice(1));
+      console.log('\n📅 週次キューから次の記事を公開準備...');
+      const result = await publishNext(opts);
+      console.log(`\n${result.published ? '✅' : 'ℹ️'} ${result.message}`);
+      if (result.published) {
+        console.log(`  記事: ${result.title}`);
+        console.log(`  画像: ${result.images}枚 (${result.provider})`);
+        console.log(`  公開予定: ${result.date} ${result.time}（JST）`);
+        console.log(`  残りキュー: ${result.remaining}本`);
+        console.log('\n  → このあとワークフローが commit & push し、WPプラグインが取り込みます。');
+      }
+      break;
+    }
+
+    case 'queue': {
+      const q = queueStatus();
+      console.log('\n📋 公開キュー');
+      console.log(`\n公開待ち (${q.pending.length}本):`);
+      q.pending.forEach((slug, i) => console.log(`  ${i + 1}. ${slug}`));
+      console.log(`\n公開済み (${q.published.length}本):`);
+      q.published.slice(-10).forEach(p => console.log(`  ✅ ${p.date} ${p.time} | ${p.slug}`));
       break;
     }
 
@@ -147,19 +176,29 @@ KATEstageLASH ブログ自動化ツール
 使用法:
   node cli.js test                                 WordPress接続テスト
   node cli.js review <file.html> [--skip-links]   品質チェック
+  node cli.js generate-images <file.html> [--provider openai|sharp|auto]  画像生成のみ
   node cli.js publish <file.html> [options]        画像生成 + WordPress投稿
   node cli.js batch <files...> [options]           バッチ投稿
+  node cli.js publish-next [options]               週次キューから次の1本を公開準備
+  node cli.js queue                                公開キューの状況を表示
   node cli.js status                               投稿ステータス確認
   node cli.js check-images <postId>                画像URL検証
 
 publish オプション:
   --date YYYY-MM-DD    予約投稿日
   --time HH:MM         投稿時刻（デフォルト: 11:00）
+  --provider NAME      画像プロバイダ openai|sharp|auto（既定: auto）
 
 batch オプション:
   --start YYYY-MM-DD   開始日
   --interval N         投稿間隔（日数、デフォルト: 3）
   --time HH:MM         投稿時刻（デフォルト: 11:00）
+
+publish-next オプション:
+  --date YYYY-MM-DD    公開日（既定: 当日 JST）
+  --time HH:MM         公開時刻（既定: 11:00）
+  --provider NAME      画像プロバイダ openai|sharp|auto（既定: auto）
+  --dry-run            実際には移動せず、次に公開される記事を表示
       `);
   }
 }

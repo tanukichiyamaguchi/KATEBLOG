@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const { generateArticleImages } = require('./image-generator');
+const { generateImages } = require('./image-provider');
 const { getConfig, uploadImage, createPost, checkImageUrls } = require('./wordpress');
 
 function extractMeta(html) {
@@ -45,9 +45,9 @@ async function publishArticle(filePath, options = {}) {
   const slug = meta.slug || path.basename(filePath, '.html');
   const imageDir = path.join(path.dirname(filePath), `images-${slug}`);
 
-  // 1. Generate images
+  // 1. Generate images（OpenAI写真風 / sharp。provider は --provider か IMAGE_PROVIDER で指定）
   console.log('\n🎨 画像生成中...');
-  const images = await generateArticleImages(content, meta.title, imageDir);
+  const images = await generateImages(content, meta.title, imageDir, { provider: options.provider });
 
   // 2. Upload images to WordPress and replace placeholders
   console.log('\n📤 画像をWordPressにアップロード中...');

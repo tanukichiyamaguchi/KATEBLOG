@@ -4,103 +4,223 @@
 - サロン名: KATEstageLASH蒲田西口店
 - 業態: アイブロウ・まつ毛専門サロン
 - **マツエク（まつ毛エクステンション）は提供していない**
+- ターゲット: 20代後半〜40代の女性
+- ブログの世界観: **女性スタッフがやさしく語りかけるような、親しみやすく信頼できるサロンブログ**
 
-## 文体ルール
-- 一人称: 「当サロン」「KATEstageLASH」「私たち」
-- 敬体（です・ます調）で統一
-- 専門用語は初出時に簡単な説明を添える
-- 読みやすさ重視: 一文は60文字以内を目安
-- 漢字・ひらがなのバランス: 漢字率30〜40%を目安
+---
+
+## 記事の全体構成 — 新PASONAの法則（必須）
+
+すべての記事は神田昌典の「新PASONAの法則」に沿って、読者の心が「悩み → 共感 → 納得 → 来店」と動く流れで構成します。
+H2見出しは下表のいずれかのステップに対応させ、記事全体でPASONAが一巡するようにします。
+
+| ステップ | 役割 | 記事での書き方 |
+|---------|------|--------------|
+| **P — Problem（問題）** | 読者の悩み・痛みを言語化 | 導入＋最初のH2。「こんなお悩みありませんか？」と具体的な困りごとを描写し、検索意図にズバリ触れる。メインKWはここで自然に登場させる。 |
+| **A — Affinity（親近感）** | 共感・寄り添い | 「わかります、私たちもよくご相談いただきます」と寄り添う。サロンの現場で実際にあったお客様のエピソードを1つ入れて距離を縮める。 |
+| **S — Solution（解決策）** | 原因と解決方法を提示 | 中核のH2群。専門知識で「なぜそうなるのか」「どうすれば良いか」を具体的・実践的に解説。箇条書き・ステップで分かりやすく。 |
+| **O — Offer（提案）** | サロンの施術・メニューを提案 | 解決策の延長として、当サロンのまつ毛パーマ／アイブロウ等を自然に提案。押し売りにしない。 |
+| **N — Narrowing down（絞り込み）** | 対象の限定・後押し | 「特にこんな方におすすめ」「席数に限りがあります」など、対象と来店理由を絞って背中を押す。誇大表現はNG。 |
+| **A — Action（行動）** | 行動喚起 | 最後のH2＋末尾CTA。予約・公式LINEへの明確な導線。 |
+
+### 標準H2構成テンプレート（6本前後）
+1. `（P）〜でお悩みではありませんか？` … 悩みの言語化＋メインKW
+2. `（A）実は多くの方が同じ悩みを抱えています` … 共感＋現場エピソード
+3. `（S）〜の原因と対処法` … 原因解説
+4. `（S）〜を解決する具体的な方法` … 実践的な解決策（箇条書き／ステップ）
+5. `（O/N）こんな方は専門サロンへ｜KATEstageLASHのご提案` … 提案＋絞り込み
+6. `（A）KATEstageLASH蒲田西口店の〇〇の特徴` … サロン紹介＋CTA（末尾）
+
+> ステップ記号（P/A/S/O/N/A）は**見出しテキストには出さない**。あくまで構成の設計指針。
+
+---
+
+## 文体・トーン — 女性スタッフが書いたような柔らかさ
+
+- **一人称はサロン名義を維持**：「当サロン」「KATEstageLASH」「私たち」。
+  個人名・施術者名は出さない（誰が施術するかは書かない）。
+- 敬体（です・ます調）で統一。そのうえで**親しみやすく語りかける**トーンにする。
+  - OK例:「〜なんですよね」「〜してみてくださいね」「〜という方、多いんです」「ぜひ一度ご相談ください」
+  - 読者に寄り添う相づち:「わかります」「ご安心くださいね」を適度に。
+- 機械的な箇条羅列だけにせず、**間に語りかけの一文**を挟む。
+- 一文は60文字以内を目安に短く。漢字率は30〜40%。
+- 専門用語は初出時にやさしく補足。
+- **絵文字は多用しない**（装飾コンポーネント内のアイコン的な1個までを目安。本文連続使用は禁止）。
+- AIっぽい定型句（「いかがでしたでしょうか」「結論から言うと」「以下に解説します」等）は避ける。
+
+---
+
+## 視認性・読みやすさのルール（必須）
+
+スマホで読む女性読者を想定し、**ぱっと見て分かる**レイアウトにします。
+
+- 段落は2〜3文ごとに改行（`<p>`を細かく分ける）。
+- 1つのH2につき、**装飾コンポーネントを最低1つ**使う（下記から選択）。
+- 重要語は**太字**または**マーカー**で強調。ただし1段落に1〜2か所まで。
+- 手順・比較・チェック項目は箇条書き／番号リスト／ボックスにする。
+- 各H2直下に画像を1枚（`%%IMAGE_N%%`）。
+
+### 装飾コンポーネント・スニペット集（WordPressでそのままインラインCSSが効きます）
+
+**① ポイントボックス（気づき・コツの強調）**
+```html
+<div style="background:#fff5f7;border:1px solid #f3c6d3;border-left:5px solid #e86a8e;border-radius:10px;padding:18px 20px;margin:24px 0;">
+<p style="margin:0 0 8px;font-weight:bold;color:#d6427a;">💡 ここがポイント</p>
+<p style="margin:0;line-height:1.9;">本文をここに。</p>
+</div>
+```
+
+**② スタッフボイス（吹き出し風・現場の一言／E-E-A-T）**
+```html
+<div style="display:flex;gap:12px;align-items:flex-start;background:#f7f4ff;border-radius:14px;padding:16px 18px;margin:24px 0;">
+<div style="flex:0 0 auto;width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,#b18cff,#e8a0b4);display:flex;align-items:center;justify-content:center;color:#fff;font-size:22px;">💁‍♀️</div>
+<p style="margin:0;line-height:1.9;">当サロンの現場でよくお伝えしている一言や、お客様とのエピソードを。</p>
+</div>
+```
+
+**③ チェックリスト**
+```html
+<ul style="list-style:none;padding:0;margin:20px 0;">
+<li style="padding:10px 0 10px 34px;position:relative;border-bottom:1px dashed #eee;line-height:1.8;"><span style="position:absolute;left:4px;top:10px;color:#06C755;font-weight:bold;">✓</span>チェック項目をここに。</li>
+</ul>
+```
+
+**④ まとめボックス（記事末尾の要点整理）**
+```html
+<div style="background:linear-gradient(180deg,#fffaf3,#ffffff);border:1px solid #ecd9b8;border-radius:12px;padding:20px 22px;margin:28px 0;box-shadow:0 4px 14px rgba(0,0,0,0.05);">
+<p style="margin:0 0 10px;font-weight:bold;font-size:18px;color:#a87a2a;">この記事のまとめ</p>
+<ul style="margin:0;padding-left:1.2em;line-height:2;">
+<li>要点1</li><li>要点2</li><li>要点3</li>
+</ul>
+</div>
+```
+
+**⑤ マーカー強調（インライン）**
+```html
+<span style="background:linear-gradient(transparent 60%,#ffe1ec 60%);font-weight:bold;">強調したい語</span>
+```
+
+**⑥ Q&Aブロック（本文中の疑問解消）**
+```html
+<div style="border:1px solid #eee;border-radius:12px;padding:16px 18px;margin:20px 0;">
+<p style="margin:0 0 8px;font-weight:bold;color:#5a4a8a;">Q. 質問文？</p>
+<p style="margin:0;line-height:1.9;">A. 回答文。</p>
+</div>
+```
+
+---
+
+## SEO構成ルール
+- H1: 記事タイトル（32〜40文字、メインKW含む）
+- H2: 5〜6個（新PASONAの各ステップに対応）
+- H3: 必要に応じてH2の下に配置
+- メインKWは記事全体で自然に5〜10回出現
+- 最初の100文字以内にメインKWを含める（Problemの導入で）
+- 最後のH2は「KATEstageLASH蒲田西口店の〇〇の特徴」で締める
+- 文字数: 3,000〜8,000文字（本文のみ、HTMLタグ・JSON-LD除く）
 
 ## E-E-A-T対応
 - サロンとしての豊富な施術実績に基づいた情報を発信
 - 「当サロンでは〜」「KATEstageLASHでは〜」等、サロン名義で記載
-- 施術者の個人名は記載しない（誰が施術するか等は書かない）
-- 1記事に2〜3箇所、サロンの経験に基づくアドバイスを挿入
-
-## 記事ボリューム
-- 文字数: 3,000〜8,000文字（本文のみ、HTMLタグ・JSON-LD除く）
-
-## SEO構成ルール
-- H1: 記事タイトル（32〜40文字、メインKW含む）
-- H2: 4〜6個（検索意図に沿った構成）
-- H3: 必要に応じてH2の下に配置
-- メインKWは記事全体で自然に5〜10回出現
-- 最初の100文字以内にメインKWを含める
-- 最後のH2は「KATEstageLASH蒲田西口店の○○」で締める
+- 施術者の個人名は記載しない
+- 1記事に2〜3箇所、サロンの経験に基づくアドバイス・エピソードを挿入（②スタッフボイス推奨）
 
 ## CTA（コールトゥアクション）ルール
-- 記事末尾に予約リンクと公式LINE登録リンクを設置
+- 記事末尾に予約リンクと公式LINE登録リンクを設置（下記の装飾CTAボタンを使用）
 - 予約URL: https://beauty.hotpepper.jp/kr/slnH000797013/coupon/
 - 公式LINE URL: https://s.lmes.jp/landing-qr/2008792677-wpt9W9sz?uLand=q3RPYg
-- 中間CTAは記事の自然な流れの中で1〜2箇所
+- 中間CTAは記事の自然な流れの中で1〜2箇所（Offer/Narrowingのあたり）
 - 「>>○○はこちら」形式は使用禁止
 
 ### 末尾CTA構成（必須・全記事共通）
 1. 公式LINE登録の訴求（お得な情報・クーポン配信など）
 2. 予約の空き枠確認への訴求
-3. 例文:
-   - 「KATEstageLASH蒲田西口店の公式LINEでは、お得なクーポンや最新情報を配信中です。お友だち登録はこちらから。」
-   - 「ご予約の空き状況はこちらからご確認いただけます。」
+3. 緑（LINE）＋赤（ホットペッパー）の装飾CTAボタンを使用（既存記事の末尾CTAブロックを踏襲）
 
-## 画像ルール
-- 各H2セクションにアイキャッチ画像を1枚配置（sharpで自動生成）
+## 画像ルール（OpenAI写真風 / sharpフォールバック）
+- 各H2セクションの直後にアイキャッチ画像を1枚配置：`<img src="%%IMAGE_N%%" alt="..." style="max-width: 100%; height: auto;">`
+  - N は1始まりの連番。1つ目のH2が `%%IMAGE_1%%`。
+- 画像は `node cli.js generate-images` / `publish` 時に自動生成・置換される（OpenAI Images APIでリアル写真風。キーが無ければsharp）。
+- **画像の内容を記事に合わせるため、メタコメントでヒントを指定できる**（任意だが推奨）:
+  ```html
+  <!-- IMG_STYLE: soft pastel tones, bright and clean salon -->
+  <!-- IMG_PROMPT_1: a close-up of a Japanese woman's natural curled eyelashes after an eyelash perm -->
+  <!-- IMG_PROMPT_2: a relaxing eyebrow styling treatment scene in a bright beauty salon -->
+  ```
+  - `IMG_PROMPT_{N}` は N 番目のH2画像の被写体（英語推奨）。指定が無いH2は見出しから自動でプロンプト生成。
+  - `IMG_STYLE` は全画像共通の追加スタイル（任意）。
 - `<figcaption>` タグは使用禁止
-- alt属性は見出しの内容を説明する文章にする（生成プロンプトは入れない）
+- alt属性は見出しの内容を説明する日本語文章にする（生成プロンプトは入れない）
 - `style="max-width: 100%; height: auto;"` を全画像に設定
 - 同一H2に画像を2枚入れない
 
 ## 禁止事項
 - マツエクを当サロンのメニューとして記載すること
-- 薬機法違反の表現（「絶対に」「100%」「必ず効果がある」等）
+- 薬機法違反の表現（「絶対に」「100%」「必ず効果がある」「治る」等）
 - 他サロンの誹謗中傷
 - 架空の統計データや研究結果の引用
-- AI執筆を示唆する文言の残留（「以下に」「結論を太字で」等のプロンプト指示）
+- AI執筆を示唆する文言・プロンプト指示の残留
 - ダミーURL（example.com等）の使用
 - 「>>○○はこちら」形式のリンク
+- 絵文字の本文連続使用
 
 ## 化粧品・施術効果の表現ガイド
 - OK: 「〜が期待できます」「〜に役立ちます」「〜をサポートします」
 - NG: 「〜が治ります」「確実に〜」「〜を保証します」
 
 ## FAQ構造化データ
-- 各記事に3〜5個のFAQをJSON-LD形式で埋め込む
+- 各記事に3〜5個のFAQをJSON-LD形式で末尾に埋め込む
 - FAQの内容はお客様からよくある質問を想定
 - 回答は50〜150文字で簡潔に
 
-## 記事HTML構造テンプレート
+---
+
+## 記事HTML構造テンプレート（新PASONA + 視認性）
 ```html
-<!-- 記事タイトルはWordPressのタイトルフィールドに設定 -->
-<!-- 以下は本文HTML -->
+<!-- TITLE: 記事タイトル（メインKW含む32〜40文字） -->
+<!-- META: メタディスクリプション120〜160文字（メインKW含む） -->
+<!-- KEYWORD: メインKW -->
+<!-- CATEGORY: カテゴリID -->
+<!-- SLUG: スラッグ -->
+<!-- IMG_STYLE: 全画像共通スタイル（任意） -->
+<!-- IMG_PROMPT_1: 1枚目の被写体（任意・英語推奨） -->
+<!-- IMG_PROMPT_2: 2枚目の被写体 -->
 
-<p>導入文（メインKW含む、読者の悩みに共感）</p>
+<p>導入文。読者の悩みに共感しながら、最初の100文字以内にメインKWを入れる（Problem）。</p>
 
-<h2>見出し1</h2>
+<h2>〜でお悩みではありませんか？</h2>            <!-- P -->
 <img src="%%IMAGE_1%%" alt="見出し内容の説明" style="max-width: 100%; height: auto;">
-<p>本文...</p>
+<p>悩みを具体的に言語化…</p>
 
-<h2>見出し2</h2>
+<h2>実は多くの方が同じ悩みを抱えています</h2>      <!-- A -->
 <img src="%%IMAGE_2%%" alt="見出し内容の説明" style="max-width: 100%; height: auto;">
-<p>本文...</p>
+<p>共感＋現場エピソード（②スタッフボイス）…</p>
 
-<!-- ... 繰り返し ... -->
+<h2>〜の原因と対処法</h2>                          <!-- S -->
+<img src="%%IMAGE_3%%" alt="見出し内容の説明" style="max-width: 100%; height: auto;">
+<p>原因を解説（①ポイントボックス／箇条書き）…</p>
 
-<h2>KATEstageLASH蒲田西口店の○○の特徴</h2>
-<img src="%%IMAGE_N%%" alt="KATEstageLASH蒲田西口店の説明" style="max-width: 100%; height: auto;">
-<p>サロン紹介＋田中のコメント</p>
-<p><a href="https://beauty.hotpepper.jp/kr/slnH000797013/coupon/">KATEstageLASH蒲田西口店のご予約はこちら</a></p>
+<h2>〜を解決する具体的な方法</h2>                  <!-- S -->
+<img src="%%IMAGE_4%%" alt="見出し内容の説明" style="max-width: 100%; height: auto;">
+<p>実践ステップ（番号リスト／③チェックリスト）…</p>
+
+<h2>こんな方は専門サロンへ｜KATEstageLASHのご提案</h2>  <!-- O / N -->
+<img src="%%IMAGE_5%%" alt="見出し内容の説明" style="max-width: 100%; height: auto;">
+<p>当サロンの施術提案＋対象の絞り込み（中間CTA）…</p>
+
+<h2>KATEstageLASH蒲田西口店の〇〇の特徴</h2>        <!-- A -->
+<img src="%%IMAGE_6%%" alt="KATEstageLASH蒲田西口店の説明" style="max-width: 100%; height: auto;">
+<p>サロン紹介＋スタッフからの一言…</p>
+<!-- ④まとめボックス -->
+<!-- 末尾CTA（緑LINE＋赤ホットペッパーの装飾ボタン） -->
 
 <!-- FAQ構造化データ -->
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [...]
-}
+{ "@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [ ... ] }
 </script>
 ```
 
 ## メタ情報
-- SEOタイトル: WordPressデフォルト動的タグ使用（#post_title #separator_sa #site_title）
+- SEOタイトル: WordPressデフォルト動的タグ使用
 - メタディスクリプション: 120〜160文字、メインKW含む
 - フォーカスキーフレーズ: メインKWをそのまま設定
