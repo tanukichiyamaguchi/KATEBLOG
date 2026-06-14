@@ -206,10 +206,12 @@ function buildSVG(spec) {
 function coverSVG(spec) {
   const title = spec.title || '';
   const chars = [...title].length;
+  // 表紙タイトルは「1行・14文字程度」を基本に、15文字までは1行で大きく表示
   let size, maxChars;
-  if (chars <= 13) { size = 64; maxChars = 13; }
-  else if (chars <= 26) { size = 54; maxChars = 13; }
-  else { size = 44; maxChars = 16; }
+  if (chars <= 10) { size = 66; maxChars = 10; }
+  else if (chars <= 15) { size = 58; maxChars = 15; }
+  else if (chars <= 28) { size = 48; maxChars = 14; }
+  else { size = 42; maxChars = 16; }
   // 行を均等割りして最終行の孤立（1文字だけ等）を防ぐ
   const numLines = Math.max(1, Math.ceil(chars / maxChars));
   const lines = wrap(title, Math.ceil(chars / numLines));
