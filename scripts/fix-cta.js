@@ -4,8 +4,9 @@
 //  - ホバー/シマー/パルス等の動的効果はプラグイン(wp_head)のCSSが付与（.kateblog-cta-*）
 const fs = require('fs');
 
-const LINE_STYLE = 'display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;max-width:430px;box-sizing:border-box;padding:18px 28px;background:linear-gradient(135deg,#07d35f 0%,#04b34c 100%);color:#fff;font-size:18px;font-weight:bold;text-decoration:none;border-radius:16px;box-shadow:0 6px 18px rgba(6,199,85,0.45),0 2px 4px rgba(0,0,0,0.12);position:relative;overflow:hidden;';
-const BOOK_STYLE = 'display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;max-width:430px;box-sizing:border-box;padding:18px 28px;background:linear-gradient(135deg,#ff5b5b 0%,#e6001e 100%);color:#fff;font-size:18px;font-weight:bold;text-decoration:none;border-radius:16px;box-shadow:0 6px 18px rgba(230,0,30,0.45),0 2px 4px rgba(0,0,0,0.12);position:relative;overflow:hidden;';
+// 立体的なボタン（下に厚みのある base edge ＋ 上面グロス）。動的(光る/押し込み)はプラグインCSSが付与。
+const LINE_STYLE = 'display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;max-width:430px;box-sizing:border-box;padding:18px 28px;background:linear-gradient(180deg,#1be072 0%,#04b34c 100%);color:#fff;font-size:18px;font-weight:bold;text-decoration:none;border:0;border-radius:16px;box-shadow:0 6px 0 #04923f,0 10px 20px rgba(6,199,85,0.45),inset 0 2px 0 rgba(255,255,255,0.45);text-shadow:0 1px 1px rgba(0,0,0,0.18);position:relative;overflow:hidden;';
+const BOOK_STYLE = 'display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;max-width:430px;box-sizing:border-box;padding:18px 28px;background:linear-gradient(180deg,#ff6a6a 0%,#e6001e 100%);color:#fff;font-size:18px;font-weight:bold;text-decoration:none;border:0;border-radius:16px;box-shadow:0 6px 0 #b3001a,0 10px 20px rgba(230,0,30,0.45),inset 0 2px 0 rgba(255,255,255,0.45);text-shadow:0 1px 1px rgba(0,0,0,0.18);position:relative;overflow:hidden;';
 
 function transform(html) {
   // 1) <style> ブロックを削除（本文に表示される「変なコード」の元）
