@@ -2,7 +2,7 @@
 /**
  * Plugin Name: KATEBLOG Importer
  * Description: GitHubリポジトリから記事HTMLを取得してWordPressに自動投稿するプラグイン
- * Version: 3.4.0
+ * Version: 3.5.0
  * Author: KATEstageLASH
  */
 
@@ -15,7 +15,7 @@ add_filter('pre_set_site_transient_update_plugins', function($transient) {
     if (empty($transient->checked)) return $transient;
 
     $plugin_slug = plugin_basename(__FILE__);
-    $current_version = '3.4.0';
+    $current_version = '3.5.0';
 
     // GitHubから最新バージョンを確認
     $repo = get_option('kateblog_github_repo', 'tanukichiyamaguchi/KATEBLOG');
@@ -202,15 +202,22 @@ add_action('wp_head', function() {
     if (!is_singular(array('post', 'blog'))) return;
     ?>
 <style id="kateblog-cta-style">
-.kateblog-cta-line,.kateblog-cta-booking{position:relative;overflow:hidden;transition:transform .15s ease,box-shadow .15s ease,filter .15s ease;-webkit-tap-highlight-color:transparent;will-change:transform;text-align:center;line-height:1.4;}
-.kateblog-cta-line:hover,.kateblog-cta-booking:hover{transform:translateY(-3px);filter:brightness(1.06);}
-.kateblog-cta-line:active,.kateblog-cta-booking:active{transform:translateY(0);}
-.kateblog-cta-line::after,.kateblog-cta-booking::after{content:"";position:absolute;top:0;left:-130%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.45),transparent);transform:skewX(-20deg);animation:kateblog-shine 3.2s ease-in-out infinite;pointer-events:none;}
-.kateblog-cta-booking::after{animation-delay:1.6s;}
-@keyframes kateblog-shine{0%{left:-130%}55%{left:150%}100%{left:150%}}
-.kateblog-cta-booking{animation:kateblog-pulse 2.2s ease-in-out infinite;}
-@keyframes kateblog-pulse{0%,100%{box-shadow:0 6px 18px rgba(230,0,30,.40),0 2px 4px rgba(0,0,0,.15)}50%{box-shadow:0 10px 30px rgba(230,0,30,.62),0 2px 4px rgba(0,0,0,.15)}}
-@media (prefers-reduced-motion:reduce){.kateblog-cta-line::after,.kateblog-cta-booking::after,.kateblog-cta-booking{animation:none!important}}
+.kateblog-cta-line,.kateblog-cta-booking{position:relative;overflow:hidden;border:0;text-align:center;line-height:1.4;text-shadow:0 1px 1px rgba(0,0,0,.18);-webkit-tap-highlight-color:transparent;will-change:transform,box-shadow;transition:transform .12s ease,box-shadow .12s ease,filter .12s ease;}
+/* 立体ボタン＋光るパルス（緑=LINE / 赤=予約） */
+.kateblog-cta-line{animation:kateblog-glow-line 2s ease-in-out infinite;}
+.kateblog-cta-booking{animation:kateblog-glow-book 2s ease-in-out infinite;}
+@keyframes kateblog-glow-line{0%,100%{box-shadow:0 6px 0 #04923f,0 10px 18px rgba(6,199,85,.40),inset 0 2px 0 rgba(255,255,255,.45)}50%{box-shadow:0 6px 0 #04923f,0 14px 34px rgba(6,199,85,.80),inset 0 2px 0 rgba(255,255,255,.45)}}
+@keyframes kateblog-glow-book{0%,100%{box-shadow:0 6px 0 #b3001a,0 10px 18px rgba(230,0,30,.42),inset 0 2px 0 rgba(255,255,255,.45)}50%{box-shadow:0 6px 0 #b3001a,0 14px 34px rgba(230,0,30,.82),inset 0 2px 0 rgba(255,255,255,.45)}}
+/* ホバーで浮き上がり、グローを強める */
+.kateblog-cta-line:hover{transform:translateY(-2px);filter:brightness(1.06);box-shadow:0 8px 0 #04923f,0 20px 38px rgba(6,199,85,.75),inset 0 2px 0 rgba(255,255,255,.5)!important;}
+.kateblog-cta-booking:hover{transform:translateY(-2px);filter:brightness(1.06);box-shadow:0 8px 0 #b3001a,0 20px 38px rgba(230,0,30,.78),inset 0 2px 0 rgba(255,255,255,.5)!important;}
+/* クリックでグッと押し込む（厚みが沈む） */
+.kateblog-cta-line:active,.kateblog-cta-booking:active{transform:translateY(5px);filter:brightness(.98);box-shadow:0 1px 0 rgba(0,0,0,.25),0 3px 8px rgba(0,0,0,.30),inset 0 2px 0 rgba(255,255,255,.30)!important;}
+/* 光沢が走るシャイン */
+.kateblog-cta-line::after,.kateblog-cta-booking::after{content:"";position:absolute;top:0;left:-130%;width:55%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-20deg);animation:kateblog-shine 3.4s ease-in-out infinite;pointer-events:none;}
+.kateblog-cta-booking::after{animation-delay:1.7s;}
+@keyframes kateblog-shine{0%{left:-130%}55%{left:160%}100%{left:160%}}
+@media (prefers-reduced-motion:reduce){.kateblog-cta-line,.kateblog-cta-booking,.kateblog-cta-line::after,.kateblog-cta-booking::after{animation:none!important}}
 </style>
     <?php
 });
