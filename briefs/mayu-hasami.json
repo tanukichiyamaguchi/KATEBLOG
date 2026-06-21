@@ -1,0 +1,105 @@
+{
+  "keyword": "眉毛 ハサミ 整え方",
+  "subKeywords": [
+    "眉毛 ハサミ 切り方",
+    "眉毛 ハサミ コーム",
+    "眉毛 セルフケア 失敗"
+  ],
+  "category": "眉毛",
+  "categoryId": 25,
+  "slug": "mayu-hasami",
+  "title": "眉毛のハサミでの整え方｜失敗しないセルフケア",
+  "metaDescription": "眉毛のハサミでの整え方を、蒲田のKATEstageLASH蒲田西口店がやさしく解説します。切りすぎが怖い、左右がそろわないという方へ、必要な道具とコームの使い方、失敗しないステップをまとめました。",
+  "pasona": {
+    "problem": "眉毛をハサミで整えたいが、切りすぎてしまいそうで怖い",
+    "affinity": "セルフケアでスカスカになった・左右がそろわないという相談が現場で多い",
+    "solution": "必要な道具と切る前の準備、コームを使って毛先だけを少しずつ切る方法",
+    "offer": "骨格に合わせたアイブロウデザイン・自然な毛流れへの整え",
+    "narrowingDown": "切りすぎが怖い方・左右差が気になる方・セルフケアで失敗した方",
+    "action": "カウンセリング予約・公式LINE登録"
+  },
+  "h2Sections": [
+    {
+      "heading": "眉毛をハサミで切りすぎるのが怖い…",
+      "pasonaStep": "P",
+      "h3Headings": [],
+      "keyPoints": [
+        "切った毛はすぐに戻らない",
+        "少しの切りすぎでも印象が変わる"
+      ]
+    },
+    {
+      "heading": "セルフで失敗しがちというご相談、多いんです",
+      "pasonaStep": "A",
+      "h3Headings": [],
+      "keyPoints": [
+        "一気に切ると短くなりすぎる",
+        "左右の長さがそろわない悩みは多い"
+      ]
+    },
+    {
+      "heading": "切る前の準備と道具、コームの使い方",
+      "pasonaStep": "S",
+      "h3Headings": [],
+      "keyPoints": [
+        "眉用ハサミ・眉コーム・明るい鏡を用意",
+        "まず毛流れをとかして整える",
+        "コームから出た毛先だけを切る"
+      ]
+    },
+    {
+      "heading": "失敗しない眉毛の切り方ステップ",
+      "pasonaStep": "S",
+      "h3Headings": [],
+      "keyPoints": [
+        "毛流れに沿ってとかす",
+        "コームから出た毛先だけ少しずつ切る",
+        "こまめに様子を見る",
+        "左右を見比べて仕上げる"
+      ]
+    },
+    {
+      "heading": "KATEstageLASH蒲田西口店のアイブロウの特徴",
+      "pasonaStep": "O/N/A",
+      "h3Headings": [],
+      "keyPoints": [
+        "骨格に合わせたデザイン",
+        "自然な毛流れに整える",
+        "お手入れ方法まで提案"
+      ]
+    }
+  ],
+  "imagePrompts": {
+    "1": "a Japanese woman in her 30s holding small eyebrow scissors near a mirror with a slightly anxious expression, soft natural makeup",
+    "2": "a Japanese woman gently consulting with an eyebrow stylist in a bright salon about a failed self-care attempt",
+    "3": "close-up of eyebrow grooming tools, small scissors and a spoolie brush, on a clean bright table",
+    "4": "extreme close-up of neatly groomed natural eyebrows on a Japanese woman, soft natural light",
+    "5": "the warm and welcoming pastel interior of a Japanese eyebrow and eyelash salon",
+    "style": "soft pastel tones, bright and clean Japanese beauty salon, natural light, no text"
+  },
+  "faqTopics": [
+    "眉毛をハサミで整えるとき、何を用意すればいいですか？",
+    "ハサミで眉毛を切りすぎないコツはありますか？",
+    "左右の眉の長さがそろわないのですが、どうすればいいですか？",
+    "セルフケアで失敗してしまったときも相談できますか？"
+  ],
+  "differentiationPoints": [
+    "骨格や毛の生え方に合わせたアイブロウデザイン",
+    "自然な毛流れに整える",
+    "おうちでのお手入れ方法まで提案"
+  ],
+  "tags": [
+    "眉毛",
+    "ハサミ",
+    "セルフケア",
+    "眉毛 整え方"
+  ],
+  "targetWordCount": 4000,
+  "publishDate": "",
+  "publishTime": "11:00",
+  "eeatInsertionPoints": [
+    "Affinityでセルフケアの失敗相談に対応した経験に触れる",
+    "コームの使い方の解説でスタッフボイス（現場の一言）を挿入",
+    "特徴のH2で当サロンのアイブロウデザインの強みを補強"
+  ]
+}

@@ -1,0 +1,106 @@
+{
+  "keyword": "すっぴん 眉毛",
+  "subKeywords": [
+    "すっぴん 眉毛 整え方",
+    "すっぴん 眉毛 自然",
+    "ノーメイク 眉"
+  ],
+  "category": "眉毛",
+  "categoryId": 25,
+  "slug": "suppin-mayuge",
+  "title": "すっぴんでも垢抜ける眉｜自然に見せる整え方",
+  "metaDescription": "すっぴん 眉毛で顔がぼやけるとお悩みの方へ。地眉を活かして自然に整える方法やノーメイクでも垢抜けて見せるコツを、蒲田のKATEstageLASH蒲田西口店がやさしく解説します。",
+  "pasona": {
+    "problem": "すっぴんになると眉がぼやけて顔がのっぺり見える",
+    "affinity": "ノーメイクだと別人みたいというご相談が現場で多く寄せられる",
+    "solution": "すっぴんでも整って見える眉の条件の理解と、地眉を活かす整え方・毛流れ・ノーメイク映えのコツ",
+    "offer": "骨格に合わせたアイブロウデザイン・アイブロウワックス",
+    "narrowingDown": "すっぴんでも眉を整えておきたい方・ノーメイクに自信を持ちたい方・形に迷う方",
+    "action": "カウンセリング予約・公式LINE登録"
+  },
+  "h2Sections": [
+    {
+      "heading": "すっぴんになると眉で顔がぼやける…",
+      "pasonaStep": "P",
+      "h3Headings": [],
+      "keyPoints": [
+        "眉はメイクで変化が出やすい",
+        "すっぴんは顔全体の輪郭までぼやけて見える"
+      ]
+    },
+    {
+      "heading": "「ノーメイクだと別人みたい」というご相談、多いんです",
+      "pasonaStep": "A",
+      "h3Headings": [],
+      "keyPoints": [
+        "メイク時とすっぴんの差に悩む方は多い",
+        "ノーメイクの場面は意外と多い"
+      ]
+    },
+    {
+      "heading": "すっぴんでも整って見える眉の条件",
+      "pasonaStep": "S",
+      "h3Headings": [],
+      "keyPoints": [
+        "形がつながって見える",
+        "毛流れがそろう",
+        "肌になじむ太さ"
+      ]
+    },
+    {
+      "heading": "地眉を活かす整え方とノーメイク映えのコツ",
+      "pasonaStep": "S",
+      "h3Headings": [],
+      "keyPoints": [
+        "なりたい形を決める",
+        "はみ出す毛だけ処理する",
+        "毛流れを整える",
+        "眉まわりを保湿する",
+        "透明の眉マスカラで毛流れを固定する"
+      ]
+    },
+    {
+      "heading": "KATEstageLASH蒲田西口店のアイブロウの特徴",
+      "pasonaStep": "O/N/A",
+      "h3Headings": [],
+      "keyPoints": [
+        "骨格に合わせたデザイン",
+        "ワックスで自然な形に",
+        "お手入れ方法まで提案"
+      ]
+    }
+  ],
+  "imagePrompts": {
+    "1": "close-up of a Japanese woman in her 30s with no makeup looking at a mirror, her face looking a bit faint and undefined without eyebrow makeup, soft natural light",
+    "2": "a Japanese woman gently consulting with an eyebrow stylist in a bright salon, talking about how different she looks without makeup",
+    "3": "extreme close-up of natural well-groomed eyebrows on a Japanese woman, neat brow shape with tidy hair flow, clean soft light",
+    "4": "a Japanese woman gently brushing her natural eyebrows with a spoolie brush to set the hair flow, no makeup natural look",
+    "5": "the warm and welcoming pastel interior of a Japanese eyebrow and eyelash salon",
+    "style": "soft pastel tones, bright and clean Japanese beauty salon, natural light, no text"
+  },
+  "faqTopics": [
+    "すっぴんでも眉を自然に整えることはできますか？",
+    "すっぴんで眉がぼやけて見えるのはなぜですか？",
+    "ノーメイクで眉を映えさせるコツはありますか？",
+    "すっぴん眉の形に迷ったら、サロンで相談できますか？"
+  ],
+  "differentiationPoints": [
+    "骨格や毛の生え方に合わせたアイブロウデザイン",
+    "アイブロウワックスで自然な形に整える",
+    "おうちでのお手入れ方法まで提案"
+  ],
+  "tags": [
+    "眉毛",
+    "すっぴん",
+    "眉毛 整え方",
+    "ナチュラル"
+  ],
+  "targetWordCount": 4000,
+  "publishDate": "",
+  "publishTime": "11:00",
+  "eeatInsertionPoints": [
+    "Affinityでノーメイクの悩みに対応した現場の経験に触れる",
+    "条件・整え方の解説でスタッフボイス（現場の一言）を挿入",
+    "特徴のH2で当サロンの地眉を活かすデザインの強みを補強"
+  ]
+}

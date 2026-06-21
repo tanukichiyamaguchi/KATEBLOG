@@ -1,0 +1,106 @@
+{
+  "keyword": "眉毛 濃い",
+  "subKeywords": [
+    "眉毛 濃い 整え方",
+    "眉毛 濃い やわらかく",
+    "眉毛 濃い きつく見える"
+  ],
+  "category": "眉毛",
+  "categoryId": 25,
+  "slug": "mayuge-koi",
+  "title": "眉毛が濃いお悩みに｜やわらかく見せる整え方",
+  "metaDescription": "眉毛が濃いとお悩みの方へ。きつく見える・主張が強いと感じる眉を、剃りすぎずにやわらかく見せる整え方とメイクのコツを蒲田のKATEstageLASH蒲田西口店がやさしく解説します。",
+  "pasona": {
+    "problem": "眉毛が濃くて顔がきつく・主張が強く見えるのが気になる",
+    "affinity": "濃さを消したいわけではなく、きつさだけ和らげたいという相談が現場で多い",
+    "solution": "濃く見える理由を理解し、濃さを消さず輪郭と毛流れを整えてやわらかく見せる考え方と、整え方・メイクのコツ",
+    "offer": "濃さを活かした骨格に合わせたアイブロウデザイン・アイブロウワックス",
+    "narrowingDown": "剃りすぎて青く見える方・きつい印象を変えたい方・似合う濃さが分からない方",
+    "action": "カウンセリング予約・公式LINE登録"
+  },
+  "h2Sections": [
+    {
+      "heading": "眉毛が濃くて、きつく見えるのが気になる…",
+      "pasonaStep": "P",
+      "h3Headings": [],
+      "keyPoints": [
+        "濃さが強いと顔全体がはっきりしすぎて見える",
+        "濃い眉はマイナスではなく整えがいのある土台"
+      ]
+    },
+    {
+      "heading": "「濃さをやわらかく見せたい」ご相談、多いんです",
+      "pasonaStep": "A",
+      "h3Headings": [],
+      "keyPoints": [
+        "濃さを消すのではなくきつさだけ和らげたい声が多い",
+        "剃りすぎると青く見えたり不自然になることがある"
+      ]
+    },
+    {
+      "heading": "眉毛が濃く見える理由と「やわらかく見せる」考え方",
+      "pasonaStep": "S",
+      "h3Headings": [],
+      "keyPoints": [
+        "毛量が多く密度が高い",
+        "毛が太く色が濃い",
+        "形がくっきりして輪郭が強い",
+        "濃さを消さず輪郭と毛流れを整える考え方"
+      ]
+    },
+    {
+      "heading": "濃い眉をやわらかく見せる整え方・メイクのコツ",
+      "pasonaStep": "S",
+      "h3Headings": [],
+      "keyPoints": [
+        "なりたい印象を決める",
+        "はみ出す毛だけ整える",
+        "毛流れを上に整える",
+        "眉マスカラで色みをほんのり明るく"
+      ]
+    },
+    {
+      "heading": "KATEstageLASH蒲田西口店のアイブロウの特徴",
+      "pasonaStep": "O/N/A",
+      "h3Headings": [],
+      "keyPoints": [
+        "濃さを活かすデザイン",
+        "ワックスで自然な毛流れ",
+        "お手入れ方法まで提案"
+      ]
+    }
+  ],
+  "imagePrompts": {
+    "1": "close-up of a Japanese woman in her 30s looking at a mirror with a slightly troubled expression about her thick dark eyebrows, soft natural makeup",
+    "2": "a Japanese woman gently consulting with an eyebrow stylist in a bright salon, talking about softening her strong-looking brows",
+    "3": "extreme close-up of a Japanese woman's thick dark dense eyebrows, clean and soft natural light",
+    "4": "a beautiful natural eyebrow styling result on a Japanese woman, neat well-shaped soft brows framing the face",
+    "5": "the warm and welcoming pastel interior of a Japanese eyebrow and eyelash salon",
+    "style": "soft pastel tones, bright and clean Japanese beauty salon, natural light, no text"
+  },
+  "faqTopics": [
+    "眉毛が濃いのですが、剃らずにやわらかく見せることはできますか？",
+    "眉毛が濃く見えるのはどうしてですか？",
+    "濃い眉を細く剃りすぎて青く見えるのですが、相談できますか？",
+    "自分に似合う眉の濃さが分からないのですが、提案してもらえますか？"
+  ],
+  "differentiationPoints": [
+    "濃さを消さず活かした骨格に合わせたアイブロウデザイン",
+    "アイブロウワックスで自然な毛流れに整える",
+    "おうちでのお手入れ方法まで提案"
+  ],
+  "tags": [
+    "眉毛",
+    "濃い眉",
+    "眉毛デザイン",
+    "整え方"
+  ],
+  "targetWordCount": 4000,
+  "publishDate": "",
+  "publishTime": "11:00",
+  "eeatInsertionPoints": [
+    "Affinityで濃さを和らげたいお客様対応の経験に触れる",
+    "整え方の解説でスタッフボイス（現場の一言）を挿入",
+    "特徴のH2で濃さを活かす当サロンのアイブロウデザインの強みを補強"
+  ]
+}

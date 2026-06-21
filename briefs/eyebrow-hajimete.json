@@ -1,0 +1,106 @@
+{
+  "keyword": "眉毛サロン 初めて",
+  "subKeywords": [
+    "眉毛サロン 初めて 流れ",
+    "眉毛サロン 当日 準備",
+    "眉毛サロン 初めて 不安"
+  ],
+  "category": "眉毛",
+  "categoryId": 25,
+  "slug": "eyebrow-hajimete",
+  "title": "眉毛サロンは初めてでも安心｜当日の流れと準備",
+  "metaDescription": "眉毛サロンが初めてで不安な方へ。カウンセリングから仕上げまでの当日の流れ、事前の準備や当日の注意点を蒲田のKATEstageLASH蒲田西口店がやさしく解説します。初めてでも安心してご来店いただけますよ。",
+  "pasona": {
+    "problem": "眉毛サロンが初めてで、当日何をするのか分からず不安",
+    "affinity": "初めてで緊張するというお声が現場で多く寄せられる",
+    "solution": "カウンセリングから仕上げまでの当日の流れの理解と、事前準備・当日の注意点・よくある不安の解消",
+    "offer": "ていねいなカウンセリングと骨格に合わせたアイブロウデザイン",
+    "narrowingDown": "初めてで不安な方・似合う形が分からない方・希望が決まっていない方",
+    "action": "カウンセリング予約・公式LINE登録"
+  },
+  "h2Sections": [
+    {
+      "heading": "眉毛サロンが初めてで、ちょっと不安…",
+      "pasonaStep": "P",
+      "h3Headings": [],
+      "keyPoints": [
+        "当日何をするのか分からず緊張する",
+        "流れを知れば不安が軽くなる"
+      ]
+    },
+    {
+      "heading": "「初めてで緊張します」というお声、よくいただきます",
+      "pasonaStep": "A",
+      "h3Headings": [],
+      "keyPoints": [
+        "初めての緊張は特別ではない",
+        "希望が決まっていなくても大丈夫"
+      ]
+    },
+    {
+      "heading": "眉毛サロン当日の流れ",
+      "pasonaStep": "S",
+      "h3Headings": [],
+      "keyPoints": [
+        "カウンセリング",
+        "デザイン設計",
+        "施術（整える）",
+        "仕上げ確認"
+      ]
+    },
+    {
+      "heading": "初めての来店前に知っておきたい準備と注意点",
+      "pasonaStep": "S",
+      "h3Headings": [],
+      "keyPoints": [
+        "普段のメイクで来店してOK",
+        "なりたいイメージを用意",
+        "施術前の自己処理は控えめに",
+        "よくある不安の解消"
+      ]
+    },
+    {
+      "heading": "KATEstageLASH蒲田西口店のアイブロウの特徴",
+      "pasonaStep": "O/N/A",
+      "h3Headings": [],
+      "keyPoints": [
+        "ていねいなカウンセリング",
+        "骨格に合わせたデザイン",
+        "お手入れ方法まで提案"
+      ]
+    }
+  ],
+  "imagePrompts": {
+    "1": "close-up of a Japanese woman in her 20s looking slightly nervous before her first eyebrow salon visit, soft natural makeup",
+    "2": "a Japanese woman feeling reassured while gently consulting with a friendly eyebrow stylist in a bright salon",
+    "3": "a Japanese woman receiving an eyebrow styling treatment in a bright clean salon, showing the steps of the procedure",
+    "4": "a Japanese woman checking her natural everyday eyebrow makeup in a mirror before a salon appointment",
+    "5": "the warm and welcoming pastel interior of a Japanese eyebrow and eyelash salon",
+    "style": "soft pastel tones, bright and clean Japanese beauty salon, natural light, no text"
+  },
+  "faqTopics": [
+    "眉毛サロンが初めてですが、当日は何をしますか？",
+    "初めての来店でも、すっぴんで行ったほうがいいですか？",
+    "なりたい眉のイメージが決まっていなくても大丈夫ですか？",
+    "来店前に自分で眉の自己処理はしておくべきですか？"
+  ],
+  "differentiationPoints": [
+    "ていねいなカウンセリングで初めてでも安心",
+    "骨格や毛の生え方に合わせたアイブロウデザイン",
+    "おうちでのお手入れ方法まで提案"
+  ],
+  "tags": [
+    "眉毛サロン",
+    "初めて",
+    "施術の流れ",
+    "アイブロウ"
+  ],
+  "targetWordCount": 4000,
+  "publishDate": "",
+  "publishTime": "11:00",
+  "eeatInsertionPoints": [
+    "Affinityで初めての来店に緊張するお客様対応の経験に触れる",
+    "当日の流れの解説でスタッフボイス（こまめな声がけ）を挿入",
+    "特徴のH2で当サロンのカウンセリング力と安心感を補強"
+  ]
+}
