@@ -2,7 +2,7 @@
 /**
  * Plugin Name: KATEBLOG Importer
  * Description: GitHubリポジトリから記事HTMLを取得してWordPressに自動投稿するプラグイン
- * Version: 3.3.0
+ * Version: 3.4.0
  * Author: KATEstageLASH
  */
 
@@ -15,7 +15,7 @@ add_filter('pre_set_site_transient_update_plugins', function($transient) {
     if (empty($transient->checked)) return $transient;
 
     $plugin_slug = plugin_basename(__FILE__);
-    $current_version = '3.3.0';
+    $current_version = '3.4.0';
 
     // GitHubから最新バージョンを確認
     $repo = get_option('kateblog_github_repo', 'tanukichiyamaguchi/KATEBLOG');
@@ -192,6 +192,27 @@ add_action('wp_head', function() {
             echo '<script type="application/ld+json">' . $jsonld . '</script>' . "\n";
         }
     }
+});
+
+// ========================================
+// CTAボタンの動的スタイル（本文の<style>はWPに除去されるため、ここで出力）
+//   ・ホバーで浮き上がる ・シャイン（光沢が走る） ・予約ボタンは glow パルスで誘目
+// ========================================
+add_action('wp_head', function() {
+    if (!is_singular(array('post', 'blog'))) return;
+    ?>
+<style id="kateblog-cta-style">
+.kateblog-cta-line,.kateblog-cta-booking{position:relative;overflow:hidden;transition:transform .15s ease,box-shadow .15s ease,filter .15s ease;-webkit-tap-highlight-color:transparent;will-change:transform;text-align:center;line-height:1.4;}
+.kateblog-cta-line:hover,.kateblog-cta-booking:hover{transform:translateY(-3px);filter:brightness(1.06);}
+.kateblog-cta-line:active,.kateblog-cta-booking:active{transform:translateY(0);}
+.kateblog-cta-line::after,.kateblog-cta-booking::after{content:"";position:absolute;top:0;left:-130%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.45),transparent);transform:skewX(-20deg);animation:kateblog-shine 3.2s ease-in-out infinite;pointer-events:none;}
+.kateblog-cta-booking::after{animation-delay:1.6s;}
+@keyframes kateblog-shine{0%{left:-130%}55%{left:150%}100%{left:150%}}
+.kateblog-cta-booking{animation:kateblog-pulse 2.2s ease-in-out infinite;}
+@keyframes kateblog-pulse{0%,100%{box-shadow:0 6px 18px rgba(230,0,30,.40),0 2px 4px rgba(0,0,0,.15)}50%{box-shadow:0 10px 30px rgba(230,0,30,.62),0 2px 4px rgba(0,0,0,.15)}}
+@media (prefers-reduced-motion:reduce){.kateblog-cta-line::after,.kateblog-cta-booking::after,.kateblog-cta-booking{animation:none!important}}
+</style>
+    <?php
 });
 
 // ========================================
