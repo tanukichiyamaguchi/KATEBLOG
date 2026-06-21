@@ -1,0 +1,56 @@
+{
+  "keyword": "まつ毛パーマ 向いてる人",
+  "subKeywords": [
+    "まつ毛パーマ 向いている人 特徴",
+    "まつ毛パーマ 迷う",
+    "まつ毛パーマ 自分に合うか"
+  ],
+  "category": "まつ毛",
+  "categoryId": 26,
+  "slug": "matsuge-perm-muiteru",
+  "title": "まつ毛パーマが向いている人｜迷っている方へのヒント",
+  "metaDescription": "まつ毛パーマ 向いてる人の特徴を知りたい方へ。下向きまつ毛やメイク時短をかなえたい方の傾向、迷ったときのチェックポイントまで蒲田のKATEstageLASHがやさしく解説します。",
+  "pasona": {
+    "problem": "まつ毛パーマが自分に向いているか分からず迷っている",
+    "affinity": "「私には向いていないかも」という相談が多い",
+    "solution": "向いている人の特徴を知り、迷ったらチェックして相談する",
+    "offer": "自まつ毛の状態を見て向き不向きとデザインを提案するまつ毛パーマ",
+    "narrowingDown": "下向きまつ毛・時短希望・すっぴん重視で迷っている方",
+    "action": "カウンセリング予約・公式LINE登録"
+  },
+  "h2Sections": [
+    { "heading": "まつ毛パーマが自分に向いているか迷っていませんか？", "pasonaStep": "P", "h3Headings": [], "keyPoints": ["自分に合うか分からない", "迷って踏み出せない"] },
+    { "heading": "「私には向いていないかも」というご相談、多いんです", "pasonaStep": "A", "h3Headings": [], "keyPoints": ["まつ毛が少ないという相談が多い", "見せてもらうと十分かけられることも"] },
+    { "heading": "まつ毛パーマが向いている人の特徴", "pasonaStep": "S", "h3Headings": [], "keyPoints": ["下向きまつ毛", "時短希望", "すっぴん重視"] },
+    { "heading": "向いているか迷ったときのチェックと相談のすすめ", "pasonaStep": "S", "h3Headings": [], "keyPoints": ["悩みを書き出す", "なりたい印象を決める", "カウンセリングで相談", "中間CTA"] },
+    { "heading": "KATEstageLASH蒲田西口店のまつ毛パーマの特徴", "pasonaStep": "A", "h3Headings": [], "keyPoints": ["なりたい印象に合わせた設計", "自まつ毛にやさしい施術", "ホームケア提案"] }
+  ],
+  "imagePrompts": {
+    "style": "soft pastel tones, bright and clean Japanese beauty salon",
+    "1": "cover: タイトル表紙",
+    "2": "checklist: こんな方は向いています",
+    "3": "cards: 向いている方の3つの傾向",
+    "4": "point: 迷ったらカウンセリングが近道",
+    "5": "steps: 迷ったときの3ステップ",
+    "6": "cards: KATEstageLASH蒲田西口店の特徴"
+  },
+  "faqTopics": [
+    "まつ毛パーマが向いているのはどんな人ですか？",
+    "まつ毛が少なくても向いていますか？",
+    "向いているか迷ったらどうすればいいですか？",
+    "もともと上向きまつ毛でも受けられますか？"
+  ],
+  "differentiationPoints": [
+    "なりたい印象に合わせたカール設計",
+    "自まつ毛にやさしい施術",
+    "ホームケアまでアドバイス"
+  ],
+  "tags": ["まつ毛パーマ", "向いてる人", "カール", "目元"],
+  "targetWordCount": 4000,
+  "publishDate": "",
+  "publishTime": "11:00",
+  "eeatInsertionPoints": [
+    "Affinityで「見せてもらうと十分かけられる」現場知見を挿入",
+    "迷ったときの相談H2で無理にすすめない姿勢を提示"
+  ]
+}
