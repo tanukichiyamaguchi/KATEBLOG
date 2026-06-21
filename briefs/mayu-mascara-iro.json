@@ -1,0 +1,105 @@
+{
+  "keyword": "眉マスカラ 色",
+  "subKeywords": [
+    "眉マスカラ 色 選び方",
+    "眉マスカラ 髪色 合わせる",
+    "眉マスカラ 暗髪 色"
+  ],
+  "category": "眉毛",
+  "categoryId": 25,
+  "slug": "mayu-mascara-iro",
+  "title": "眉マスカラの色の選び方｜髪色に合わせる垢抜け眉",
+  "metaDescription": "眉マスカラの色選びで眉だけ浮く、きつく見えるとお悩みの方へ。髪色や肌色に合わせた色の選び方と、自然に見える塗り方のコツを蒲田のKATEstageLASH蒲田西口店がやさしく解説します。",
+  "pasona": {
+    "problem": "眉マスカラの色が合わず、眉だけ浮いたりきつく見えたりする",
+    "affinity": "髪色と合っているか分からないという相談が現場で多く寄せられる",
+    "solution": "髪色より少し明るめを基準に、髪色・肌色に合わせた色を選び、薄く重ねて自然に塗る",
+    "offer": "骨格に合わせたアイブロウデザイン・髪色に合う色みの提案・アイブロウワックス",
+    "narrowingDown": "髪色を変えて眉が浮く方・色選びに迷う方・眉の形に自信がない方",
+    "action": "カウンセリング予約・公式LINE登録"
+  },
+  "h2Sections": [
+    {
+      "heading": "眉マスカラの色が合わず、眉だけ浮いて見える…",
+      "pasonaStep": "P",
+      "h3Headings": [],
+      "keyPoints": [
+        "色がちぐはぐだと顔全体が浮く",
+        "暗すぎるときつく、明るすぎるとぼんやり"
+      ]
+    },
+    {
+      "heading": "「髪色と合っているか分からない」ご相談、多いんです",
+      "pasonaStep": "A",
+      "h3Headings": [],
+      "keyPoints": [
+        "髪色を変えても眉はそのままの方が多い",
+        "髪と眉の色がそろわないとちぐはぐに見える"
+      ]
+    },
+    {
+      "heading": "髪色・肌色に合わせた色の選び方",
+      "pasonaStep": "S",
+      "h3Headings": [],
+      "keyPoints": [
+        "髪色より少し明るめを選ぶ",
+        "暗髪はグレー系、明るい髪はベージュ系、赤み髪はピンクブラウン",
+        "肌色との相性も意識する"
+      ]
+    },
+    {
+      "heading": "自然に見せる塗り方のコツとサロンの活用",
+      "pasonaStep": "S",
+      "h3Headings": [],
+      "keyPoints": [
+        "毛流れを整える",
+        "毛先から逆毛で塗る",
+        "毛流れに沿って戻す",
+        "余分な液をオフして薄く重ねる"
+      ]
+    },
+    {
+      "heading": "KATEstageLASH蒲田西口店のアイブロウの特徴",
+      "pasonaStep": "O/N/A",
+      "h3Headings": [],
+      "keyPoints": [
+        "骨格に合わせたデザイン",
+        "髪色に合う色みを提案",
+        "お手入れ方法まで案内"
+      ]
+    }
+  ],
+  "imagePrompts": {
+    "1": "close-up of a Japanese woman in her 30s looking at a mirror with a slightly troubled expression, her eyebrow color not matching her hair color, soft natural makeup",
+    "2": "a Japanese woman gently consulting with an eyebrow stylist in a bright salon, talking about brow mascara color and hair color",
+    "3": "close-up of a Japanese woman's neatly styled eyebrows with brow mascara matching her hair color, clean and soft natural light",
+    "4": "a beautiful natural eyebrow finished with brow mascara on a Japanese woman, neat well-shaped brows framing the face",
+    "5": "the warm and welcoming pastel interior of a Japanese eyebrow and eyelash salon",
+    "style": "soft pastel tones, bright and clean Japanese beauty salon, natural light, no text"
+  },
+  "faqTopics": [
+    "眉マスカラの色は何を基準に選べばよいですか？",
+    "暗髪・黒髪に合う眉マスカラの色はありますか？",
+    "眉マスカラを自然に見せる塗り方のコツはありますか？",
+    "眉の形に自信がなくても色を変えて大丈夫ですか？"
+  ],
+  "differentiationPoints": [
+    "骨格や毛の生え方に合わせたアイブロウデザイン",
+    "髪色・肌色に合う眉マスカラの色みを提案",
+    "おうちでのお手入れ方法まで提案"
+  ],
+  "tags": [
+    "眉マスカラ",
+    "眉メイク",
+    "色選び",
+    "アイブロウ"
+  ],
+  "targetWordCount": 4000,
+  "publishDate": "",
+  "publishTime": "11:00",
+  "eeatInsertionPoints": [
+    "Affinityで髪色と眉色の相談に対応した現場の経験に触れる",
+    "塗り方の解説でスタッフボイス（現場の一言）を挿入",
+    "特徴のH2で髪色に合う色提案という当サロンの強みを補強"
+  ]
+}
