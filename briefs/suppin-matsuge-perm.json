@@ -19,11 +19,52 @@
     "action": "カウンセリング予約・公式LINE登録"
   },
   "h2Sections": [
-    { "heading": "すっぴんに自信が持てない…そんなお悩みありませんか？", "pasonaStep": "P", "h3Headings": [], "keyPoints": ["目元がぼんやり見える", "目元の開き方で印象が変わる"] },
-    { "heading": "「ノーメイクでも目元だけは…」というご相談、多いんです", "pasonaStep": "A", "h3Headings": [], "keyPoints": ["目元だけ整えたい相談が多い", "自然に見えるカールを提案"] },
-    { "heading": "なぜまつ毛パーマですっぴんの印象が変わるの？", "pasonaStep": "S", "h3Headings": [], "keyPoints": ["根元の立ち上げで目が開く", "黒目がはっきり見える"] },
-    { "heading": "すっぴんでも自然に見せるまつ毛パーマのコツ", "pasonaStep": "S", "h3Headings": [], "keyPoints": ["ナチュラル〜ミディアム", "根元重視", "オイルフリーケア"] },
-    { "heading": "KATEstageLASH蒲田西口店のまつ毛パーマの特徴", "pasonaStep": "A", "h3Headings": [], "keyPoints": ["なりたい印象に合わせた設計", "自まつ毛にやさしい施術"] }
+    {
+      "heading": "すっぴんに自信が持てない…そんなお悩みありませんか？",
+      "pasonaStep": "P",
+      "h3Headings": [],
+      "keyPoints": [
+        "目元がぼんやり見える",
+        "目元の開き方で印象が変わる"
+      ]
+    },
+    {
+      "heading": "「ノーメイクでも目元だけは…」というご相談、多いんです",
+      "pasonaStep": "A",
+      "h3Headings": [],
+      "keyPoints": [
+        "目元だけ整えたい相談が多い",
+        "自然に見えるカールを提案"
+      ]
+    },
+    {
+      "heading": "なぜまつ毛パーマですっぴんの印象が変わるの？",
+      "pasonaStep": "S",
+      "h3Headings": [],
+      "keyPoints": [
+        "根元の立ち上げで目が開く",
+        "黒目がはっきり見える"
+      ]
+    },
+    {
+      "heading": "すっぴんでも自然に見せるまつ毛パーマのコツ",
+      "pasonaStep": "S",
+      "h3Headings": [],
+      "keyPoints": [
+        "ナチュラル〜ミディアム",
+        "根元重視",
+        "オイルフリーケア"
+      ]
+    },
+    {
+      "heading": "KATEstageLASH蒲田西口店のまつ毛パーマの特徴",
+      "pasonaStep": "A",
+      "h3Headings": [],
+      "keyPoints": [
+        "なりたい印象に合わせた設計",
+        "自まつ毛にやさしい施術"
+      ]
+    }
   ],
   "imagePrompts": {
     "1": "cover: タイトル表紙",
@@ -43,9 +84,14 @@
     "自まつ毛にやさしい施術",
     "ホームケアまでアドバイス"
   ],
-  "tags": ["まつ毛パーマ", "すっぴん", "ナチュラル", "目元"],
+  "tags": [
+    "まつ毛パーマ",
+    "すっぴん",
+    "ナチュラル",
+    "目元"
+  ],
   "targetWordCount": 4200,
-  "publishDate": "",
+  "publishDate": "2026-06-22",
   "publishTime": "11:00",
   "eeatInsertionPoints": [
     "AffinityとまとめでスタッフボイスによりE-E-A-Tを補強"
