@@ -2,7 +2,7 @@
 /**
  * Plugin Name: KATEBLOG Importer
  * Description: GitHubリポジトリから記事HTMLを取得してWordPressに自動投稿するプラグイン
- * Version: 3.5.0
+ * Version: 3.6.0
  * Author: KATEstageLASH
  */
 
@@ -15,7 +15,7 @@ add_filter('pre_set_site_transient_update_plugins', function($transient) {
     if (empty($transient->checked)) return $transient;
 
     $plugin_slug = plugin_basename(__FILE__);
-    $current_version = '3.5.0';
+    $current_version = '3.6.0';
 
     // GitHubから最新バージョンを確認
     $repo = get_option('kateblog_github_repo', 'tanukichiyamaguchi/KATEBLOG');
@@ -203,18 +203,18 @@ add_action('wp_head', function() {
     ?>
 <style id="kateblog-cta-style">
 .kateblog-cta-line,.kateblog-cta-booking{position:relative;overflow:hidden;border:0;text-align:center;line-height:1.4;text-shadow:0 1px 1px rgba(0,0,0,.18);-webkit-tap-highlight-color:transparent;will-change:transform,box-shadow;transition:transform .12s ease,box-shadow .12s ease,filter .12s ease;}
-/* 立体ボタン＋光るパルス（緑=LINE / 赤=予約） */
+/* 記事のパステルに馴染む配色（LINE=ラベンダー / 予約=ローズ）。立体ボタン＋光るパルス */
 .kateblog-cta-line{animation:kateblog-glow-line 2s ease-in-out infinite;}
 .kateblog-cta-booking{animation:kateblog-glow-book 2s ease-in-out infinite;}
-@keyframes kateblog-glow-line{0%,100%{box-shadow:0 6px 0 #04923f,0 10px 18px rgba(6,199,85,.40),inset 0 2px 0 rgba(255,255,255,.45)}50%{box-shadow:0 6px 0 #04923f,0 14px 34px rgba(6,199,85,.80),inset 0 2px 0 rgba(255,255,255,.45)}}
-@keyframes kateblog-glow-book{0%,100%{box-shadow:0 6px 0 #b3001a,0 10px 18px rgba(230,0,30,.42),inset 0 2px 0 rgba(255,255,255,.45)}50%{box-shadow:0 6px 0 #b3001a,0 14px 34px rgba(230,0,30,.82),inset 0 2px 0 rgba(255,255,255,.45)}}
+@keyframes kateblog-glow-line{0%,100%{box-shadow:0 6px 0 #6a4bb0,0 10px 18px rgba(130,101,207,.38),inset 0 2px 0 rgba(255,255,255,.40)}50%{box-shadow:0 6px 0 #6a4bb0,0 14px 34px rgba(130,101,207,.72),inset 0 2px 0 rgba(255,255,255,.40)}}
+@keyframes kateblog-glow-book{0%,100%{box-shadow:0 6px 0 #bf3a6e,0 10px 18px rgba(223,77,134,.40),inset 0 2px 0 rgba(255,255,255,.40)}50%{box-shadow:0 6px 0 #bf3a6e,0 14px 34px rgba(223,77,134,.74),inset 0 2px 0 rgba(255,255,255,.40)}}
 /* ホバーで浮き上がり、グローを強める */
-.kateblog-cta-line:hover{transform:translateY(-2px);filter:brightness(1.06);box-shadow:0 8px 0 #04923f,0 20px 38px rgba(6,199,85,.75),inset 0 2px 0 rgba(255,255,255,.5)!important;}
-.kateblog-cta-booking:hover{transform:translateY(-2px);filter:brightness(1.06);box-shadow:0 8px 0 #b3001a,0 20px 38px rgba(230,0,30,.78),inset 0 2px 0 rgba(255,255,255,.5)!important;}
+.kateblog-cta-line:hover{transform:translateY(-2px);filter:brightness(1.05);box-shadow:0 8px 0 #6a4bb0,0 20px 38px rgba(130,101,207,.68),inset 0 2px 0 rgba(255,255,255,.45)!important;}
+.kateblog-cta-booking:hover{transform:translateY(-2px);filter:brightness(1.05);box-shadow:0 8px 0 #bf3a6e,0 20px 38px rgba(223,77,134,.70),inset 0 2px 0 rgba(255,255,255,.45)!important;}
 /* クリックでグッと押し込む（厚みが沈む） */
-.kateblog-cta-line:active,.kateblog-cta-booking:active{transform:translateY(5px);filter:brightness(.98);box-shadow:0 1px 0 rgba(0,0,0,.25),0 3px 8px rgba(0,0,0,.30),inset 0 2px 0 rgba(255,255,255,.30)!important;}
+.kateblog-cta-line:active,.kateblog-cta-booking:active{transform:translateY(5px);filter:brightness(.98);box-shadow:0 1px 0 rgba(0,0,0,.22),0 3px 8px rgba(0,0,0,.28),inset 0 2px 0 rgba(255,255,255,.30)!important;}
 /* 光沢が走るシャイン */
-.kateblog-cta-line::after,.kateblog-cta-booking::after{content:"";position:absolute;top:0;left:-130%;width:55%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-20deg);animation:kateblog-shine 3.4s ease-in-out infinite;pointer-events:none;}
+.kateblog-cta-line::after,.kateblog-cta-booking::after{content:"";position:absolute;top:0;left:-130%;width:55%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.50),transparent);transform:skewX(-20deg);animation:kateblog-shine 3.4s ease-in-out infinite;pointer-events:none;}
 .kateblog-cta-booking::after{animation-delay:1.7s;}
 @keyframes kateblog-shine{0%{left:-130%}55%{left:160%}100%{left:160%}}
 @media (prefers-reduced-motion:reduce){.kateblog-cta-line,.kateblog-cta-booking,.kateblog-cta-line::after,.kateblog-cta-booking::after{animation:none!important}}

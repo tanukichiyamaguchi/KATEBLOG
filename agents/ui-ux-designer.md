@@ -52,7 +52,7 @@
 ## CTA HTMLテンプレート
 
 **重要**: WordPressは投稿本文の `<style>` と `<svg>` を除去（KSES）するため、**本文には `<style>` も `<svg>` も入れない**。
-- アイコンは絵文字（LINE=💬／予約=📅）を使う。
+- **CTAに絵文字・アイコンは入れない（テキストのみ）**。配色は記事のパステルに馴染むローズ/ラベンダーで一貫（LINE=ラベンダー・予約=ローズ）。
 - ホバー／光沢（シャイン）／予約ボタンの glow パルスなどの**動的CSSはプラグイン（`wp-plugin/kateblog-importer.php` の `wp_head`）が `.kateblog-cta-line` / `.kateblog-cta-booking` に付与**する。本文側はクラス名と下記のインラインstyleだけ。
 - ボタンは大きく押しやすく（横幅いっぱい・最大430px・角丸16px・厚め）。`transform` はインラインに書かない（ホバーCSSが効かなくなるため）。
 
@@ -60,7 +60,7 @@
 ```html
 <p>KATEstageLASH蒲田西口店の公式LINEでは、お得なクーポンや最新情報を配信中です。</p>
 <div style="text-align:center;margin:30px 0;">
-<a href="https://s.lmes.jp/landing-qr/2008792677-wpt9W9sz?uLand=q3RPYg" class="kateblog-cta-line" style="display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;max-width:430px;box-sizing:border-box;padding:18px 28px;background:linear-gradient(180deg,#1be072 0%,#04b34c 100%);color:#fff;font-size:18px;font-weight:bold;text-decoration:none;border:0;border-radius:16px;box-shadow:0 6px 0 #04923f,0 10px 20px rgba(6,199,85,0.45),inset 0 2px 0 rgba(255,255,255,0.45);text-shadow:0 1px 1px rgba(0,0,0,0.18);position:relative;overflow:hidden;"><span aria-hidden="true">💬</span> 公式LINEでお得な情報を受け取る</a>
+<a href="https://s.lmes.jp/landing-qr/2008792677-wpt9W9sz?uLand=q3RPYg" class="kateblog-cta-line" style="display:inline-flex;align-items:center;justify-content:center;width:100%;max-width:430px;box-sizing:border-box;padding:18px 28px;background:linear-gradient(180deg,#a98fe6 0%,#8265cf 100%);color:#fff;font-size:18px;font-weight:bold;letter-spacing:.02em;text-decoration:none;border:0;border-radius:16px;box-shadow:0 6px 0 #6a4bb0,0 10px 20px rgba(130,101,207,0.40),inset 0 2px 0 rgba(255,255,255,0.40);text-shadow:0 1px 1px rgba(0,0,0,0.18);position:relative;overflow:hidden;">公式LINEでお得な情報を受け取る</a>
 </div>
 ```
 
@@ -68,7 +68,7 @@
 ```html
 <p>ご予約の空き状況は以下からご確認いただけます。</p>
 <div style="text-align:center;margin:30px 0;">
-<a href="https://beauty.hotpepper.jp/kr/slnH000797013/coupon/" class="kateblog-cta-booking" style="display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;max-width:430px;box-sizing:border-box;padding:18px 28px;background:linear-gradient(180deg,#ff6a6a 0%,#e6001e 100%);color:#fff;font-size:18px;font-weight:bold;text-decoration:none;border:0;border-radius:16px;box-shadow:0 6px 0 #b3001a,0 10px 20px rgba(230,0,30,0.45),inset 0 2px 0 rgba(255,255,255,0.45);text-shadow:0 1px 1px rgba(0,0,0,0.18);position:relative;overflow:hidden;"><span aria-hidden="true">📅</span> 空き枠確認・予約（ホットペッパービューティー）</a>
+<a href="https://beauty.hotpepper.jp/kr/slnH000797013/coupon/" class="kateblog-cta-booking" style="display:inline-flex;align-items:center;justify-content:center;width:100%;max-width:430px;box-sizing:border-box;padding:18px 28px;background:linear-gradient(180deg,#f178a6 0%,#df4d86 100%);color:#fff;font-size:18px;font-weight:bold;letter-spacing:.02em;text-decoration:none;border:0;border-radius:16px;box-shadow:0 6px 0 #bf3a6e,0 10px 20px rgba(223,77,134,0.42),inset 0 2px 0 rgba(255,255,255,0.40);text-shadow:0 1px 1px rgba(0,0,0,0.18);position:relative;overflow:hidden;">空き枠確認・予約（ホットペッパービューティー）</a>
 </div>
 ```
 
