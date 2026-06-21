@@ -51,14 +51,16 @@
 
 ## CTA HTMLテンプレート
 
+**重要**: WordPressは投稿本文の `<style>` と `<svg>` を除去（KSES）するため、**本文には `<style>` も `<svg>` も入れない**。
+- アイコンは絵文字（LINE=💬／予約=📅）を使う。
+- ホバー／光沢（シャイン）／予約ボタンの glow パルスなどの**動的CSSはプラグイン（`wp-plugin/kateblog-importer.php` の `wp_head`）が `.kateblog-cta-line` / `.kateblog-cta-booking` に付与**する。本文側はクラス名と下記のインラインstyleだけ。
+- ボタンは大きく押しやすく（横幅いっぱい・最大430px・角丸16px・厚め）。`transform` はインラインに書かない（ホバーCSSが効かなくなるため）。
+
 ### 公式LINE CTAボタン
 ```html
 <p>KATEstageLASH蒲田西口店の公式LINEでは、お得なクーポンや最新情報を配信中です。</p>
 <div style="text-align:center;margin:30px 0;">
-<a href="https://s.lmes.jp/landing-qr/2008792677-wpt9W9sz?uLand=q3RPYg" class="kateblog-cta-line" style="display:inline-flex;align-items:center;gap:10px;padding:18px 44px;background:linear-gradient(180deg,#06C755 0%,#04B34C 100%);color:#fff;font-size:17px;font-weight:bold;text-decoration:none;border-radius:12px;box-shadow:0 4px 12px rgba(6,199,85,0.4),0 2px 4px rgba(0,0,0,0.15);transform:translateY(-2px);position:relative;overflow:hidden;">
-<svg width="24" height="24" viewBox="0 0 24 24" fill="white"><!-- LINE logo SVG --></svg>
-公式LINEでお得な情報を受け取る
-</a>
+<a href="https://s.lmes.jp/landing-qr/2008792677-wpt9W9sz?uLand=q3RPYg" class="kateblog-cta-line" style="display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;max-width:430px;box-sizing:border-box;padding:18px 28px;background:linear-gradient(135deg,#07d35f 0%,#04b34c 100%);color:#fff;font-size:18px;font-weight:bold;text-decoration:none;border-radius:16px;box-shadow:0 6px 18px rgba(6,199,85,0.45),0 2px 4px rgba(0,0,0,0.12);position:relative;overflow:hidden;"><span aria-hidden="true">💬</span> 公式LINEでお得な情報を受け取る</a>
 </div>
 ```
 
@@ -66,38 +68,10 @@
 ```html
 <p>ご予約の空き状況は以下からご確認いただけます。</p>
 <div style="text-align:center;margin:30px 0;">
-<a href="https://beauty.hotpepper.jp/kr/slnH000797013/coupon/" class="kateblog-cta-booking" style="display:inline-flex;align-items:center;gap:10px;padding:18px 44px;background:linear-gradient(180deg,#FF5757 0%,#E6001E 100%);color:#fff;font-size:17px;font-weight:bold;text-decoration:none;border-radius:12px;box-shadow:0 4px 12px rgba(230,0,30,0.4),0 2px 4px rgba(0,0,0,0.15);transform:translateY(-2px);position:relative;overflow:hidden;">
-<svg width="22" height="22" viewBox="0 0 24 24" fill="white"><!-- booking icon --></svg>
-空き枠確認・予約（ホットペッパービューティー）
-</a>
+<a href="https://beauty.hotpepper.jp/kr/slnH000797013/coupon/" class="kateblog-cta-booking" style="display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;max-width:430px;box-sizing:border-box;padding:18px 28px;background:linear-gradient(135deg,#ff5b5b 0%,#e6001e 100%);color:#fff;font-size:18px;font-weight:bold;text-decoration:none;border-radius:16px;box-shadow:0 6px 18px rgba(230,0,30,0.45),0 2px 4px rgba(0,0,0,0.12);position:relative;overflow:hidden;"><span aria-hidden="true">📅</span> 空き枠確認・予約（ホットペッパービューティー）</a>
 </div>
 ```
 
-### 光るエフェクトCSS
-```html
-<style>
-@keyframes kateblog-shimmer {
-  0% { left: -100%; }
-  100% { left: 200%; }
-}
-.kateblog-cta-line::after,
-.kateblog-cta-booking::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 50%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-  animation: kateblog-shimmer 2.5s ease-in-out infinite;
-}
-.kateblog-cta-booking::after {
-  animation-delay: 1.2s;
-}
-.kateblog-cta-line:hover,
-.kateblog-cta-booking:hover {
-  transform: translateY(-4px) !important;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.25) !important;
-}
-</style>
-```
+### 動的エフェクト（プラグイン側で適用・本文には書かない）
+ホバーで浮き上がる／光沢が走る（シャイン）／予約ボタンの glow パルスは、プラグインが `wp_head` で出力する CSS（`#kateblog-cta-style`）が担当。記事HTMLには `<style>` を書かないこと（書くと本文に文字として表示される）。
+

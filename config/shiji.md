@@ -110,7 +110,9 @@ H2見出しは下表のいずれかのステップに対応させ、記事全体
 ### 末尾CTA構成（必須・全記事共通）
 1. 公式LINE登録の訴求（お得な情報・クーポン配信など）
 2. 予約の空き枠確認への訴求
-3. 緑（LINE）＋赤（ホットペッパー）の装飾CTAボタンを使用（既存記事の末尾CTAブロックを踏襲）
+3. 緑（LINE）＋赤（ホットペッパー）の装飾CTAボタンを使用（`agents/ui-ux-designer.md` のテンプレート）
+   - **本文に `<style>` も `<svg>` も書かない**（WordPressが除去し、CSSが本文に文字表示される）。アイコンは絵文字（💬／📅）。
+   - ホバー・光沢・パルス等の動的CSSはプラグイン（`wp_head` の `#kateblog-cta-style`）が `.kateblog-cta-line` / `.kateblog-cta-booking` に付与する。ボタンの `style` に `transform` を書かない。
 
 ## 画像ルール（表紙＋図解中心 / 写真は最小限）
 各H2セクションの直後にアイキャッチ画像を1枚配置：`<img src="%%IMAGE_N%%" alt="..." style="max-width: 100%; height: auto;">`（N は1始まり。1つ目のH2が `%%IMAGE_1%%`）。
