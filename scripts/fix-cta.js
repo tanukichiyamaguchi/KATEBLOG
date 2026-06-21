@@ -17,11 +17,15 @@ function transform(html) {
   html = html.replace(/(class="kateblog-cta-line" style=")[^"]*(")/g, `$1${LINE_STYLE}$2`);
   html = html.replace(/(class="kateblog-cta-booking" style=")[^"]*(")/g, `$1${BOOK_STYLE}$2`);
 
-  // 3) ボタン内の絵文字span / svg を除去（テキストのみにする）
+  // 3) ボタン内の絵文字span / svg を除去（テキストのみにする。LINEアイコンはプラグインCSSが付与）
   html = html.replace(/(<a [^>]*class="kateblog-cta-(?:line|booking)"[^>]*>)\s*<span aria-hidden="true">[^<]*<\/span>\s*/g, '$1');
   html = html.replace(/(<a [^>]*class="kateblog-cta-(?:line|booking)"[^>]*>)\s*<svg[\s\S]*?<\/svg>\s*/g, '$1');
 
-  // 4) 余分な空行を整理
+  // 4) CTAラベルの統一
+  html = html.replace(/空き枠確認・予約（ホットペッパービューティー）/g, '空席確認・予約する');
+  html = html.replace(/公式LINEでお得な情報を受け取る/g, '限定特典配布中');
+
+  // 5) 余分な空行を整理
   html = html.replace(/\n{3,}/g, '\n\n');
   return html;
 }
