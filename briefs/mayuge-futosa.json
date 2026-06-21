@@ -1,0 +1,107 @@
+{
+  "keyword": "眉毛 太さ 選び方",
+  "subKeywords": [
+    "眉毛 太さ 似合う",
+    "眉毛 太め 細め",
+    "眉毛 太さ 顔印象"
+  ],
+  "category": "眉毛",
+  "categoryId": 25,
+  "slug": "mayuge-futosa",
+  "title": "似合う眉の太さの選び方｜顔印象を変える眉デザイン",
+  "metaDescription": "眉毛の太さの選び方をお探しの方へ。太め・細めどっちが似合う？という迷いに、顔の印象と眉の太さの関係や、目との間隔・骨格を基準にした選び方を蒲田のKATEstageLASHがやさしく解説します。",
+  "pasona": {
+    "problem": "眉の太さが自分の顔に合っているか分からず自信が持てない",
+    "affinity": "太め・細めどっちが似合うかという相談が現場で多く寄せられる",
+    "solution": "顔の印象と眉の太さの関係を理解し、目の大きさ・目と眉の間隔・骨格を基準に似合う太さを選ぶ",
+    "offer": "黄金比と骨格に合わせたアイブロウデザイン・アイブロウワックス",
+    "narrowingDown": "似合う太さが分からない方・流行に流されて迷っている方・自己流の整え方に限界を感じる方",
+    "action": "カウンセリング予約・公式LINE登録"
+  },
+  "h2Sections": [
+    {
+      "heading": "眉の太さが自分に合っているか分からない",
+      "pasonaStep": "P",
+      "h3Headings": [],
+      "keyPoints": [
+        "流行に合わせて迷ううちに分からなくなる",
+        "太さが合わないと野暮ったく・きつく見える"
+      ]
+    },
+    {
+      "heading": "「太め・細め、どっちが似合う？」というご相談",
+      "pasonaStep": "A",
+      "h3Headings": [],
+      "keyPoints": [
+        "迷うのは自然なこと",
+        "顔立ちやなりたい雰囲気で似合う太さは変わる"
+      ]
+    },
+    {
+      "heading": "顔の印象と眉の太さの関係・選び方の基準",
+      "pasonaStep": "S",
+      "h3Headings": [],
+      "keyPoints": [
+        "太め・細め・中間の印象の違い",
+        "目の大きさとの相性",
+        "目と眉の間隔",
+        "顔の骨格や輪郭",
+        "黒目の縦幅を太さの目安にする"
+      ]
+    },
+    {
+      "heading": "似合う太さの整え方のコツとトレンドとの付き合い方",
+      "pasonaStep": "S",
+      "h3Headings": [],
+      "keyPoints": [
+        "黒目の幅で太さの目安を決める",
+        "眉頭は触らず残す",
+        "はみ出す毛だけ整える",
+        "描き足して全体をなじませる",
+        "流行はお顔に合わせて取り入れる"
+      ]
+    },
+    {
+      "heading": "KATEstageLASH蒲田西口店のアイブロウの特徴",
+      "pasonaStep": "O/N/A",
+      "h3Headings": [],
+      "keyPoints": [
+        "黄金比と骨格から太さを設計",
+        "ワックスで自然な太さに",
+        "流行と顔立ちのバランスを提案"
+      ]
+    }
+  ],
+  "imagePrompts": {
+    "1": "close-up of a Japanese woman in her 30s looking at a mirror with a slightly unsure expression about her eyebrow thickness, soft natural makeup",
+    "2": "a Japanese woman gently consulting with an eyebrow stylist in a bright salon, discussing whether thick or thin brows suit her",
+    "3": "two contrasting eyebrow looks on Japanese women, one with thicker brows and one with thinner brows, clean soft natural light",
+    "4": "a beautiful natural eyebrow styling result with well-balanced thickness on a Japanese woman, neat brows framing the face",
+    "5": "the warm and welcoming pastel interior of a Japanese eyebrow and eyelash salon"
+  },
+  "faqTopics": [
+    "眉毛の太さは、どうやって選べばいいですか？",
+    "太めの眉と細めの眉では、印象はどう変わりますか？",
+    "流行の眉の太さをそのまま真似しても大丈夫ですか？",
+    "自分に似合う太さが分からない場合、サロンで相談できますか？"
+  ],
+  "differentiationPoints": [
+    "眉の黄金比と骨格に合わせた太さの設計",
+    "アイブロウワックスで自然な太さに整える",
+    "流行と顔立ちのバランスを見たデザイン提案"
+  ],
+  "tags": [
+    "眉毛 太さ",
+    "眉毛デザイン",
+    "アイブロウ",
+    "似合う眉"
+  ],
+  "targetWordCount": 4000,
+  "publishDate": "",
+  "publishTime": "11:00",
+  "eeatInsertionPoints": [
+    "Affinityで太さ選びに迷うお客様対応の経験に触れる",
+    "選び方の基準・整え方の解説でスタッフボイス（現場の一言）を挿入",
+    "特徴のH2で当サロンの太さ設計の強みを補強"
+  ]
+}
