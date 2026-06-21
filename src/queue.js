@@ -14,6 +14,7 @@
 const fs = require('fs');
 const path = require('path');
 const { generateImages } = require('./image-provider');
+const { applyInternalLinks } = require('./internal-links');
 
 const ROOT = path.join(__dirname, '..');
 const QUEUE_DIR = path.join(ROOT, 'queue');
@@ -142,11 +143,25 @@ async function publishNext(options = {}) {
   // 1. 画像生成（OpenAI写真風 / sharp）
   const images = await generateImages(html, title, imageDir, { provider: options.provider });
 
-  // 2. HTML を output/ へ移動（queue 側の事前生成画像があれば破棄）
-  moveFile(htmlSrc, htmlDest);
-  rmDirIfExists(path.join(QUEUE_DIR, `images-${slug}`));
+  // 2. 過去記事への内部リンクを自動付与（公開済みの記事のみリンク）
+  let linkInfo = { count: 0, inline: 0 };
+  let outHtml = html;
+  try {
+    const r = applyInternalLinks(html, slug, { cutoff: date });
+    outHtml = r.html;
+    linkInfo = { count: r.count, inline: r.inline };
+  } catch (e) {
+    console.log(`  ⚠️ 内部リンク付与をスキップ: ${e.message}`);
+  }
 
-  // 3. ブリーフに公開日時をセット
+  // 3. HTML を output/ へ書き出し（queue 側は削除）
+  fs.mkdirSync(path.dirname(htmlDest), { recursive: true });
+  fs.writeFileSync(htmlDest, outHtml);
+  fs.unlinkSync(htmlSrc);
+  rmDirIfExists(path.join(QUEUE_DIR, `images-${slug}`));
+  console.log(`  🔗 内部リンク: 関連${linkInfo.count}件 / 文脈リンク${linkInfo.inline}本`);
+
+  // 4. ブリーフに公開日時をセット
   const briefPath = upsertBriefDate(slug, html, date, time);
 
   // 4. キュー更新

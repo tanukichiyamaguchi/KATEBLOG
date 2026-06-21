@@ -7,6 +7,7 @@ const { publishArticle } = require('./src/publisher');
 const { getConfig, getRecentPosts, checkImageUrls, testConnection } = require('./src/wordpress');
 const { generateImages } = require('./src/image-provider');
 const { publishNext, queueStatus } = require('./src/queue');
+const { applyInternalLinks, loadCorpus } = require('./src/internal-links');
 
 const args = process.argv.slice(2);
 const command = args[0];
@@ -156,6 +157,35 @@ async function main() {
       break;
     }
 
+    case 'internal-links': {
+      const corpus = loadCorpus();
+      let targets = [];
+      if (args[1] === '--all') {
+        targets = fs.readdirSync('output').filter(f => f.endsWith('.html')).map(f => path.join('output', f));
+      } else if (args[1]) {
+        targets = [args[1]];
+      } else {
+        console.error('使用法: node cli.js internal-links <file.html> | --all');
+        process.exit(1);
+      }
+      console.log(`\n🔗 内部リンク付与: ${targets.length}件`);
+      let total = 0;
+      for (const file of targets) {
+        const slug = path.basename(file, '.html');
+        const html = fs.readFileSync(file, 'utf-8');
+        const r = applyInternalLinks(html, slug, { corpus });
+        if (r.count > 0) {
+          fs.writeFileSync(file, r.html);
+          total++;
+          console.log(`  ✅ ${slug} … 関連${r.count}件 / 文脈リンク${r.inline}本`);
+        } else {
+          console.log(`  － ${slug} … 関連記事なし（スキップ）`);
+        }
+      }
+      console.log(`\n完了: ${total}/${targets.length} 件に内部リンクを付与`);
+      break;
+    }
+
     case 'test': {
       console.log('\n🔧 WordPress接続テスト...');
       const config = getConfig();
@@ -181,6 +211,7 @@ KATEstageLASH ブログ自動化ツール
   node cli.js batch <files...> [options]           バッチ投稿
   node cli.js publish-next [options]               週次キューから次の1本を公開準備
   node cli.js queue                                公開キューの状況を表示
+  node cli.js internal-links <file.html> | --all   過去記事への内部リンクを自動付与
   node cli.js status                               投稿ステータス確認
   node cli.js check-images <postId>                画像URL検証
 

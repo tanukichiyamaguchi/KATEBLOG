@@ -54,3 +54,4 @@
 - 最後のH2は「KATEstageLASH蒲田西口店の〇〇の特徴」
 - 末尾にHot Pepper Beauty予約リンク＋公式LINE
 - figcaption禁止、>>はこちら禁止、薬機法遵守、マツエク誤記なし
+- 内部リンク（関連記事ブロック・文脈リンク）は**公開時に自動付与**されるので手動で書かない。briefの`tags`/`categoryId`を正確に

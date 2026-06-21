@@ -75,6 +75,18 @@ node cli.js generate-images queue/hitoe-matsuge-perm.html --provider openai
 
 ---
 
+## 内部リンク（過去記事への自動リンク）
+- `src/internal-links.js` が、各記事に**過去記事への内部リンク**を自動付与します（SEOの回遊・関連性向上）。
+  - 末尾CTA直前に「**あわせて読みたい**」関連記事ブロック（公開済みの関連記事を最大4本）。
+  - 本文中の特徴的な語に**文脈リンク**を最大2本（汎用語は除外、語の本命記事へ）。
+- 関連度は briefの `tags` / `keyword` / `categoryId` で算出。リンク先は **公開済み（publishDate ≤ 当日）の過去記事のみ**、自記事は除外。
+- **公開時（`publish-next` / `publish`）に自動実行**。既存記事へまとめて付与するには:
+  ```bash
+  node cli.js internal-links --all      # output/ の全記事に付与（冪等）
+  node cli.js internal-links output/xxx.html
+  ```
+- 冪等設計（再実行で重複しない）。WordPress反映には「全記事を再インポート」を実行。
+
 ## 3. 週1自動公開
 
 ### 全体像

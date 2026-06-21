@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const { generateImages } = require('./image-provider');
+const { applyInternalLinks } = require('./internal-links');
 const { getConfig, uploadImage, createPost, checkImageUrls } = require('./wordpress');
 
 function extractMeta(html) {
@@ -44,6 +45,15 @@ async function publishArticle(filePath, options = {}) {
   const config = getConfig();
   const slug = meta.slug || path.basename(filePath, '.html');
   const imageDir = path.join(path.dirname(filePath), `images-${slug}`);
+
+  // 0. 過去記事への内部リンクを自動付与
+  try {
+    const r = applyInternalLinks(content, slug, {});
+    content = r.html;
+    console.log(`🔗 内部リンク: 関連${r.count}件 / 文脈リンク${r.inline}本`);
+  } catch (e) {
+    console.log(`⚠️ 内部リンク付与をスキップ: ${e.message}`);
+  }
 
   // 1. Generate images（OpenAI写真風 / sharp。provider は --provider か IMAGE_PROVIDER で指定）
   console.log('\n🎨 画像生成中...');
