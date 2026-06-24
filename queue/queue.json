@@ -1,6 +1,5 @@
 {
   "pending": [
-    "suppin-matsuge-perm",
     "matsuge-perm-40dai",
     "mayuge-usui-josei",
     "matsuge-perm-umi-pool",
@@ -51,6 +50,13 @@
       "date": "2026-06-15",
       "time": "11:00",
       "publishedAt": "2026-06-14T21:02:08.652Z"
+    },
+    {
+      "slug": "suppin-matsuge-perm",
+      "title": "すっぴんでも印象が変わる｜まつ毛パーマで叶えるナチュラルな目元",
+      "date": "2026-06-22",
+      "time": "11:00",
+      "publishedAt": "2026-06-21T21:06:37.263Z"
     }
   ]
 }
