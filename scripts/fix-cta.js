@@ -5,9 +5,11 @@
 //  - 立体感（厚み・グロス）はインライン、光る/押し込みの動的CSSはプラグイン(wp_head)が付与
 const fs = require('fs');
 
-// LINE = ラベンダー（表紙のlavenderに馴染む） / 予約 = ローズ（アクセント#e86a8eに馴染む）
-const LINE_STYLE = 'display:inline-flex;align-items:center;justify-content:center;width:100%;max-width:430px;box-sizing:border-box;padding:18px 28px;background:linear-gradient(180deg,#a98fe6 0%,#8265cf 100%);color:#fff;font-size:18px;font-weight:bold;letter-spacing:.02em;text-decoration:none;border:0;border-radius:16px;box-shadow:0 6px 0 #6a4bb0,0 10px 20px rgba(130,101,207,0.40),inset 0 2px 0 rgba(255,255,255,0.40);text-shadow:0 1px 1px rgba(0,0,0,0.18);position:relative;overflow:hidden;';
-const BOOK_STYLE = 'display:inline-flex;align-items:center;justify-content:center;width:100%;max-width:430px;box-sizing:border-box;padding:18px 28px;background:linear-gradient(180deg,#f178a6 0%,#df4d86 100%);color:#fff;font-size:18px;font-weight:bold;letter-spacing:.02em;text-decoration:none;border:0;border-radius:16px;box-shadow:0 6px 0 #bf3a6e,0 10px 20px rgba(223,77,134,0.42),inset 0 2px 0 rgba(255,255,255,0.40);text-shadow:0 1px 1px rgba(0,0,0,0.18);position:relative;overflow:hidden;';
+// LINE = ラベンダー / 予約 = ローズ
+// ※ width:100%+padding+box-sizing は WordPress(KSES)が box-sizing を除去すると右側に横はみ出し（余白/横スクロール）の原因に。
+//    width指定をやめ display:flex+max-width+margin:0 auto で「親の枠内に必ず収まる」実装にする（box-sizing非依存）。
+const LINE_STYLE = 'display:flex;align-items:center;justify-content:center;max-width:430px;margin:0 auto;padding:18px 22px;background:linear-gradient(180deg,#a98fe6 0%,#8265cf 100%);color:#fff;font-size:17px;font-weight:bold;letter-spacing:.02em;text-decoration:none;border:0;border-radius:16px;box-shadow:0 6px 0 #6a4bb0,0 10px 20px rgba(130,101,207,0.40),inset 0 2px 0 rgba(255,255,255,0.40);text-shadow:0 1px 1px rgba(0,0,0,0.18);position:relative;overflow:hidden;';
+const BOOK_STYLE = 'display:flex;align-items:center;justify-content:center;max-width:430px;margin:0 auto;padding:18px 22px;background:linear-gradient(180deg,#f178a6 0%,#df4d86 100%);color:#fff;font-size:17px;font-weight:bold;letter-spacing:.02em;text-decoration:none;border:0;border-radius:16px;box-shadow:0 6px 0 #bf3a6e,0 10px 20px rgba(223,77,134,0.42),inset 0 2px 0 rgba(255,255,255,0.40);text-shadow:0 1px 1px rgba(0,0,0,0.18);position:relative;overflow:hidden;';
 
 function transform(html) {
   // 1) <style> ブロックを削除

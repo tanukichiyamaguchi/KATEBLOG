@@ -2,7 +2,7 @@
 /**
  * Plugin Name: KATEBLOG Importer
  * Description: GitHubリポジトリから記事HTMLを取得してWordPressに自動投稿するプラグイン
- * Version: 3.7.0
+ * Version: 3.8.0
  * Author: KATEstageLASH
  */
 
@@ -15,7 +15,7 @@ add_filter('pre_set_site_transient_update_plugins', function($transient) {
     if (empty($transient->checked)) return $transient;
 
     $plugin_slug = plugin_basename(__FILE__);
-    $current_version = '3.7.0';
+    $current_version = '3.8.0';
 
     // GitHubから最新バージョンを確認
     $repo = get_option('kateblog_github_repo', 'tanukichiyamaguchi/KATEBLOG');
@@ -202,7 +202,7 @@ add_action('wp_head', function() {
     if (!is_singular(array('post', 'blog'))) return;
     ?>
 <style id="kateblog-cta-style">
-.kateblog-cta-line,.kateblog-cta-booking{position:relative;overflow:hidden;border:0;text-align:center;line-height:1.4;text-shadow:0 1px 1px rgba(0,0,0,.18);-webkit-tap-highlight-color:transparent;will-change:transform,box-shadow;transition:transform .12s ease,box-shadow .12s ease,filter .12s ease;}
+.kateblog-cta-line,.kateblog-cta-booking{position:relative;overflow:hidden;border:0;box-sizing:border-box;max-width:100%;text-align:center;line-height:1.4;text-shadow:0 1px 1px rgba(0,0,0,.18);-webkit-tap-highlight-color:transparent;will-change:transform,box-shadow;transition:transform .12s ease,box-shadow .12s ease,filter .12s ease;}
 /* LINEボタンの公式アイコン（白・本文の<svg>はWPに除去されるためCSSで付与） */
 .kateblog-cta-line::before{content:"";flex:0 0 auto;width:22px;height:22px;margin-right:9px;background:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iI2ZmZmZmZiI+PHBhdGggZD0iTTE5LjM2NSA5Ljg2M2MuMzQ5IDAgLjYzLjI4NS42My42MzEgMCAuMzQ1LS4yODEuNjMtLjYzLjYzSDE3LjYxdjEuMTI1aDEuNzU1Yy4zNDkgMCAuNjMuMjgzLjYzLjYzIDAgLjM0NC0uMjgxLjYyOS0uNjMuNjI5aC0yLjM4NmMtLjM0NSAwLS42MjctLjI4NS0uNjI3LS42MjlWOC4xMDhjMC0uMzQ1LjI4Mi0uNjMuNjI3LS42M2gyLjM4NmMuMzQ5IDAgLjYzLjI4NS42My42MyAwIC4zNDktLjI4MS42My0uNjMuNjNIMTcuNjF2MS4xMjVoMS43NTV6bS0zLjg1NSAzLjAxNmMwIC4yNy0uMTc0LjUxLS40MzIuNTk2LS4wNjQuMDIxLS4xMzMuMDMxLS4xOTkuMDMxLS4yMTEgMC0uMzkxLS4wOS0uNTEtLjI1bC0yLjQ0My0zLjMxN3YyLjk0YzAgLjM0NC0uMjc5LjYyOS0uNjMxLjYyOS0uMzQ2IDAtLjYyNi0uMjg1LS42MjYtLjYyOVY4LjEwOGMwLS4yNy4xNzMtLjUxLjQzLS41OTUuMDYtLjAyMy4xMzYtLjAzMy4xOTQtLjAzMy4xOTUgMCAuMzc1LjEwNC40OTUuMjU0bDIuNDYyIDMuMzNWOC4xMDhjMC0uMzQ1LjI4Mi0uNjMuNjMtLjYzLjM0NSAwIC42My4yODUuNjMuNjN2NC43NzF6bS01Ljc0MSAwYzAgLjM0NC0uMjgyLjYyOS0uNjMxLjYyOS0uMzQ1IDAtLjYyNy0uMjg1LS42MjctLjYyOVY4LjEwOGMwLS4zNDUuMjgyLS42My42MjctLjYzLjM0OSAwIC42MzEuMjg1LjYzMS42M3Y0Ljc3MXptLTIuNDY2LjYyOUg0LjkxN2MtLjM0NSAwLS42My0uMjg1LS42My0uNjI5VjguMTA4YzAtLjM0NS4yODUtLjYzLjYzLS42My4zNDggMCAuNjMuMjg1LjYzLjYzdjQuMTQxaDEuNzU2Yy4zNDggMCAuNjI5LjI4My42MjkuNjMgMCAuMzQ0LS4yODEuNjI5LS42MjkuNjI5TTI0IDEwLjMxNEMyNCA0Ljk0MyAxOC42MTUuNTcyIDEyIC41NzJTMCA0Ljk0MyAwIDEwLjMxNGMwIDQuODExIDQuMjcgOC44NDIgMTAuMDM1IDkuNjA4LjM5MS4wODIuOTIzLjI1OCAxLjA1OC41OS4xMi4zMDEuMDc5Ljc2Ni4wMzggMS4wOGwtLjE2NCAxLjAyYy0uMDQ1LjMwMS0uMjQgMS4xODYgMS4wNDkuNjQ1IDEuMjkxLS41MzkgNi45MTYtNC4wNzggOS40MzYtNi45NzVDMjMuMTc2IDE0LjM5MyAyNCAxMi40NTggMjQgMTAuMzE0Ii8+PC9zdmc+") center/contain no-repeat;}
 /* 記事のパステルに馴染む配色（LINE=ラベンダー / 予約=ローズ）。立体ボタン＋光るパルス */
