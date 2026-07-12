@@ -19,11 +19,54 @@
     "action": "カウンセリング予約・公式LINE登録"
   },
   "h2Sections": [
-    { "heading": "夏の海やプールで目元が寂しく見えていませんか？", "pasonaStep": "P", "h3Headings": [], "keyPoints": ["水に濡れてまつ毛が下がる", "マスカラがにじんでパンダ目になる"] },
-    { "heading": "「夏はメイク崩れが気になる」というご相談、増えています", "pasonaStep": "A", "h3Headings": [], "keyPoints": ["夏はメイク崩れの相談が増える", "メイクに頼りすぎない目元づくりを提案"] },
-    { "heading": "なぜ夏の水辺にまつ毛パーマが向いているの？", "pasonaStep": "S", "h3Headings": [], "keyPoints": ["マスカラ要らずで目力キープ", "汗や水でも落ちにくい", "パンダ目の心配が減る"] },
-    { "heading": "夏にまつ毛パーマを長持ちさせるコツと水との付き合い方", "pasonaStep": "S", "h3Headings": [], "keyPoints": ["施術後しばらく濡らさない", "海やプールの後はやさしく流す", "オイルフリーケア"] },
-    { "heading": "KATEstageLASH蒲田西口店のまつ毛パーマの特徴", "pasonaStep": "A", "h3Headings": [], "keyPoints": ["なりたい印象に合わせた設計", "自まつ毛にやさしい施術", "夏のケアまでアドバイス"] }
+    {
+      "heading": "夏の海やプールで目元が寂しく見えていませんか？",
+      "pasonaStep": "P",
+      "h3Headings": [],
+      "keyPoints": [
+        "水に濡れてまつ毛が下がる",
+        "マスカラがにじんでパンダ目になる"
+      ]
+    },
+    {
+      "heading": "「夏はメイク崩れが気になる」というご相談、増えています",
+      "pasonaStep": "A",
+      "h3Headings": [],
+      "keyPoints": [
+        "夏はメイク崩れの相談が増える",
+        "メイクに頼りすぎない目元づくりを提案"
+      ]
+    },
+    {
+      "heading": "なぜ夏の水辺にまつ毛パーマが向いているの？",
+      "pasonaStep": "S",
+      "h3Headings": [],
+      "keyPoints": [
+        "マスカラ要らずで目力キープ",
+        "汗や水でも落ちにくい",
+        "パンダ目の心配が減る"
+      ]
+    },
+    {
+      "heading": "夏にまつ毛パーマを長持ちさせるコツと水との付き合い方",
+      "pasonaStep": "S",
+      "h3Headings": [],
+      "keyPoints": [
+        "施術後しばらく濡らさない",
+        "海やプールの後はやさしく流す",
+        "オイルフリーケア"
+      ]
+    },
+    {
+      "heading": "KATEstageLASH蒲田西口店のまつ毛パーマの特徴",
+      "pasonaStep": "A",
+      "h3Headings": [],
+      "keyPoints": [
+        "なりたい印象に合わせた設計",
+        "自まつ毛にやさしい施術",
+        "夏のケアまでアドバイス"
+      ]
+    }
   ],
   "imagePrompts": {
     "1": "cover: タイトル表紙",
@@ -43,9 +86,14 @@
     "自まつ毛にやさしい施術",
     "夏のケアまでアドバイス"
   ],
-  "tags": ["まつ毛パーマ", "夏", "海・プール", "汗対策"],
+  "tags": [
+    "まつ毛パーマ",
+    "夏",
+    "海・プール",
+    "汗対策"
+  ],
   "targetWordCount": 4000,
-  "publishDate": "",
+  "publishDate": "2026-07-13",
   "publishTime": "11:00",
   "eeatInsertionPoints": [
     "AffinityとまとめでスタッフボイスによりE-E-A-Tを補強"
