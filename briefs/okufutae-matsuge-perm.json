@@ -19,11 +19,53 @@
     "action": "カウンセリング予約・公式LINE登録"
   },
   "h2Sections": [
-    { "heading": "奥二重でまつ毛パーマが「あまり変わらない」と感じていませんか？", "pasonaStep": "P", "h3Headings": [], "keyPoints": ["効果を感じにくいと思いがち", "まぶたに埋もれて見えるだけのことが多い"] },
-    { "heading": "同じ奥二重の方から、よくいただくご相談", "pasonaStep": "A", "h3Headings": [], "keyPoints": ["奥二重ならではの相談が多い", "根元の立ち上げを提案"] },
-    { "heading": "奥二重とまぶた・まつ毛の関係｜なぜ埋もれて見えるの？", "pasonaStep": "S", "h3Headings": [], "keyPoints": ["まぶたが根元に重なる", "根元が立ち上がりにくい", "根元の角度がカギ"] },
-    { "heading": "奥二重さんに似合うカールの選び方・長持ちのコツ", "pasonaStep": "S", "h3Headings": [], "keyPoints": ["立ち上げ重視のカール", "根元の角度を起こす", "オイルフリーケア"] },
-    { "heading": "KATEstageLASH蒲田西口店のまつ毛パーマの特徴", "pasonaStep": "A", "h3Headings": [], "keyPoints": ["まぶたの形に合わせた設計", "自まつ毛にやさしい施術"] }
+    {
+      "heading": "奥二重でまつ毛パーマが「あまり変わらない」と感じていませんか？",
+      "pasonaStep": "P",
+      "h3Headings": [],
+      "keyPoints": [
+        "効果を感じにくいと思いがち",
+        "まぶたに埋もれて見えるだけのことが多い"
+      ]
+    },
+    {
+      "heading": "同じ奥二重の方から、よくいただくご相談",
+      "pasonaStep": "A",
+      "h3Headings": [],
+      "keyPoints": [
+        "奥二重ならではの相談が多い",
+        "根元の立ち上げを提案"
+      ]
+    },
+    {
+      "heading": "奥二重とまぶた・まつ毛の関係｜なぜ埋もれて見えるの？",
+      "pasonaStep": "S",
+      "h3Headings": [],
+      "keyPoints": [
+        "まぶたが根元に重なる",
+        "根元が立ち上がりにくい",
+        "根元の角度がカギ"
+      ]
+    },
+    {
+      "heading": "奥二重さんに似合うカールの選び方・長持ちのコツ",
+      "pasonaStep": "S",
+      "h3Headings": [],
+      "keyPoints": [
+        "立ち上げ重視のカール",
+        "根元の角度を起こす",
+        "オイルフリーケア"
+      ]
+    },
+    {
+      "heading": "KATEstageLASH蒲田西口店のまつ毛パーマの特徴",
+      "pasonaStep": "A",
+      "h3Headings": [],
+      "keyPoints": [
+        "まぶたの形に合わせた設計",
+        "自まつ毛にやさしい施術"
+      ]
+    }
   ],
   "imagePrompts": {
     "1": "cover: タイトル表紙",
@@ -43,9 +85,14 @@
     "自まつ毛にやさしい施術",
     "ホームケアまでアドバイス"
   ],
-  "tags": ["まつ毛パーマ", "奥二重", "カール", "目元"],
+  "tags": [
+    "まつ毛パーマ",
+    "奥二重",
+    "カール",
+    "目元"
+  ],
   "targetWordCount": 4000,
-  "publishDate": "",
+  "publishDate": "2026-07-27",
   "publishTime": "11:00",
   "eeatInsertionPoints": [
     "AffinityとまとめでスタッフボイスによりE-E-A-Tを補強"
