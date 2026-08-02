@@ -1,6 +1,5 @@
 {
   "pending": [
-    "mayu-wax-mochi",
     "matsuge-perm-mascara",
     "mayuge-futosa",
     "shitamatsuge-perm",
@@ -87,6 +86,13 @@
       "date": "2026-07-27",
       "time": "11:00",
       "publishedAt": "2026-07-26T20:48:00.125Z"
+    },
+    {
+      "slug": "mayu-wax-mochi",
+      "title": "眉毛ワックスの持ちはどのくらい？長持ちさせるコツ",
+      "date": "2026-08-03",
+      "time": "11:00",
+      "publishedAt": "2026-08-02T20:43:53.244Z"
     }
   ]
 }
