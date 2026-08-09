@@ -1,6 +1,5 @@
 {
   "pending": [
-    "matsuge-perm-mascara",
     "mayuge-futosa",
     "shitamatsuge-perm",
     "mayu-mascara-iro",
@@ -93,6 +92,13 @@
       "date": "2026-08-03",
       "time": "11:00",
       "publishedAt": "2026-08-02T20:43:53.244Z"
+    },
+    {
+      "slug": "matsuge-perm-mascara",
+      "title": "まつ毛パーマ中のマスカラ｜選び方と落とし方のコツ",
+      "date": "2026-08-10",
+      "time": "11:00",
+      "publishedAt": "2026-08-09T20:21:49.335Z"
     }
   ]
 }

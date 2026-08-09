@@ -19,11 +19,53 @@
     "action": "カウンセリング予約・公式LINE登録"
   },
   "h2Sections": [
-    { "heading": "まつ毛パーマ中、マスカラを使っていいか迷っていませんか？", "pasonaStep": "P", "h3Headings": [], "keyPoints": ["マスカラ自体がいけないわけではない", "種類と落とし方が大切"] },
-    { "heading": "「カールが落ちないか心配」というご相談、多いんです", "pasonaStep": "A", "h3Headings": [], "keyPoints": ["心配する相談が多い", "選ぶアイテムと落とし方で変わる"] },
-    { "heading": "まつ毛パーマ中に向くマスカラの選び方とNG例", "pasonaStep": "S", "h3Headings": [], "keyPoints": ["オイルフリー", "お湯オフタイプ", "強力ウォータープルーフはNG"] },
-    { "heading": "カールを守る塗り方・落とし方のコツ", "pasonaStep": "S", "h3Headings": [], "keyPoints": ["根元を避けて毛先中心", "こすらずぬるま湯でオフ", "中間CTA設置"] },
-    { "heading": "KATEstageLASH蒲田西口店のまつ毛パーマの特徴", "pasonaStep": "A", "h3Headings": [], "keyPoints": ["なりたい目元に合わせた設計", "メイク・ケアまで提案"] }
+    {
+      "heading": "まつ毛パーマ中、マスカラを使っていいか迷っていませんか？",
+      "pasonaStep": "P",
+      "h3Headings": [],
+      "keyPoints": [
+        "マスカラ自体がいけないわけではない",
+        "種類と落とし方が大切"
+      ]
+    },
+    {
+      "heading": "「カールが落ちないか心配」というご相談、多いんです",
+      "pasonaStep": "A",
+      "h3Headings": [],
+      "keyPoints": [
+        "心配する相談が多い",
+        "選ぶアイテムと落とし方で変わる"
+      ]
+    },
+    {
+      "heading": "まつ毛パーマ中に向くマスカラの選び方とNG例",
+      "pasonaStep": "S",
+      "h3Headings": [],
+      "keyPoints": [
+        "オイルフリー",
+        "お湯オフタイプ",
+        "強力ウォータープルーフはNG"
+      ]
+    },
+    {
+      "heading": "カールを守る塗り方・落とし方のコツ",
+      "pasonaStep": "S",
+      "h3Headings": [],
+      "keyPoints": [
+        "根元を避けて毛先中心",
+        "こすらずぬるま湯でオフ",
+        "中間CTA設置"
+      ]
+    },
+    {
+      "heading": "KATEstageLASH蒲田西口店のまつ毛パーマの特徴",
+      "pasonaStep": "A",
+      "h3Headings": [],
+      "keyPoints": [
+        "なりたい目元に合わせた設計",
+        "メイク・ケアまで提案"
+      ]
+    }
   ],
   "imagePrompts": {
     "1": "cover: タイトル表紙",
@@ -43,9 +85,14 @@
     "自まつ毛にやさしい施術",
     "施術後のメイク・ホームケアまで提案"
   ],
-  "tags": ["まつ毛パーマ", "マスカラ", "メイク", "アフターケア"],
+  "tags": [
+    "まつ毛パーマ",
+    "マスカラ",
+    "メイク",
+    "アフターケア"
+  ],
   "targetWordCount": 4000,
-  "publishDate": "",
+  "publishDate": "2026-08-10",
   "publishTime": "11:00",
   "eeatInsertionPoints": [
     "Affinityと落とし方の章でスタッフボイスによりE-E-A-Tを補強"
