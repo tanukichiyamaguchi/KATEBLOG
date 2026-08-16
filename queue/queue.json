@@ -1,6 +1,5 @@
 {
   "pending": [
-    "mayuge-futosa",
     "shitamatsuge-perm",
     "mayu-mascara-iro",
     "matsuge-biyoueki-tsukaikata",
@@ -99,6 +98,13 @@
       "date": "2026-08-10",
       "time": "11:00",
       "publishedAt": "2026-08-09T20:21:49.335Z"
+    },
+    {
+      "slug": "mayuge-futosa",
+      "title": "似合う眉の太さの選び方｜顔印象を変える眉デザイン",
+      "date": "2026-08-17",
+      "time": "11:00",
+      "publishedAt": "2026-08-16T20:12:46.229Z"
     }
   ]
 }
