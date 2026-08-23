@@ -19,11 +19,54 @@
     "action": "カウンセリング予約・公式LINE登録"
   },
   "h2Sections": [
-    { "heading": "下まつげが目立たず、目元がぼやけて見える…", "pasonaStep": "P", "h3Headings": [], "keyPoints": ["下まつげが短い・下向きで目立たない", "目の縦幅が狭く見える"] },
-    { "heading": "「上だけでなく下も気になる」というご相談、増えています", "pasonaStep": "A", "h3Headings": [], "keyPoints": ["上を整えると下が気になる", "上下のバランスを見て設計"] },
-    { "heading": "下まつげのパーマってどんな仕上がり？上との違い", "pasonaStep": "S", "h3Headings": [], "keyPoints": ["下は向きをそろえて整える", "上は上向きで華やかさ", "強さで印象が変わる"] },
-    { "heading": "下まつげをきれいに保つコツと注意点", "pasonaStep": "S", "h3Headings": [], "keyPoints": ["こすらない", "控えめな角度", "オイルフリーケア", "まつ毛美容液"] },
-    { "heading": "KATEstageLASH蒲田西口店のまつ毛パーマの特徴", "pasonaStep": "A", "h3Headings": [], "keyPoints": ["上下のバランスを考えた設計", "自まつ毛にやさしい施術"] }
+    {
+      "heading": "下まつげが目立たず、目元がぼやけて見える…",
+      "pasonaStep": "P",
+      "h3Headings": [],
+      "keyPoints": [
+        "下まつげが短い・下向きで目立たない",
+        "目の縦幅が狭く見える"
+      ]
+    },
+    {
+      "heading": "「上だけでなく下も気になる」というご相談、増えています",
+      "pasonaStep": "A",
+      "h3Headings": [],
+      "keyPoints": [
+        "上を整えると下が気になる",
+        "上下のバランスを見て設計"
+      ]
+    },
+    {
+      "heading": "下まつげのパーマってどんな仕上がり？上との違い",
+      "pasonaStep": "S",
+      "h3Headings": [],
+      "keyPoints": [
+        "下は向きをそろえて整える",
+        "上は上向きで華やかさ",
+        "強さで印象が変わる"
+      ]
+    },
+    {
+      "heading": "下まつげをきれいに保つコツと注意点",
+      "pasonaStep": "S",
+      "h3Headings": [],
+      "keyPoints": [
+        "こすらない",
+        "控えめな角度",
+        "オイルフリーケア",
+        "まつ毛美容液"
+      ]
+    },
+    {
+      "heading": "KATEstageLASH蒲田西口店のまつ毛パーマの特徴",
+      "pasonaStep": "A",
+      "h3Headings": [],
+      "keyPoints": [
+        "上下のバランスを考えた設計",
+        "自まつ毛にやさしい施術"
+      ]
+    }
   ],
   "imagePrompts": {
     "1": "cover: タイトル表紙",
@@ -43,9 +86,14 @@
     "自まつ毛にやさしい施術",
     "ホームケアまでアドバイス"
   ],
-  "tags": ["まつ毛パーマ", "下まつげ", "目力", "カール"],
+  "tags": [
+    "まつ毛パーマ",
+    "下まつげ",
+    "目力",
+    "カール"
+  ],
   "targetWordCount": 4000,
-  "publishDate": "",
+  "publishDate": "2026-08-24",
   "publishTime": "11:00",
   "eeatInsertionPoints": [
     "Affinityと特徴の段落でスタッフボイスによりE-E-A-Tを補強"

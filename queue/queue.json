@@ -1,6 +1,5 @@
 {
   "pending": [
-    "shitamatsuge-perm",
     "mayu-mascara-iro",
     "matsuge-biyoueki-tsukaikata",
     "parisienne-chigai",
@@ -105,6 +104,13 @@
       "date": "2026-08-17",
       "time": "11:00",
       "publishedAt": "2026-08-16T20:12:46.229Z"
+    },
+    {
+      "slug": "shitamatsuge-perm",
+      "title": "下まつげもパーマできる？目力アップのケアとサロン活用",
+      "date": "2026-08-24",
+      "time": "11:00",
+      "publishedAt": "2026-08-23T20:13:03.625Z"
     }
   ]
 }
