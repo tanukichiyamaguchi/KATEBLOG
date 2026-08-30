@@ -1,6 +1,5 @@
 {
   "pending": [
-    "mayu-mascara-iro",
     "matsuge-biyoueki-tsukaikata",
     "parisienne-chigai",
     "matsuge-perm-50dai",
@@ -111,6 +110,13 @@
       "date": "2026-08-24",
       "time": "11:00",
       "publishedAt": "2026-08-23T20:13:03.625Z"
+    },
+    {
+      "slug": "mayu-mascara-iro",
+      "title": "眉マスカラの色の選び方｜髪色に合わせる垢抜け眉",
+      "date": "2026-08-31",
+      "time": "11:00",
+      "publishedAt": "2026-08-30T22:15:53.061Z"
     }
   ]
 }
