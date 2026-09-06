@@ -1,6 +1,5 @@
 {
   "pending": [
-    "matsuge-biyoueki-tsukaikata",
     "parisienne-chigai",
     "matsuge-perm-50dai",
     "matsuge-mijikai",
@@ -117,6 +116,13 @@
       "date": "2026-08-31",
       "time": "11:00",
       "publishedAt": "2026-08-30T22:15:53.061Z"
+    },
+    {
+      "slug": "matsuge-biyoueki-tsukaikata",
+      "title": "まつ毛美容液の使い方｜効果を引き出す塗り方とタイミング",
+      "date": "2026-09-07",
+      "time": "11:00",
+      "publishedAt": "2026-09-06T21:52:01.032Z"
     }
   ]
 }

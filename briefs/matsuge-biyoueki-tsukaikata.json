@@ -19,11 +19,53 @@
     "action": "カウンセリング予約・公式LINE登録"
   },
   "h2Sections": [
-    { "heading": "まつ毛美容液を使っても効果を感じにくい…そんなお悩みありませんか？", "pasonaStep": "P", "h3Headings": [], "keyPoints": ["変化を感じにくい", "塗り方・量・タイミングで使い心地が変わる"] },
-    { "heading": "「使い方が合っているか不安」というご相談、多いんです", "pasonaStep": "A", "h3Headings": [], "keyPoints": ["使い方が合っているか不安という相談が多い", "今の塗り方を一緒に確認"] },
-    { "heading": "効果を引き出す正しい塗り方・量・タイミング", "pasonaStep": "S", "h3Headings": [], "keyPoints": ["清潔な状態で塗る", "根元の生え際中心に薄く", "夜はお風呂上がり・朝はメイク前"] },
-    { "heading": "続けるコツ・やりがちなNG・まつ毛パーマとの併用", "pasonaStep": "S", "h3Headings": [], "keyPoints": ["毎日の流れに組み込む", "つけすぎ・塗り忘れを避ける", "まつ毛パーマとの併用は施術翌日以降に"] },
-    { "heading": "KATEstageLASH蒲田西口店のまつ毛ケアの特徴", "pasonaStep": "A", "h3Headings": [], "keyPoints": ["自まつ毛の状態に合わせた提案", "施術とホームケアの両立"] }
+    {
+      "heading": "まつ毛美容液を使っても効果を感じにくい…そんなお悩みありませんか？",
+      "pasonaStep": "P",
+      "h3Headings": [],
+      "keyPoints": [
+        "変化を感じにくい",
+        "塗り方・量・タイミングで使い心地が変わる"
+      ]
+    },
+    {
+      "heading": "「使い方が合っているか不安」というご相談、多いんです",
+      "pasonaStep": "A",
+      "h3Headings": [],
+      "keyPoints": [
+        "使い方が合っているか不安という相談が多い",
+        "今の塗り方を一緒に確認"
+      ]
+    },
+    {
+      "heading": "効果を引き出す正しい塗り方・量・タイミング",
+      "pasonaStep": "S",
+      "h3Headings": [],
+      "keyPoints": [
+        "清潔な状態で塗る",
+        "根元の生え際中心に薄く",
+        "夜はお風呂上がり・朝はメイク前"
+      ]
+    },
+    {
+      "heading": "続けるコツ・やりがちなNG・まつ毛パーマとの併用",
+      "pasonaStep": "S",
+      "h3Headings": [],
+      "keyPoints": [
+        "毎日の流れに組み込む",
+        "つけすぎ・塗り忘れを避ける",
+        "まつ毛パーマとの併用は施術翌日以降に"
+      ]
+    },
+    {
+      "heading": "KATEstageLASH蒲田西口店のまつ毛ケアの特徴",
+      "pasonaStep": "A",
+      "h3Headings": [],
+      "keyPoints": [
+        "自まつ毛の状態に合わせた提案",
+        "施術とホームケアの両立"
+      ]
+    }
   ],
   "imagePrompts": {
     "1": "cover: タイトル表紙",
@@ -43,9 +85,14 @@
     "施術とホームケアの両立",
     "蒲田駅西口すぐで通いやすい"
   ],
-  "tags": ["まつ毛美容液", "まつ毛ケア", "使い方", "自まつ毛"],
+  "tags": [
+    "まつ毛美容液",
+    "まつ毛ケア",
+    "使い方",
+    "自まつ毛"
+  ],
   "targetWordCount": 4200,
-  "publishDate": "",
+  "publishDate": "2026-09-07",
   "publishTime": "11:00",
   "eeatInsertionPoints": [
     "AffinityとまとめでスタッフボイスによりE-E-A-Tを補強"
