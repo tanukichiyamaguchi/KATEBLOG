@@ -1,6 +1,5 @@
 {
   "pending": [
-    "parisienne-chigai",
     "matsuge-perm-50dai",
     "matsuge-mijikai",
     "matsuge-perm-merit",
@@ -123,6 +122,13 @@
       "date": "2026-09-07",
       "time": "11:00",
       "publishedAt": "2026-09-06T21:52:01.032Z"
+    },
+    {
+      "slug": "parisienne-chigai",
+      "title": "パリジェンヌと普通のまつ毛パーマの違い｜選び方ガイド",
+      "date": "2026-09-14",
+      "time": "11:00",
+      "publishedAt": "2026-09-13T21:58:32.886Z"
     }
   ]
 }
