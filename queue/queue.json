@@ -1,6 +1,5 @@
 {
   "pending": [
-    "matsuge-perm-50dai",
     "matsuge-mijikai",
     "matsuge-perm-merit",
     "mayu-hasami",
@@ -129,6 +128,13 @@
       "date": "2026-09-14",
       "time": "11:00",
       "publishedAt": "2026-09-13T21:58:32.886Z"
+    },
+    {
+      "slug": "matsuge-perm-50dai",
+      "title": "50代のまつ毛パーマ｜目元の印象を上向きにするカール選び",
+      "date": "2026-09-21",
+      "time": "11:00",
+      "publishedAt": "2026-09-20T22:04:11.670Z"
     }
   ]
 }
