@@ -1,6 +1,5 @@
 {
   "pending": [
-    "matsuge-mijikai",
     "matsuge-perm-merit",
     "mayu-hasami",
     "matsuge-perm-jitan",
@@ -135,6 +134,13 @@
       "date": "2026-09-21",
       "time": "11:00",
       "publishedAt": "2026-09-20T22:04:11.670Z"
+    },
+    {
+      "slug": "matsuge-mijikai",
+      "title": "まつ毛が短いお悩みに｜長く見せるケアとサロン活用",
+      "date": "2026-09-28",
+      "time": "11:00",
+      "publishedAt": "2026-09-27T22:43:12.853Z"
     }
   ]
 }
