@@ -1,6 +1,5 @@
 {
   "pending": [
-    "matsuge-perm-merit",
     "mayu-hasami",
     "matsuge-perm-jitan",
     "mayu-self-shippai",
@@ -141,6 +140,13 @@
       "date": "2026-09-28",
       "time": "11:00",
       "publishedAt": "2026-09-27T22:43:12.853Z"
+    },
+    {
+      "slug": "matsuge-perm-merit",
+      "title": "まつ毛パーマのメリット・デメリット｜後悔しない選び方",
+      "date": "2026-10-05",
+      "time": "11:00",
+      "publishedAt": "2026-10-04T22:38:16.466Z"
     }
   ]
 }
