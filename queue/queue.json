@@ -1,6 +1,5 @@
 {
   "pending": [
-    "mayu-hasami",
     "matsuge-perm-jitan",
     "mayu-self-shippai",
     "matsuge-perm-megata",
@@ -147,6 +146,13 @@
       "date": "2026-10-05",
       "time": "11:00",
       "publishedAt": "2026-10-04T22:38:16.466Z"
+    },
+    {
+      "slug": "mayu-hasami",
+      "title": "眉毛のハサミでの整え方｜失敗しないセルフケア",
+      "date": "2026-10-12",
+      "time": "11:00",
+      "publishedAt": "2026-10-11T23:19:48.927Z"
     }
   ]
 }
