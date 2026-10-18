@@ -19,11 +19,54 @@
     "action": "カウンセリング予約・公式LINE登録"
   },
   "h2Sections": [
-    { "heading": "朝のメイク、目元だけで時間がかかっていませんか？", "pasonaStep": "P", "h3Headings": [], "keyPoints": ["朝は忙しい", "目元メイクに時間がかかる"] },
-    { "heading": "「朝のメイクを楽にしたい」というご相談、多いんです", "pasonaStep": "A", "h3Headings": [], "keyPoints": ["朝の支度を楽にしたい相談が多い", "生活スタイルに合わせたカール提案"] },
-    { "heading": "なぜまつ毛パーマで時短メイクが叶うの？", "pasonaStep": "S", "h3Headings": [], "keyPoints": ["ビューラー不要", "マスカラ最小限", "目元が決まりやすい"] },
-    { "heading": "まつ毛パーマの時短を活かす朝メイクのコツ", "pasonaStep": "S", "h3Headings": [], "keyPoints": ["コームで整える", "マスカラは軽く", "アイラインで仕上げ", "オイルフリーケア"] },
-    { "heading": "KATEstageLASH蒲田西口店のまつ毛パーマの特徴", "pasonaStep": "A", "h3Headings": [], "keyPoints": ["ライフスタイルに合うカール設計", "自まつ毛にやさしい施術"] }
+    {
+      "heading": "朝のメイク、目元だけで時間がかかっていませんか？",
+      "pasonaStep": "P",
+      "h3Headings": [],
+      "keyPoints": [
+        "朝は忙しい",
+        "目元メイクに時間がかかる"
+      ]
+    },
+    {
+      "heading": "「朝のメイクを楽にしたい」というご相談、多いんです",
+      "pasonaStep": "A",
+      "h3Headings": [],
+      "keyPoints": [
+        "朝の支度を楽にしたい相談が多い",
+        "生活スタイルに合わせたカール提案"
+      ]
+    },
+    {
+      "heading": "なぜまつ毛パーマで時短メイクが叶うの？",
+      "pasonaStep": "S",
+      "h3Headings": [],
+      "keyPoints": [
+        "ビューラー不要",
+        "マスカラ最小限",
+        "目元が決まりやすい"
+      ]
+    },
+    {
+      "heading": "まつ毛パーマの時短を活かす朝メイクのコツ",
+      "pasonaStep": "S",
+      "h3Headings": [],
+      "keyPoints": [
+        "コームで整える",
+        "マスカラは軽く",
+        "アイラインで仕上げ",
+        "オイルフリーケア"
+      ]
+    },
+    {
+      "heading": "KATEstageLASH蒲田西口店のまつ毛パーマの特徴",
+      "pasonaStep": "A",
+      "h3Headings": [],
+      "keyPoints": [
+        "ライフスタイルに合うカール設計",
+        "自まつ毛にやさしい施術"
+      ]
+    }
   ],
   "imagePrompts": {
     "1": "cover: タイトル表紙",
@@ -43,9 +86,14 @@
     "自まつ毛にやさしい施術",
     "ホームケアまでアドバイス"
   ],
-  "tags": ["まつ毛パーマ", "時短メイク", "朝メイク", "目元"],
+  "tags": [
+    "まつ毛パーマ",
+    "時短メイク",
+    "朝メイク",
+    "目元"
+  ],
   "targetWordCount": 4000,
-  "publishDate": "",
+  "publishDate": "2026-10-19",
   "publishTime": "11:00",
   "eeatInsertionPoints": [
     "AffinityとまとめでスタッフボイスによりE-E-A-Tを補強"

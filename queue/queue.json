@@ -1,6 +1,5 @@
 {
   "pending": [
-    "matsuge-perm-jitan",
     "mayu-self-shippai",
     "matsuge-perm-megata",
     "mayuge-koi",
@@ -153,6 +152,13 @@
       "date": "2026-10-12",
       "time": "11:00",
       "publishedAt": "2026-10-11T23:19:48.927Z"
+    },
+    {
+      "slug": "matsuge-perm-jitan",
+      "title": "まつ毛パーマで朝が楽に｜時短メイクが叶う理由",
+      "date": "2026-10-19",
+      "time": "11:00",
+      "publishedAt": "2026-10-18T22:06:41.072Z"
     }
   ]
 }
