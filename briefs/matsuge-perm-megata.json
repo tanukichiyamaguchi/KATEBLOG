@@ -19,11 +19,54 @@
     "action": "カウンセリング予約・公式LINE登録"
   },
   "h2Sections": [
-    { "heading": "自分に似合うカールが分からない…そんなお悩みありませんか？", "pasonaStep": "P", "h3Headings": [], "keyPoints": ["カールの種類が多くて迷う", "目の形で似合うカールが違う"] },
-    { "heading": "カール選び、まずはお気軽にご相談くださいね", "pasonaStep": "A", "h3Headings": [], "keyPoints": ["カール選びに迷う相談が多い", "カウンセリングで一緒に選ぶ"] },
-    { "heading": "目の形とカールの関係を知っておきましょう", "pasonaStep": "S", "h3Headings": [], "keyPoints": ["黒目の見え方が変わる", "目の縦幅の印象が変わる", "まつ毛の生え方が違う"] },
-    { "heading": "目の形別｜似合うカールの選び方", "pasonaStep": "S", "h3Headings": [], "keyPoints": ["丸い目はゆるめで横長", "切れ長は中央を上げる", "たれ目は目尻控えめ", "つり目は目尻を上げる"] },
-    { "heading": "KATEstageLASH蒲田西口店のまつ毛パーマの特徴", "pasonaStep": "A", "h3Headings": [], "keyPoints": ["目の形を見て設計する", "自まつ毛にやさしい施術"] }
+    {
+      "heading": "自分に似合うカールが分からない…そんなお悩みありませんか？",
+      "pasonaStep": "P",
+      "h3Headings": [],
+      "keyPoints": [
+        "カールの種類が多くて迷う",
+        "目の形で似合うカールが違う"
+      ]
+    },
+    {
+      "heading": "カール選び、まずはお気軽にご相談くださいね",
+      "pasonaStep": "A",
+      "h3Headings": [],
+      "keyPoints": [
+        "カール選びに迷う相談が多い",
+        "カウンセリングで一緒に選ぶ"
+      ]
+    },
+    {
+      "heading": "目の形とカールの関係を知っておきましょう",
+      "pasonaStep": "S",
+      "h3Headings": [],
+      "keyPoints": [
+        "黒目の見え方が変わる",
+        "目の縦幅の印象が変わる",
+        "まつ毛の生え方が違う"
+      ]
+    },
+    {
+      "heading": "目の形別｜似合うカールの選び方",
+      "pasonaStep": "S",
+      "h3Headings": [],
+      "keyPoints": [
+        "丸い目はゆるめで横長",
+        "切れ長は中央を上げる",
+        "たれ目は目尻控えめ",
+        "つり目は目尻を上げる"
+      ]
+    },
+    {
+      "heading": "KATEstageLASH蒲田西口店のまつ毛パーマの特徴",
+      "pasonaStep": "A",
+      "h3Headings": [],
+      "keyPoints": [
+        "目の形を見て設計する",
+        "自まつ毛にやさしい施術"
+      ]
+    }
   ],
   "imagePrompts": {
     "1": "cover: タイトル表紙",
@@ -43,9 +86,14 @@
     "自まつ毛にやさしい施術",
     "ホームケアまでアドバイス"
   ],
-  "tags": ["まつ毛パーマ", "目の形", "カール", "似合う"],
+  "tags": [
+    "まつ毛パーマ",
+    "目の形",
+    "カール",
+    "似合う"
+  ],
   "targetWordCount": 4000,
-  "publishDate": "",
+  "publishDate": "2026-11-02",
   "publishTime": "11:00",
   "eeatInsertionPoints": [
     "Affinityと目の形別解説でスタッフボイスによりE-E-A-Tを補強"
