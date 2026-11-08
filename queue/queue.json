@@ -1,6 +1,5 @@
 {
   "pending": [
-    "mayuge-koi",
     "matsuge-curl-c-j",
     "eyebrow-hajimete",
     "matsuge-perm-itai",
@@ -171,6 +170,13 @@
       "date": "2026-11-02",
       "time": "11:00",
       "publishedAt": "2026-11-01T23:15:24.250Z"
+    },
+    {
+      "slug": "mayuge-koi",
+      "title": "眉毛が濃いお悩みに｜やわらかく見せる整え方",
+      "date": "2026-11-09",
+      "time": "11:00",
+      "publishedAt": "2026-11-08T23:19:30.864Z"
     }
   ]
 }
