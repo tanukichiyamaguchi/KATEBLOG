@@ -140,8 +140,22 @@ async function publishNext(options = {}) {
     };
   }
 
-  // 1. 画像生成（OpenAI写真風 / sharp）
-  const images = await generateImages(html, title, imageDir, { provider: options.provider });
+  // 1. 画像: 既定では新規生成せず、既存の output/images-{slug}/ を使い回す。
+  //    （方針: 画像の新規作成は停止。再生成したい場合のみ options.generate / KATEBLOG_GENERATE_IMAGES=1）
+  const genEnabled = options.generate === true || process.env.KATEBLOG_GENERATE_IMAGES === '1';
+  const listPng = dir => (fs.existsSync(dir) ? fs.readdirSync(dir).filter(f => /\.(png|jpe?g|webp)$/i.test(f)) : []);
+  let images;
+  const existingImgs = listPng(imageDir);
+  if (genEnabled) {
+    images = await generateImages(html, title, imageDir, { provider: options.provider });
+  } else if (existingImgs.length > 0) {
+    images = existingImgs.sort().map(f => ({ filename: f, provider: 'existing' }));
+    console.log(`  🖼️ 既存画像を使用: ${existingImgs.length}枚（新規生成なし）`);
+  } else {
+    images = [];
+    console.log(`  ⚠️ ${slug}: 既存画像が見つかりません（新規生成は停止中）。画像なしで公開します。`);
+    console.log(`     画像を付けるには output/images-${slug}/ に配置するか KATEBLOG_GENERATE_IMAGES=1 で再生成してください。`);
+  }
 
   // 2. 過去記事への内部リンクを自動付与（公開済みの記事のみリンク）
   let linkInfo = { count: 0, inline: 0 };

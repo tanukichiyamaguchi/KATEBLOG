@@ -214,15 +214,15 @@ KATEBLOG/
 
 **実行タイミング**: 品質レビュー通過後
 
-**画像生成**:
-- 既定で **OpenAI（ChatGPT）Images API** によるリアル写真風（`IMG_PROMPT_N` / `imagePrompts` を反映）。
-- `OPENAI_API_KEY` が無い・生成失敗時は **sharp**（グラデーション）に自動フォールバック。
-- プロバイダは `--provider openai|sharp|auto` または `.env` の `IMAGE_PROVIDER` で指定（既定 `auto`）。
+**画像（新規生成は停止・既存画像を使い回す運用）**:
+- **週次公開（publish-next）は画像を新規生成しない**。各記事の画像はあらかじめ `output/images-{slug}/` に用意（コミット）しておき、それを使い回す。
+- 新規生成したい場合のみ `node cli.js publish-next --generate`（または環境変数 `KATEBLOG_GENERATE_IMAGES=1`）。単体生成は `node cli.js generate-images <file> --provider sharp|openai`。
+- 生成方式: 表紙・図解は **手書きフォント（Zen Kurenaido）＋sharp**。写真は OpenAI、キー無・失敗時は sharp にフォールバック。
 
 **週1自動公開（推奨フロー）**:
 1. 記事は `queue/{slug}.html` にストックし、`queue/queue.json` の `pending` に登録。
 2. 週次 GitHub Actions（`.github/workflows/weekly-publish.yml`, cron）が `node cli.js publish-next` を実行。
-3. キュー先頭1本の画像を生成して `output/images-{slug}/` に保存、HTMLを `output/{slug}.html` へ移動、`briefs/{slug}.json` に公開日（当日JST 11:00）をセット。
+3. キュー先頭1本について、`output/images-{slug}/` の**既存画像を使用**（新規生成なし）し、HTMLを `output/{slug}.html` へ移動、`briefs/{slug}.json` に公開日（当日JST 11:00）をセット。
 4. commit & push → WPプラグインが1時間以内に取り込み、予約公開。
 
 **手動公開（XML-RPC直）**:
@@ -250,7 +250,7 @@ node cli.js batch output/*.html --start 2026-04-01 --interval 3 --time 11:00
         ↓                ↓                    ↓                      ↓
      品質校閲          情報正確性         人間らしさ監査        デザイン最適化
         ↓（全チェック通過後 → queue/queue.json に登録）
-[Publisher]   → 週次cron(publish-next) → OpenAI画像生成 → GitHubプッシュ → WP自動インポート
+[Publisher]   → 週次cron(publish-next) → 既存画像を使用(新規生成なし) → GitHubプッシュ → WP自動インポート
 ```
 
 ### 週次フロー（毎週1本・自動）
