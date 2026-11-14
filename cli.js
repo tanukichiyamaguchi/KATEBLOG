@@ -22,6 +22,7 @@ function parseOptions(args) {
     else if (args[i] === '--provider' && args[i + 1]) opts.provider = args[++i];
     else if (args[i] === '--skip-links') opts.skipLinks = true;
     else if (args[i] === '--dry-run') opts.dryRun = true;
+    else if (args[i] === '--generate') opts.generate = true;
   }
   return opts;
 }
@@ -228,7 +229,8 @@ batch オプション:
 publish-next オプション:
   --date YYYY-MM-DD    公開日（既定: 当日 JST）
   --time HH:MM         公開時刻（既定: 11:00）
-  --provider NAME      画像プロバイダ openai|sharp|auto（既定: auto）
+  --provider NAME      画像プロバイダ openai|sharp|auto（--generate 指定時のみ使用）
+  --generate           画像を新規生成する（既定は生成せず output/images-{slug}/ の既存画像を使い回す）
   --dry-run            実際には移動せず、次に公開される記事を表示
       `);
   }
